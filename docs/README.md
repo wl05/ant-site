@@ -2,6 +2,7 @@
 home: true
 # heroImage: /logo.jpg
 # actionText: 快速上手 →
+heroText: 个人网站 # 首页的标题内容
 actionLink: /zh/guide/
 features:
 - title: 简洁至上
