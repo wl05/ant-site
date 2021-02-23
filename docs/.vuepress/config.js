@@ -1,5 +1,5 @@
 module.exports = {
-  title: "Ant Notes",
+  title: "Notes",
   description: "个人日常记录",
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
@@ -13,10 +13,8 @@ module.exports = {
     sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
     lastUpdated: "Last Updated", // 文档更新时间：每个文件git最后提交的时间
     nav: [
-      { text: "笔记", link: "/algorithm/" }, // 内部链接 以docs为根目录
-      { text: "日常", link: "/algorithm/" }, // 外部链接
-      { text: "日常", link: "/algorithm/" }, // 外部链接
-      { text: "日常", link: "/algorithm/" }, // 外部链接
+      { text: "技术", link: "/tech/" }, // 内部链接 以docs为根目录
+      { text: "日常", link: "/life/" }, // 外部链接
       // 下拉列表
       {
         text: "GitHub",
@@ -43,12 +41,19 @@ module.exports = {
         },
       ],
       // docs文件夹下面的algorithm文件夹 这是第二组侧边栏 跟第一组侧边栏没关系
-      "/algorithm/": [
-        "/algorithm/",
-        {
-          title: "第二组侧边栏下拉框的标题1",
-          children: ["/algorithm/simple/test"],
-        },
+      "/tech/": [
+        "/tech/",
+        // {
+        //   title: "第二组侧边栏下拉框的标题1",
+        //   children: ["/algorithm/simple/test"],
+        // },
+      ],
+      "/life/": [
+        "/life/",
+        // {
+        //   title: "第二组侧边栏下拉框的标题1",
+        //   children: ["/algorithm/simple/test"],
+        // },
       ],
     },
   },
