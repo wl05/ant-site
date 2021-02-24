@@ -18,7 +18,7 @@ module.exports = {
       // 下拉列表
       {
         text: "GitHub",
-        items: [{ text: "GitHub地址", link: "https://github.com/OBKoro1" }],
+        link: "https://github.com/wl05/ant-site",
       },
     ],
     sidebar: {
