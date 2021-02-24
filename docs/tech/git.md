@@ -30,11 +30,6 @@ git cherry-pick --abort
 ```
 
 [参考](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
-## git rebase 
-
-
-
-[参考](http://gitbook.liuhui998.com/4_2.html)
 
 
 

@@ -26,7 +26,7 @@ module.exports = {
         {
           title: "Tech",
           collapsable: false,
-          children: ["git"],
+          children: ["git", "git-rebase"],
         },
       ],
       "/life/": [
