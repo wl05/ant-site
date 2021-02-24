@@ -22,12 +22,26 @@ $ git merge dev
 记得有次面试，有个面试官问我，如果想把多个没有意义的commit合并成一个有意义的操作应该怎么做，这个也是git rebase的应用
 场景之一。
 
+下面我们举例来进行说明：
 
+```bash
+* cc0fac9 (HEAD -> master) commit 3
+* 532cd7e commit 2
+* 42cebee commit 1
+```
+现在这里有三个commit，现在我们想把三个提交合并成一个,
+执行命令：
+
+```bash
+git rebase -i HEAD~
+```
+
+这时会出现交互式界面：
+
+![git-rebase-i](./images/git-rebase-i.png)
 
 # 参考
 
 * [分支合并](http://gitbook.liuhui998.com/4_2.html)
 * [使用git rebase合并多次commit](https://juejin.cn/post/6844903600976576519)
 * [Rebase 当前分支](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
-
-3
