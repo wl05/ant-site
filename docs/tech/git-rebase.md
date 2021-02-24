@@ -62,7 +62,7 @@ p 42cebee commit 1
 s 532cd7e commit 2
 s cc0fac9 commit 3
 ```
-这里表示将的第2次，第3次commit合并到第一次commit上,
+这里表示将第2次，第3次commit合并到第一次commit上,
 
 wq保存后退出。然后会进到下面的界面：
 
