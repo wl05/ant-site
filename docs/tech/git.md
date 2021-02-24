@@ -1,6 +1,8 @@
 # git 命令总结
 
-## git cherry-pick
+## git cherry-pick 
+
+* 基本用法
 ``` bash
 # cherry-pick 单条commit
 git cherry-pick <commitHash>
@@ -14,7 +16,7 @@ git cherry-pick A..B
 git cherry-pick A^..B 
 ```
 
-cherry-pick 有冲突解决
+* cherry-pick 有冲突解决
 ```bash
 # 解决冲突后执行执行
 git add .
@@ -22,7 +24,17 @@ git add .
 git cherry-pick --continue
 ```
 
-丢弃修改
+* 丢弃修改
 ```bash
 git cherry-pick --abort
 ```
+
+[参考](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
+## git rebase 
+
+
+[参考](http://gitbook.liuhui998.com/4_2.html)
+
+
+
+
