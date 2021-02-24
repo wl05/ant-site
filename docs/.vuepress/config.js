@@ -24,6 +24,7 @@ module.exports = {
     sidebar: {
       "/tech/": [
         {
+          path: "/tech/",
           title: "Tech",
           collapsable: false,
           children: ["git", "git-rebase"],
@@ -33,7 +34,7 @@ module.exports = {
         {
           title: "Life",
           collapsable: false,
-          children: ["one", "two"],
+          children: [],
         },
       ],
     },
