@@ -1,7 +1,42 @@
 ## 终止异步任务
-想象这样一种场景，在一个批量上传图片的操作里面，上传的图片很多，这个操作是一个异步任务比较耗时用户可能要等几分钟才能完成这个操作。
-同时我们提供一个取消按钮，用户可以选择取消本次操作，然后我们需要终止异步任务。那么对于这样的场景我们怎样来终止异步任务呢。
-答案是可以使用AbortController
+在一些耗时的异步任务中，我们需要提前终止异步任务，使用[AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)构造函数我们可以做到这一点。
+
+需要注意的是AbortController只能在web请求中使用，不支持在nodejs环境中使用。
+
+### 取消fetch请求
+
+目前只Fetch Api官方支持使用AbortController来终止请求，但是并不影响我们使用它来终止其他的异步任务，后面会讲到，
+先来看一下AbortController的基本使用方法。
+
+```js
+var controller = new AbortController(); // 1. 声明AbortController实例
+var signal = controller.signal; // 2. 将signal传入5中的fetch api
+
+var downloadBtn = document.querySelector('.download');
+var abortBtn = document.querySelector('.abort');
+
+downloadBtn.addEventListener('click', fetchVideo); // 3. 点击按钮开始下载音频
+
+abortBtn.addEventListener('click', function() { // 4. 点击中断按钮终止下载
+  controller.abort();// 5. 调用abort方法触发终止
+  console.log('Download aborted');
+});
+
+function fetchVideo() {
+  ...
+  fetch(url, {
+    signal // 6. 传入signal参数
+  
+  }).then(function(response) {
+    ...
+  }).catch(function(e) { 
+    // 7. 接收终止异常
+    reports.textContent = 'Download error: ' + e.message;
+  })
+}
+```
+
+### 终止异步函数
 
 
 
