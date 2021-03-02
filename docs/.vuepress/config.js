@@ -26,7 +26,13 @@ module.exports = {
           path: "/tech/",
           title: "Tech",
           collapsable: false,
-          children: ["git", "git-rebase", "cicd-concepts"],
+          children: [
+            "git",
+            "git-rebase",
+            "cicd-concepts",
+            "abort-request",
+            "google-search",
+          ],
         },
       ],
       "/life/": [
