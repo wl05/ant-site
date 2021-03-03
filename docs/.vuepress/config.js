@@ -1,5 +1,5 @@
 module.exports = {
-  title: "wl05 ",
+  title: "wl05",
   description: "随学随记",
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
