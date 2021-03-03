@@ -13,8 +13,7 @@ module.exports = {
     sidebarDepth: 2,
     lastUpdated: "最后更新于",
     nav: [
-      { text: "Tech", link: "/tech/" },
-      { text: "Life", link: "/life/" },
+      { text: "技术", link: "/tech/" },
       {
         text: "GitHub",
         link: "https://github.com/wl05/ant-site",
@@ -33,13 +32,6 @@ module.exports = {
             "abort-request",
             "google-search",
           ],
-        },
-      ],
-      "/life/": [
-        {
-          title: "Life",
-          collapsable: false,
-          children: [],
         },
       ],
     },

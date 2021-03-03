@@ -100,9 +100,6 @@ function fetchVideo() {
 </script>
 </html>
 ```
-
-###  
-
 ## 参考资料
 1. [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
 2. [AbortSignal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
