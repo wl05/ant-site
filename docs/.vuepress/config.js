@@ -31,6 +31,8 @@ module.exports = {
             "cicd-concepts",
             "abort-request",
             "google-search",
+            "web-workers",
+            "service-workers",
           ],
         },
       ],

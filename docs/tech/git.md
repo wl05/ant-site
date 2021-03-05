@@ -29,6 +29,16 @@ git cherry-pick --continue
 git cherry-pick --abort
 ```
 
+
+## 批量处理冲突
+
+```bash
+# 采用当前的
+$ git checkout --ours filepath
+# 采用传入的
+$ git checkout --theirs filepath
+```
+
 [参考](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 
 
