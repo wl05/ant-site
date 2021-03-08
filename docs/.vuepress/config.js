@@ -33,6 +33,7 @@ module.exports = {
             "google-search",
             "web-workers",
             "service-workers",
+            "algorithm/backtracking-algorithm",
           ],
         },
       ],
