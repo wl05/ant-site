@@ -131,9 +131,6 @@ A -> B -> C -> D --  merge -> E --------> F ---- G(master)
 3. [revert](https://blog.csdn.net/yxlshk/article/details/79944535)
 
 
-
-
-1
-2
 master 1
 master 2
+
