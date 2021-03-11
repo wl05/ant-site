@@ -1,13 +1,19 @@
 # git rebase 详解
-平时工作中很少使用git rebase 这个命令，源于前段时间同事在我合并分支时让我先rebase一下，当时一脸懵逼。源于此这里学习总结一下git rebase 的具体使用方法和应用场景。
+平时工作中很少使用```git rebase``` 这个命令，源于前段时间同事在我合并分支时让我先```rebase```一下，当时一脸懵逼。源于此这里学习总结一下```git rebase``` 的具体使用方法和应用场景。
 ## 分支合并
-git rebase 这个命令最常用的场景就是合并分支了吧，平时git merge使用比较多，但是git merge合并会产生一个合并commit，提交记录也会分叉，平时大家用得比较多，这里就不再赘述。但是如果你想维护一条干净整洁没有冗余commit的分支那么git rebase就派上用场了。
+```git rebase``` 这个命令最常用的场景就是合并分支了吧，平时```git merge```使用比较多，但是```git merge```合并会产生一个合并```commit```，提交记录也会分叉，平时大家用得比较多，这里就不再赘述。但是如果你想维护一条干净整洁没有冗余```commit```的分支那么```git rebase```就派上用场了。
 
-![git-rebase.png](./images/git-rebase.jpg)
+```
+(master)B -> A 
+(dev)D -> C -> B -> A
+          ↓
+(master)E -> B -> A 
+(dev)D -> C -> E -> B -> A
+```
 
-在这个场景中我们从master 分支中checkout出一个dev分支，然后在dev分支上做了D、C两次提交，在合并到master分支之前又有别的开发者在master上做了E提交，此时在dev分支上进行git rebase master操作，我们就可以得到 D->C->E->B->A的提交记录，然后再checkout 到master分支上执行git merge dev操作，此时master分支不会产生新的commit也不会分叉。那么这个过程发生了什么呢。
+在这个场景中我们从```master``` 分支中```checkout```出一个```dev```分支，然后在```dev```分支上做了```D、C```两次提交，在合并到```master```分支之前又有别的开发者在```master```上做了```E```提交，此时在```dev```分支上进行```git rebase master```操作，我们就可以得到 ```D->C->E->B->A```的提交记录，然后再````checkout``` 到```master```分支上执行```git merge dev```操作，此时```master```分支不会产生新的```commit```也不会分叉。那么这个过程发生了什么呢。
 
-在dev分支上执行git rebase master 操作时，这个命令会将dev分支上的所有提交保存为patch，并存放到“.git/rebase”目录下，然后dev分支会去同步master上的最新提交，紧接着将dev上的patch接到dev分支上。这样看来也比较好理解了。
+在```dev```分支上执行```git rebase master``` 操作时，这个命令会将```dev```分支上的所有提交保存为```patch```，并存放到```“.git/rebase”```目录下，然后```dev```分支会去同步```master```上的最新提交，紧接着将```dev```上的```patch```接到```dev```分支上。这样看来也比较好理解了。
 
 总结一下操作命令：
 
@@ -19,8 +25,7 @@ $ git checkout master
 $ git merge dev
 ```
 ## 合并多个commit
-记得有次面试，有个面试官问我，如果想把多个没有意义的commit合并成一个有意义的commit应该怎么做，这个也是git rebase的应用
-场景之一。
+记得有次面试，有个面试官问我，如果想把多个没有意义的commit合并成一个有意义的```commit```应该怎么做，这个也是```git rebase```的应用场景之一。
 
 下面我们举例来进行说明：
 
@@ -29,7 +34,7 @@ $ git merge dev
 * 532cd7e commit 2
 * 42cebee commit 1
 ```
-这里有三个commit， 现在我们想把三个提交合并成一个,
+这里有三个```commit```， 现在我们想把三个提交合并成一个,
 执行命令：
 ```bash
 git rebase -i HEAD~
@@ -51,9 +56,9 @@ git rebase -i HEAD~
 # d, drop = remove commit
 ```
 
-这里我们会用到pick和squash命令，
-pick表示保留当前commit，
-squash表示将当前commit与上一个commit合并。
+这里我们会用到```pick```和```squash```命令，
+```pick```表示保留当前```commit```，
+```squash```表示将当前```commit```与上一个```commit```合并。
 
 修改命令后：
 
@@ -62,15 +67,15 @@ p 42cebee commit 1
 s 532cd7e commit 2
 s cc0fac9 commit 3
 ```
-这里表示将第2次，第3次commit合并到第一次commit上,
+这里表示将第```2```次，第```3```次```commit```合并到第一次```commit```上,
 
-wq保存后退出。然后会进到下面的界面：
+```wq```保存后退出。然后会进到下面的界面：
 
 ![git-rebase-commit](./images/git-rebase-commit.png)
 
-这里我们可以对commit message进行修改。修改完后执行wq保存退出。
+这里我们可以对```commit message```进行修改。修改完后执行```wq```保存退出。
 
-现在再执行git log看一下，我们会发现三次commit合并成了一个：
+现在再执行```git log```看一下，我们会发现三次```commit```合并成了一个：
 
 ```bash
 commit a7e595a8d0bf0ad2ef4bd1bd4534ef80b4b32683
