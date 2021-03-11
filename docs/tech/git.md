@@ -39,7 +39,7 @@ $ git checkout --ours filepath
 $ git checkout --theirs filepath
 ```
 ## git reset
-例如有 A<-B<-C<-D 次提交，当前在D这个commit，现在想回退到B这个commit，使用命令：
+例如有 A -> B -> C -> D 次提交，当前在D这个commit，现在想回退到B这个commit，使用命令：
 
 ```bash
 $ git reset --hard B
@@ -51,14 +51,13 @@ $ git reset --hard B
 ## git revert
 
 ### revert普通提交
-例如有 A<-B<-C<-D 次提交，当前在D这个commit，现在想回退B这个commit，使用命令：
+例如有 A -> B -> C -> D 次提交，当前在D这个commit，现在想回退B这个commit，使用命令：
 
 ```bash
 $ git revert B
 ```
-执行完命令后提交记录变成： A<-B<-C<-D<-E， 这里E的会保存D，E 的修改撤销B的修改，这里就能看出 ```git revert```
-和```git reset```的区别了。
-
+执行完命令后提交记录变成： A -> B -> C -> D -> E， 这里E的会保存D，E 的修改撤销B的修改，
+这里就能看出 ```git revert```和```git reset```的区别了。
 ### revert合并
 
 相对于revert 普通提交，revert merge提交会稍微麻烦些。
@@ -112,7 +111,7 @@ fatal: revert failed
 这里我们想保留master分支上的修改所以我们执行命令：
 
 ```
-$ git revert -m 1
+$ git revert 3fd41a -m 1
 ```
 执行完后的分支
 ```
@@ -122,18 +121,9 @@ A -> B -> C -> D --  merge -> E --------> F ---- G(master)
        \                              /
         A'' --> B'' --- D''（feature）/ 
 ```
-此时生成一个新的commit G，这里G是包含E，F不包含merge的，
+此时生成一个新的commit G，这里G是包含E，F不包含merge的。
 
-这里还需要注意的是
 ## 参考
 1. [cherry-pick](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 2. [revert](https://juejin.cn/post/6844903647390744589#heading-3)
 3. [revert](https://blog.csdn.net/yxlshk/article/details/79944535)
-
-
-master 1
-master 2
-
-1
-2
-3
