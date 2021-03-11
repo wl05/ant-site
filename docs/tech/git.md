@@ -56,7 +56,7 @@ $ git reset --hard B
 ```bash
 $ git revert B
 ```
-执行完命令后提交记录变成： A -> B -> C -> D -> E， 这里E的会保存D，E 的修改撤销B的修改，
+执行完命令后提交记录变成： A -> B -> C -> D -> E， E会保存D，E 的修改撤销B的修改，
 这里就能看出 ```git revert```和```git reset```的区别了。
 ### revert合并
 
@@ -102,11 +102,10 @@ git revert faulty merge
 error: Commit faulty merge is a merge but no -m option was given.
 fatal: revert failed
 ```
-报错原因是git 不知道保留哪一个分支的修改，是保留dev还是master呢？ 怎么区分？
-这里我们需要使用-m参数执行parant number，-m后面的值可以1或者2，看上面的merge log
-```Merge: 8506600c9 4cffdcd01``` 这里```8506600c9```是master的commit id,
-```4cffdcd01``` 是dev的commit id, 这里1，2分别就对应```8506600c9,4cffdcd01```,也就是分别
-对应master、dev
+报错原因是git 不知道保留哪一个分支的修改，是保留```dev```还是```master```呢？ 怎么区分？
+这里我们需要使用-m参数指定```parant number```，-m后面的值可以```1```或者```2```，看上面的```merge log```
+```Merge: 8506600c9 4cffdcd01``` 这里```8506600c9```是```master```的```commit id```,
+```4cffdcd01``` 是```dev```的```commit id```, 这里```1```，```2```分别就对应```8506600c9,4cffdcd01```,也就是分别对应```master、dev```
 
 这里我们想保留master分支上的修改所以我们执行命令：
 
@@ -121,7 +120,7 @@ A -> B -> C -> D --  merge -> E --------> F ---- G(master)
        \                              /
         A'' --> B'' --- D''（feature）/ 
 ```
-此时生成一个新的commit G，这里G是包含E，F不包含merge的。
+此时生成一个新的```commit G```，这里```G```是包含```E```，```F```不包含```merge```的。
 
 ## 参考
 1. [cherry-pick](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
