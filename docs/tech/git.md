@@ -122,6 +122,41 @@ A -> B -> C -> D --  merge -> E --------> F ---- G(master)
 ```
 此时生成一个新的```commit G```，这里```G```是包含```E```，```F```不包含```merge```的。
 
+
+## git stash 
+
+git stash 使用场景，比如正在feature分支上开发，然后遇到一个bug需要从master 切出分支修改，
+此时我们功能开发到一半不想commit，这个时候就可以使用git stash来操作了。
+
+```bash
+# 将工作区和暂存区的进度保存下来
+git stash 
+
+# 查看保存的进度列表
+git stash list
+
+# 将进度恢复到工作区
+git stash pop
+
+# 将原来在工作区的改动恢复到工作区，将原来在暂存区的改动恢复到暂存区
+git stash pop [–index]
+
+# 恢复指定的进度到工作区
+git stash pop [stash_id]
+
+# 和git stash pop使用方式一样，区别是git stash pop执行完后会删除当前的保存的进度，而git stash apply不会
+git stash apply
+
+# 删除指定的进度
+git stash drop [stash_id]
+
+# 删除保存的所有进度
+git stash clear
+
+```
+
+
+
 ## 参考
 1. [cherry-pick](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 2. [revert](https://juejin.cn/post/6844903647390744589#heading-3)
