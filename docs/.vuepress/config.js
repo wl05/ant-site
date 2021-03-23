@@ -34,6 +34,7 @@ module.exports = {
             "web-workers",
             "service-workers",
             "algorithm/backtracking-algorithm",
+            "algorithm/sort-algorithm/bubble-sort",
           ],
         },
       ],

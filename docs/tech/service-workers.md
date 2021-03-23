@@ -1,5 +1,4 @@
-[DOING]
-# Service Workers
+# Service Workers [Doing]
 
 ## 参考资料
 1. [Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers)

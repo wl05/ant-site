@@ -1,5 +1,4 @@
-[DOING]
-# Web Workers 使用
+# Web Workers 使用 [Doing]
 
 ## 专用workers
 
