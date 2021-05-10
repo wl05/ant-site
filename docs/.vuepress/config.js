@@ -14,6 +14,7 @@ module.exports = {
     lastUpdated: "最后更新于",
     nav: [
       { text: "技术", link: "/tech/" },
+      { text: "爱好", link: "/hobby/" },
       {
         text: "GitHub",
         link: "https://github.com/wl05/ant-site",
@@ -27,13 +28,21 @@ module.exports = {
           collapsable: false,
           children: [
             "git",
-            // "git-rebase",
-            // "cicd-concepts",
-            // "abort-request",
-            // "google-search",
-            // "algorithm/backtracking-algorithm",
-            // "algorithm/sort-algorithm/bubble-sort",
+            "git-rebase",
+            "cicd-concepts",
+            "abort-request",
+            "google-search",
+            "algorithm/backtracking-algorithm",
+            "algorithm/sort-algorithm/bubble-sort",
           ],
+        },
+      ],
+      "/hobby/": [
+        {
+          path: "/hobby/",
+          title: "Hobby",
+          collapsable: false,
+          children: ["BreedingOfTheThreeToedBoxTurtle/index"],
         },
       ],
     },
