@@ -402,11 +402,64 @@ curl --request GET --url http://localhost:8000/notes
 
 那有没有办法一行命令搞定所有这些事情呢，答案是肯定的。现在我们就来介绍docker compose的使用让我们一次搞定所有这些步骤。
 
+docker compose需要安装。这里我们省略安装步骤。
+
+1. 在项目的根目录下创建docker-compose.yml文件
+2. 写入相关命令
+```
+version: '3.3'
+
+services:
+ notes:
+  build:
+   context: .
+  ports:
+   - 8000:8000
+  environment:
+   - SERVER_PORT=8000
+   - CONNECTIONSTRING=mongodb://mongo:27017/notes
+  working_dir: /app
+  volumes:
+   - ./:/app
+  command: npm run start
+
+ mongo:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
+```
+
+
+定义好docker-compose.yml文件文件以后使用命令：
+
+```bash
+docker-compose up -d
+```
+
+查看日志
+```bash
+docker-compose logs -f
+```
+
+查看某个日志
+
+```bash
+docker-compose logs -f app
+```
+
+停止
+```bash
+docker-compose down
+```
 
 ## 创建image的最佳实践
 https://docs.docker.com/get-started/09_image_best/
-
-
 
 
 ## 最后我们再来总结一下docker的一些特点
