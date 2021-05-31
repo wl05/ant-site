@@ -1,45 +1,43 @@
 # Docker 浅尝辄止
 
-本文将从Docker是什么，如何使用Docker，项目实践几个方面来介绍Docker
-
-
+Docker是什么，如何使用Docker，本文结合Docker实践来带着大家了解Docker走入Dokcer的世界。
 ## Docker是什么
-
-
 ### Docker概念
 
 ![docker-logo](./docker-logo.png)
 
-如同 Docker 的 Logo 一样，Docker 的思想来源于集装箱。集装箱解决了什么问题？在一艘大船上，可以把货物规整的摆放起来，并且各种各样的货物被集装箱标准化，集装箱与集装箱之间互不影响。那么就不需要专门运送水果的船和专门运送化学用品的船了。只要这些货物封装在不同的集装箱里，就可以用一艘大船把它们都运走。
+Docker的logo非常形象的表现了Docker的思想，一艘大船载满的各种各样的集装箱。
+集装箱解决了什么问题？
+船上的货物各种各样，集装箱将各种货物分门别类并且集装箱与集装箱之间互不影响。
+这样就不用担心这种货物不能与另一种货物一起运送的问题了。
+只要这些货物封装在不同的集装箱里，就可以用一艘大船把它们都运走。
 
-回到实际运用中来，服务器就像是一艘大船，docker 就是集装箱。不同的应用程序会有不同的运行环境依赖，我们把这些环境依赖打包进不同的docker容器中，容器与容器之间独立存在，互不影响。
+回到实际运用中来，服务器就像是一艘大船，Docker就是集装箱。
+不同的应用程序会有不同的运行环境依赖，我们把这些环境依赖打包进不同的Docker容器中，容器与容器之间独立存在，互不影响。
 
-
-这里不得不提到虚拟机技术。虚拟机技术同样可以实现隔离，那它与docker有什么区别呢。
+说到环境隔离这里不得不提到虚拟机技术。虚拟机技术同样可以实现隔离，那它与docker有什么区别呢？
 
 ![docker-vm](./docker-vm.jpeg)
 
-这里对比两者之间的差异，虚拟机通过在操作系统上建立了一个中间虚拟软件层 Hypervisor ，并利用物理机器的资源虚拟出多个虚拟硬件环境来共享宿主机的资源，其中的应用运行在虚拟机内核上。虚拟机的一个缺点在于Guest OS通常会占用不少硬件资源。就算不运行任何应用程序也需要占用一定的内存和硬盘空间，而且为了运行程序的性能，往往还要给每台虚拟机预留出一些内存空间以供消耗。
+这里对比两者之间的差异，虚拟机通过在操作系统上建立了一个中间虚拟软件层 Hypervisor ，并利用物理机器的资源虚拟出多个虚拟硬件环境来共享宿主机的资源，其中的应用运行在虚拟机内核上。
+虚拟机的一个缺点在于Guest OS通常会占用不少硬件资源。
+就算不运行任何应用程序也需要占用一定的内存和硬盘空间，而且为了运行程序的性能，往往还要给每台虚拟机预留出一些内存空间以供消耗。
 
-相对于虚拟机，Docker省去了虚拟机操作系统（Guest OS），Docker守护进程可以直接与主操作系统进行通信，Docker会直接使用宿主机的硬件资源,为各个Docker容器分配资源，从而节省了一部分的系统资源。
+相比于虚拟机，Docker省去了虚拟机操作系统（Guest OS），Docker守护进程可以直接与主操作系统进行通信，Docker会直接使用宿主机的硬件资源，为各个Docker容器分配资源，从而节省了一部分的系统资源。
 
 
 对比虚拟机Docker的优缺点：
 
 **优点：**
-* 没有虚拟机硬件的初始化，没有Guest OS的启动过程，可以节约很多启动时间
+* 没有虚拟机硬件的初始化，没有Guest OS的启动过程，可以节约很多启动时间；
 * 没有运行Guest OS所需的内存开销，无需为虚拟机预留运行内存，无需安装、运行App不需要的运行库/操作系统服务，内存占用、存储空间占用都小的多。
 
 **缺点：**
 
-* 应用之间的隔离不如虚拟机彻底，如果某个应用运行时导致内核崩溃，所有的容器都会崩溃。
+* 应用之间的隔离不如虚拟机彻底，如果某个应用运行时导致宿主机内核崩溃，所有的容器都会崩溃。
 
-
-1. [docker 是什么](https://www.zhihu.com/question/28300645)
-2. [Docker和虚拟机的对比](https://www.cnblogs.com/jie-fang/p/10279629.html)
-
-
-
+<!-- 1. [docker 是什么](https://www.zhihu.com/question/28300645) -->
+<!-- 2. [Docker和虚拟机的对比](https://www.cnblogs.com/jie-fang/p/10279629.html) -->
 ### Docker 架构
 
 ![docker-architecture](./docker-architecture.svg)
@@ -50,32 +48,26 @@ docker 采用客户端（client）服务器（docker deamon）架构，使用RES
 
 Docker镜像是创建Docker container的只读模版。
 
-
 #### Docker 容器（Docker container）
-container是镜像的可运行实例。c
-
+container是镜像的可运行实例。
 #### Docker守护进程（The Docker da。emon）
 Docker守护进程监听Docker Api请求，负责管理docker对象（images、containers、networks、volumes），构建、运行和分发Docker容器。
 
-
 #### Docker客户端（The Docker client）
 
-用户通过Docker客户端与Docker守护进程进行交互，用户在控制台中输入Docker命令，Docker客户端将命令发送给Docker守护进程，Docker命令最终调用Docker API。
-
+用户通过Docker客户端与Docker守护进程进行交互，用户在命令行中输入Docker命令，Docker客户端将命令发送给Docker守护进程，Docker命令最终会调用Docker API。
 
 #### Docker仓库（Docker registries）
 
-Docker仓库存储Docker镜像，默认的仓库地址是Docker Hub，可以配置自己的私有Docker仓库。
-
-
+Docker仓库存储Docker镜像，默认的仓库地址是[Docker Hub](https://hub.docker.com/)，可以配置自己的私有Docker仓库。
 
 ## 如何使用docker
 
-docker如何安装就不讲解了，安装过程可以参考[官方文档](https://docs.docker.com/get-started/)
+docker如何安装这里就不讲解了，安装过程可以参考[官方文档](https://docs.docker.com/get-started/)
 
 ### 运行第一个Docker container
 
-运行一个hello world镜像，
+运行一个hello world镜像
 
 ```bash
 $ docker container run hello-world
@@ -83,18 +75,18 @@ $ docker container run hello-world
 
 ![docker-hello-world](./docker-hello-world.png)
 
-现在我们已经运行了我们的第一个Docker应用，就是这么简单，命令行还打印出了生成这条信息,Docker用了哪些步骤，这里简单分析一下:
+现在我们已经运行了我们的第一个Docker应用，就是这么简单，命令行还打印出生成这条信息Docker用了哪些步骤，这里简单分析一下:
 
 
 1. 首先Docker客户端与Docker守护进程建立通信。
 2. Docker会在本地查找hello-world镜像，发现没有找到，此时docker会自动帮我们执行docker pull hello-world 从Docker Hub上拉取，将远程仓库的镜像拉取到本地
 3. 有了镜像以后Docker守护进程会自动帮我们执行docker container create命令来创建container，并且运行container
-4. Docker守护进程将结果给到Docker客户端，客户端再发送到终端。
+4. Docker守护进程将container的运行结果给到Docker客户端，客户端再发送到终端。
 
 
 ### 如何创建image
 
-这里以官方文档中[demo](https://docs.docker.com/language/nodejs/build-images/)讲解如何构建我们自己的镜像
+这里以官方文档中的[demo](https://docs.docker.com/language/nodejs/build-images/)讲解如何构建我们自己的镜像
 
 首先我们需要创建自己的应用。
 
@@ -135,7 +127,7 @@ $ curl http://localhost:8000/test
 
 ```
 
-输入日志：
+输出日志：
 
 ```bash
 2021-05-30T17:39:41:1940  INFO: POST /notes
@@ -144,10 +136,12 @@ $ curl http://localhost:8000/test
 
 说明一切运行正常。
 
-现在我们开始动手将我们的应用build成一个docker镜像。
+现在我们可以开始动手将我们的应用build成一个docker镜像了。
 
 #### 创建Dockerfile
 
+
+*===========整理============*
 在项目根目录下创建Dockerfile文件，
 
 ```Dockerfile
@@ -195,7 +189,7 @@ node_modules
 docker build --tag node-docker .
 ```
 
-执行这个命令Docker会读取dDockerfile里面指令并逐个执行它们，最终创建一个Docker映像。
+执行这个命令Docker会读取Dockerfile里面的指令并逐个执行它们，最终创建一个Docker映像。
 
 #### 运行container
 
@@ -208,7 +202,8 @@ docker run -d -p 8000:8000 node-docker
 - -d 是--detach的缩写，表示在后台运行container不会占用命令行
 - -p 是--publish缩写，将容器里面的端口暴露给宿主机，[host port]:[container port]
 
-执行完这个命令后我们的container已经运行起来了，我们可以用上面的POST和GET请求进行验证。因为container在后台运行，我们没法直接看到日志打出，可以使用命令   ```docker logs [containerId] 进行查看。
+执行完这个命令后container已经运行起来了，我们可以用上面的POST和GET请求进行验证。
+因为container在后台运行，我们没法直接看到日志打出，可以使用命令  ```docker logs [containerId]``` 进行查看。
 
 
 #### 更新应用操作
@@ -220,7 +215,9 @@ console.log("this is a new image");
 ...
 ```
 
-那么本次改动如何更新到镜像和container中？
+那么本次改动如何更新到镜像和container中呢？
+
+执行以下步骤：
 
 * 重新build image，```docker build --tag node-docker .```
 * 删除之前的container，```docker rm -f [containerId]```
@@ -228,34 +225,42 @@ console.log("this is a new image");
 
 
 #### 共享image
-现在我们已经构建好了自己的镜像，我们可以发布到远程仓库中以供他人下载和使用,
 
-这里我们使用Docker Hub来共享我们image，
+镜像构建好了，我们可以发布到远程仓库中以供他人下载和使用。
 
-* 首先我们需要[注册](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)和[登录]()Docker Hub
-* 点击 “Create Repository”按钮创建一个我们自己的仓库，取名就叫node-server，创建成功后我们可以得到新的镜像名字，[YOUR-USER-NAME]/node-server。
-* 我们需要在本地登录Docker Hub，```docker login -u YOUR-USER-NAME```。
-* 我们需要给我们的镜像重新取一个跟远程一样的名字，```docker tag node-serve YOUR-USER-NAME/node-server``` 这里不会创建新的镜像，执行```docker images```命令可以看到```IMAGE ID```是相同的。
-* 现在我们可以将我们的镜像推送到远程了，执行命令```docker push YOUR-USER-NAME/node-server```, 执行完已经刷新Docker Hub页面就可以看到我们刚刚的推送了。
+这里我们使用Docker Hub来共享我们image操作步骤如下：
 
-这样别人就可以拉取到我们的镜像了。
+* 首先我们需要[注册](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)和登录Docker Hub；
+* 点击 “Create Repository”按钮创建一个自己的仓库，取名就叫node-server，创建成功后得到新的镜像名字，[YOUR-USER-NAME]/node-server；
+* 我们需要在本地登录Docker Hub，```docker login -u YOUR-USER-NAME```；
+* 我们需要给镜像重新取一个跟远程一样的名字，```docker tag node-serve YOUR-USER-NAME/node-server``` 这里不会创建新的镜像，执行```docker images```命令可以看到```IMAGE ID```是相同的；
+* 现在我们可以将镜像推送到远程了，执行命令```docker push YOUR-USER-NAME/node-server```, 执行完命令刷新Docker Hub页面就可以看到刚刚的推送了。
+
+至此别人也可以拉取我们构建好的镜像并运行了。
+
+感兴趣的同学可以去[Play with Docker](https://labs.play-with-docker.com/)拉取并运行刚才发布的镜像。
 
 
 #### 数据持久化（volume）
 
-在上面的demo中，我们用post请求存储的数据存在内存中，前文也讲过docker container拥有自己独立的文件系统并且与外界隔离，container可以完成文件的增删改查操作，
-那么当container被删除后，container里面的数据也会被一并删除。那么docker里面怎么做数据的持久化存储呢。这里就引入了volume的概念。
+在上面的demo中，我们用post请求存储的数据存储在container里面的文件系统中。
+前文也讲过docker container拥有自己独立的文件系统并且与外界隔离，container可以完成文件的增删改查操作。
+当container被删除后，container里面的数据也会被一并删除。
+那么docker里面怎么做数据的持久化存储呢。
+这里就引入了volume（数据卷）的概念。
 
-volume可以将container中的文件路径挂载到宿主机的某个路径上面，那么container中那个路径下的所有改动都会映射到宿主机上对应的路径中，它的生命周期独立于容器，Docker不会在容器被删除后自动删除volume。
+volume可以将container中的文件路径挂载到宿主机的某个路径上面，
+那么container中那个路径下的所有改动都会映射到宿主机上对应的路径中，
+它的生命周期独立于容器，
+volume不会在容器被删除后自动删除。
 
 
 volume 主要分为两种:
-
-
 ##### 1. bind mounts
 
-我们需要自己指定挂载目录，也可以用来做的数据存储，不过通常用来给container提供额外的数据。比如将项目的源代码挂载到container里面，
-
+使用bind mounts volume我们需要自己指定挂载目录。
+bind mounts volume可以用来做数据存储，不过通常用来给container提供额外的数据，
+比如将项目的源代码挂载到container里面，
 修改源代码就可以同步到container里面。
 
 ```bash
@@ -268,14 +273,13 @@ docker run -dp 3000:3000 \
 
 *========运行demo=============*
 
-
-开发完后我们就可以重新打包我们的镜像了。
-
+这样在开发完后我们就可以重新打包我们的镜像了，相当的方便.
 
 ##### 2. named volume 
 
-named volume适用于数据存储，我们不用关心数据的存储位置。创建好named volume后，我们只需要使用volumeName用作挂载，
-docker 会自动给volume分配存储路径。
+named volume适用于数据存储，我们不用关心数据的存储位置。
+创建好named volume后，我们只需要使用volumeName用作挂载，
+Docker会自动给volume分配存储路径。
 
 ```bash
 # 创建named volume 
@@ -288,29 +292,38 @@ $ docker volume create [volumeName]
 
 那我们怎么查看named volume在宿主机上的挂载路径呢，很简单使用命令：
 
+*=======待确认=====*
+
 ```bash
 docker volume inspect [volumeName]
 ```
 
-
 #### container 之间如何通信
 
-目前为止我们只有一个container在运行，但是在实际使用中服务往往不止一个，比如数据库服务，api服务等，
+目前为止我们只有一个container在运行，但是在实际使用中服务往往不止一个，比如数据库服务、api服务等，
 
-为了方便管理和维护，我们将服务分到不同的container中，每个container只做好一件事情，
+为了方便管理和维护，我们将服务分到不同的container中运行，力求让每个container只做好一件事情。
 
-在同一个局域网中,container之间可以通过networking进行通信。
+container之间往往需要相互通信，例如api服务与数据库服务之间需要进行增删改查的通信，那么container直接如何通信呢？
 
+这里就要用到docker network了。
+
+创建network非常简单:
 
 ```bash
 $ docker network create [networkName]
 ```
 
+在同一个局域网中，container之间可以通过networking进行通信。
 
-#### 改造我们的应用
-这里我们综合使用volume和networking来改造我们的应用。我们将引入数据库（mongodb）用来存储我们的数据。
 
-首先我们创建两个volume用来存储mongodb的数据和配置
+#### 使用volume和network改造我们的应用
+
+这里我们综合使用volume和networking来改造我们的应用。
+我们引入数据库（mongodb）用来存储我们的数据，我们将运行一个mongodb的container。
+
+
+首先创建两个volume用来存储mongodb的数据和配置
 
 ```bash
 $ docker volume create mongodb
@@ -332,8 +345,9 @@ $ docker run -it --rm -d -v mongodb:/data/db \
   --name mongodb \
   mongo
 ```
+*===参数讲解===*
 
-修改我们的server.js 代码，使其连接到Mongodb
+修改我们的server.js代码，使其连接到mongodb服务。
 
 ```js
 const ronin     = require( 'ronin-server' )
@@ -370,8 +384,8 @@ $ docker run \
   node-docker
 ```
 
-这里我们将container接入到相同的网络mongodb中，这样应用就可以和mongodb相互通信了。
-注入环境变量CONNECTIONSTRING，server.js 连接数据库需要用到。
+我们将node-docker container接入到相同的网络mongodb中，这样node-docker就可以和mongodb相互通信了。
+这里注入环境变量CONNECTIONSTRING，server.js连接数据库需要用到。
 
 现在让我们来测试一下：
 
@@ -398,11 +412,11 @@ curl --request GET --url http://localhost:8000/notes
 
 到目前为止我们已经了解了docker的基本概念，学会了如何使用docker。
 
-但是我们也发现了，整个过程还是比较繁琐的，我们需要创建network，创建volume，启动container，注入环境变量等等操作，
+但是我们也发现了，整个过程还是比较繁琐的，我们需要创建network，创建volume，启动container，注入环境变量等等操作。
 
-那有没有办法一行命令搞定所有这些事情呢，答案是肯定的。现在我们就来介绍docker compose的使用让我们一次搞定所有这些步骤。
+有没有办法一行命令搞定所有这些事情呢？答案是肯定的。现在我们就来介绍docker compose的使用让我们一次搞定。
 
-docker compose需要安装。这里我们省略安装步骤。
+docker compose需要安装。这里我们省略安装步骤，大家自行google。
 
 1. 在项目的根目录下创建docker-compose.yml文件
 2. 写入相关命令
@@ -435,6 +449,7 @@ volumes:
  mongodb_config:
 ```
 
+*===命令解析====*
 
 定义好docker-compose.yml文件文件以后使用命令：
 
@@ -458,11 +473,9 @@ docker-compose logs -f app
 docker-compose down
 ```
 
-## 创建image的最佳实践
-https://docs.docker.com/get-started/09_image_best/
 
 
-## 最后我们再来总结一下docker的一些特点
+## 总结
 
 
 
