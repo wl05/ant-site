@@ -6,10 +6,10 @@ Docker是什么，如何使用Docker，本文结合Docker实践来带着大家�
 
 ![docker-logo](./docker-logo.png)
 
-Docker的logo非常形象的表现了Docker的思想，一艘大船载满的各种各样的集装箱。
+Docker的logo非常形象的表现了Docker的思想，一艘大船载满各种各样的集装箱。
 集装箱解决了什么问题？
 船上的货物各种各样，集装箱将各种货物分门别类并且集装箱与集装箱之间互不影响。
-这样就不用担心这种货物不能与另一种货物一起运送的问题了。
+这样就不用担心哪些货物不能一起运送的问题。
 只要这些货物封装在不同的集装箱里，就可以用一艘大船把它们都运走。
 
 回到实际运用中来，服务器就像是一艘大船，Docker就是集装箱。
@@ -140,30 +140,20 @@ $ curl http://localhost:8000/test
 
 #### 创建Dockerfile
 
-
-*===========整理============*
 在项目根目录下创建Dockerfile文件，
 
 ```Dockerfile
-# syntax=docker/dockerfile:1
 
 # 基础镜像
 FROM node:12.18.1
-
-# 为了提升性能将NODE_ENV设置为production
-ENV NODE_ENV=production
-
 # 指定工作目录，后续所有的操作都在这个目录下进行
 WORKDIR /app
 
-# 将项目的package.json、package-lock.json拷贝到工作目录下，以便执行npm install安装依赖
-COPY ["package.json", "package-lock.json*", "./"]
-
-# 执行npm install安装所有依赖
-RUN npm install --production
-
 # 将项目代码拷贝到工作目录
 COPY . .
+
+# 执行npm install安装所有依赖
+RUN npm install
 
 # 当镜像的container运行时执行这个命令，这样我们的服务就启动了。
 # 区别于RUN命令，RUN命令实在生成image时执行的
@@ -264,14 +254,11 @@ bind mounts volume可以用来做数据存储，不过通常用来给container�
 修改源代码就可以同步到container里面。
 
 ```bash
-docker run -dp 3000:3000 \
+docker run -dp 8000:8000 \
      -w /app -v "$(pwd):/app" \
      node:12-alpine \
-     sh -c "yarn install && yarn run dev"
+     sh -c "npm i nodemon -g && npm i && nodemon server.js"
 ```
-
-
-*========运行demo=============*
 
 这样在开发完后我们就可以重新打包我们的镜像了，相当的方便.
 
@@ -291,8 +278,6 @@ $ docker volume create [volumeName]
 ```
 
 那我们怎么查看named volume在宿主机上的挂载路径呢，很简单使用命令：
-
-*=======待确认=====*
 
 ```bash
 docker volume inspect [volumeName]
@@ -339,13 +324,12 @@ $ docker network create mongodb
 mongodb镜像，将我们创建好的volume挂载上去，同时将mongodb接入到我们创建的network中。
 
 ```bash
-$ docker run -it --rm -d -v mongodb:/data/db \
+$ docker run --rm -d -v mongodb:/data/db \
   -v mongodb_config:/data/configdb -p 27017:27017 \
   --network mongodb \
   --name mongodb \
   mongo
 ```
-*===参数讲解===*
 
 修改我们的server.js代码，使其连接到mongodb服务。
 
@@ -376,11 +360,11 @@ $ docker build --tag node-docker .
 
 ```bash
 $ docker run \
-  -it --rm -d \
+  --rm -d \
   --network mongodb \
   --name rest-server \
   -p 8000:8000 \
-  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/db_notes \
   node-docker
 ```
 
@@ -449,7 +433,7 @@ volumes:
  mongodb_config:
 ```
 
-*===命令解析====*
+
 
 定义好docker-compose.yml文件文件以后使用命令：
 
@@ -474,9 +458,18 @@ docker-compose down
 ```
 
 
-
 ## 总结
 
+最后我们来总结一下Docker的特点：
+
+* 高效利用系统资源
+  由于容器不需要进行硬件虚拟以及运行完整操作系统等额外开销，Docker 对系统资源的利用率更高。
+* 启动时间短
+  Docker运行于宿主机内核之中，相较于虚拟机无需启动完整的操作系统，启动时间往往是秒甚至毫秒级别。
+* 保证了运行环境的一致性
+  Dokcer将服务所需的依赖都打包进image中，保证了在不同机器上运行环境的一致性，不会出现因为运行环境不一致导致的bug
+* 方便迁移
+  由于Dokcer保证了运行环境的一致性，不同平台运行Docker得出的结果都是一致的，这样用户就可以很轻易的将一个平台上运行的应用，迁移到另一个平台上。
 
 
 ## Docker 常用命令总结

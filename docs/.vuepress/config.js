@@ -25,26 +25,27 @@ module.exports = {
         {
           path: "/tech/",
           title: "Tech",
-          collapsable: false,
+          collapsable: true,
           children: [
-            "git",
-            "git-rebase",
-            "cicd-concepts",
-            "abort-request",
-            "google-search",
-            "algorithm/backtracking-algorithm",
-            "algorithm/sort-algorithm/bubble-sort",
+            "git.md",
+            "algorithm/leetcode.md",
+            "algorithm/sort-algorithm/bubble-sort.md",
+            "git-rebase/git-rebase.md",
+            "abort-request.md",
+            "cicd-concepts.md",
+            "google-search.md",
+            "docker/docker.md",
           ],
         },
       ],
-      "/hobby/": [
-        {
-          path: "/hobby/",
-          title: "Hobby",
-          collapsable: false,
-          children: ["BreedingOfTheThreeToedBoxTurtle/index"],
-        },
-      ],
+      // "/hobby/": [
+      //   {
+      //     path: "/hobby/",
+      //     title: "Hobby",
+      //     collapsable: false,
+      //     children: ["BreedingOfTheThreeToedBoxTurtle/index"],
+      //   },
+      // ],
     },
   },
 };
