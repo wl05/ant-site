@@ -38,14 +38,17 @@ module.exports = {
           ],
         },
       ],
-      // "/hobby/": [
-      //   {
-      //     path: "/hobby/",
-      //     title: "Hobby",
-      //     collapsable: false,
-      //     children: ["BreedingOfTheThreeToedBoxTurtle/index"],
-      //   },
-      // ],
+      "/hobby/": [
+        {
+          path: "/hobby/",
+          title: "Hobby",
+          collapsable: true,
+          children: [
+            "turtle-way/turtle-way.md",
+            "three-toed-box-turtle/breeding.md",
+          ],
+        },
+      ],
     },
   },
 };
