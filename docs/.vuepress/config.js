@@ -1,6 +1,6 @@
 module.exports = {
   title: "wl05",
-  description: "随学随记",
+  description: "随记",
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }], // 增加一个自定义的 favicon(网页标签的图标)
