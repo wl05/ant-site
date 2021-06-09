@@ -46,6 +46,7 @@ module.exports = {
           children: [
             "turtle-way/turtle-way.md",
             "three-toed-box-turtle/breeding.md",
+            "cuora-galbinifrons/cuora-galbinifrons.md",
           ],
         },
       ],
