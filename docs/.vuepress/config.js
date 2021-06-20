@@ -15,9 +15,16 @@ module.exports = {
     nav: [
       { text: "技术", link: "/tech/" },
       { text: "爱好", link: "/hobby/" },
+      { text: "生活", link: "/life/" },
     ],
     sidebar: {
       "/tech/": [
+        {
+          title: "浏览器",
+          collapsable: false,
+          children: ["browser/"],
+        },
+
         {
           title: "git",
           collapsable: false,
@@ -37,7 +44,6 @@ module.exports = {
           collapsable: false,
           children: ["docker/docker-introduction/"],
         },
-
         {
           title: "其他",
           collapsable: false,
@@ -50,7 +56,6 @@ module.exports = {
       ],
       "/hobby/": [
         {
-          title: "Hobby",
           collapsable: false,
           children: [
             "turtle-way/turtle-way.md",
