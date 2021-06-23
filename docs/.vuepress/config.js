@@ -22,7 +22,7 @@ module.exports = {
         {
           title: "浏览器",
           collapsable: false,
-          children: ["browser/chrome-browser-architecture/"],
+          children: ["browser/1-chrome-browser-architecture/"],
         },
         {
           title: "git",
