@@ -20,6 +20,11 @@ module.exports = {
     sidebar: {
       "/tech/": [
         {
+          title: "Typescript",
+          collapsable: false,
+          children: ["typescript/", "typescript/type-manipulation/generics.md"],
+        },
+        {
           title: "浏览器",
           collapsable: false,
           children: ["browser/1-chrome-browser-architecture/"],
@@ -37,7 +42,6 @@ module.exports = {
             "algorithm/sort-algorithm/bubble-sort.md",
           ],
         },
-
         {
           title: "docker",
           collapsable: false,
