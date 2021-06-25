@@ -60,6 +60,8 @@ module.exports = {
             "turtle-way/turtle-way.md",
             "three-toed-box-turtle/breeding.md",
             "cuora-galbinifrons/cuora-galbinifrons.md",
+            "fall-down-and-hurt-oneself/",
+            "how-to-give-medicine-to-turtle/",
           ],
         },
       ],
