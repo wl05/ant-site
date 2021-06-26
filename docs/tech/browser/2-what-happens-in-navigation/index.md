@@ -2,7 +2,7 @@
 
 <span style="font-size:14px;text-decoration:underline">发布于：2021-06-26</span>
 
-老生常谈的问题浏览器地址栏输入URL回车到页面渲染出来这个过程中发生了什么？结合上一篇浏览器架构的知识，我们来一探究竟。
+页面导航的过程发生了什么？结合上一篇浏览器架构的知识，我们来一探究竟。
 ## 页面控制
 
 在上一篇中我们介绍了Chrome浏览器是多进程架构，进程之间分工协作。打开浏览器，除了Tab里面的内容，我们眼睛能看到的部分都是由浏览器进程来控制的。浏览器进程里面又有分工协作的线程，比如负责操作界面的UI线程（绘制操作按钮，地址导航栏），负责网络请求的网络线程，负责文件访问控制的存储线程。
@@ -28,7 +28,7 @@
 
 当我们敲下回车，UI线程会告诉网络线程获取网站内容，此时标签的左上角开始转圈圈，网络线程此时会进行DNS解析、建立TLS连接。
 
-![browserprocesses](./browserprocesses.png)
+![navstart](./navstart.png)
 <center style="font-size:14px;text-decoration:underline">UI线程告诉网络线程导航到mysite.com</center> 
 如果这里是重定向请求比如301，网络线程会告诉UI线程服务器要求重定向，然后开始另一个URL跳转。
 
