@@ -1,6 +1,6 @@
 # 浏览器篇（二）- 页面导航过程发生了什么
 
-<span style="font-size:14px;text-decoration:underline">发布于：2021-06-26</span>
+<page-tags text="发布于：2021-06-26"></page-tags>
 
 页面导航的过程发生了什么？结合上一篇浏览器架构的知识，我们来一探究竟。
 ## 页面控制
