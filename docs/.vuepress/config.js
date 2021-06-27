@@ -30,6 +30,7 @@ module.exports = {
           children: [
             "browser/1-chrome-browser-architecture/",
             "browser/2-what-happens-in-navigation/",
+            "browser/3-inner-workings-of-a-renderer-process/",
           ],
         },
         {

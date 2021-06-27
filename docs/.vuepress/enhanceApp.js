@@ -1,5 +1,6 @@
 // 使用异步函数也是可以的
 import PageTags from "./components/page-tags.vue";
+import ImageDescription from "./components/image-description.vue";
 
 export default ({
   Vue, // VuePress 正在使用的 Vue 构造函数
@@ -10,4 +11,5 @@ export default ({
 }) => {
   // ...做一些其他的应用级别的优化
   Vue.use(PageTags);
+  Vue.use(ImageDescription);
 };
