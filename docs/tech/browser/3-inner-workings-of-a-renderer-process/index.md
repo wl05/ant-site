@@ -62,26 +62,27 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 ![tellgame.png](./tellgame.png)
 <image-description text="向你的朋友描绘一副画面"/>
 
-
-布局是计算元素几何形状的过程。主线程遍历DOM和计算样式创建布局树，其中包含 x y 坐标和边界框大小（bounding box sizes）等信息，布局树一般来说比Dom 树要小，它只包含跟页面可见内容相关的信息。比如设置元素```display: none```这个元素就不会包含在布局树中（注意:```visibility: hidden```是会包含在布局树中，只是对我们肉眼不可见）。还有就是伪元素，比如```p::before{content:"Hi!"}```，虽然伪元素没有包含在DOM中但是会包含在布局树中。
+布局是计算元素几何结构的过程。主线程遍历DOM树和计算样式来创建布局树，布局树包含 x y 坐标和边界框大小（bounding box sizes）等信息，布局树一般来说比Dom 树要小，它只包含跟页面可见内容相关的信息。比如设置元素```display: none```这个元素就不会包含在布局树中（注意:```visibility: hidden```是会包含在布局树中的，只是对我们肉眼不可见）。还有就是伪元素，比如```p::before{content:"Hi!"}```，虽然伪元素没有包含在DOM中但是会包含在布局树中。
 
 ![layout.png](./layout.png)
 <image-description text="主线程遍历带有计算样式的DOM树然后产出布局树"/>
 
-布局过程不是那么简单和容易的。即使是最简单的页面布局，比如从上到下的排列段落，这个过程就必须要考虑到字体的大小以及到哪里换行，因为这些会影响到段落的大小和形状，更进一步会影响到下一个段落的位置。
+布局过程不是那么简单和容易的。即使是最简单的页面布局，比如从上到下的排列段落，这个过程就必须要考虑到字体的大小以及每一行到哪里换行，因为这些会影响到段落的大小和形状，更进一步会影响到下一个段落的位置。
 
 ![layout.gif](./layout.gif)
 
-我们可以通过CSS干很多事情，比如使元素浮动，隐藏溢出的部分或者改变输入框的输入方向。以此可以想象布局阶段是多么的复杂，在Chrome团队中有一个专门的团队来负责布局过程。如果你对他们的工作感兴趣可以看下这个视频[few talks from BlinkOn Conference](https://www.youtube.com/watch?v=Y5Xa4H2wtVA)
+我们可以通过CSS干很多事情，比如使元素浮动，隐藏溢出的部分或者改变输入框的输入方向。因此我们d可以想象布局阶段有多么复杂，在Chrome团队中有一个专门的团队来负责布局过程。如果你对他们的工作感兴趣可以看下这个视频[few talks from BlinkOn Conference](https://www.youtube.com/watch?v=Y5Xa4H2wtVA)
 
 
 ### 绘制过程（Paint）
 
-[drawgame.png](./drawgame.png)
-<image-description text="一个人站在画布面前思考是应该先画圆还是应该画正方形"/>
 
 
 现在我们已经有了DOM，样式和布局，但是要渲染页面这些还是不够。就跟画画一样，知道了画中元素的大小，形状和位置，你还要考虑从哪个元素开始画起。
+
+
+[drawgame.png](./drawgame.png)
+<image-description text="一个人站在画布面前思考是应该先画圆还是应该画正方形"/>
 
 举个例子，给某些元素设置了不同的z-index属性，在这种情况还按照元素在HTML中的顺序渲染，渲染出来的页面就会有问题。
 
@@ -90,7 +91,7 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 <image-description text="页面元素按HTML中的顺序出现，因为没有把z-index考虑进去导致渲染出来的页面不正确"/>
 
 
-在绘制这一步，主线程遍历布局树来创建绘制记录。绘制记录是绘制过程的笔记，比如的“先画背景再画文字再画长方形”。如果你使用过canvas，那么你对这个过程应该不会感到陌生。
+在绘制这一步，主线程遍历布局树来创建绘制记录。绘制记录是绘制过程的笔记，就像“应该先画背景再画文字再画长方形”。如果你使用过canvas，那么你对这个过程应该不会感到陌生。
 
 ![paint.png](./paint.png)
 
@@ -103,13 +104,13 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 ![trees.gif](./trees.gif)
 <image-description text="DOM+Style、Layout 和 Paint 树，按顺序生成"/>
 
-如果你使用动画，那么这个流水线就必须要在帧与帧之间的间隙内完成，这个间隙有多长呢，目前大多数设备的屏幕刷新率为 60 次/秒，那么浏览器渲染动画或页面的每一帧的速率也需要跟设备屏幕的刷新率保持一致，也就是1 秒/ 60 = 16.66 毫秒，如果超过这个时间就会出现页面掉帧。可以参考[这里](https://developers.google.com/web/fundamentals/performance/rendering?hl=zh-cn)
+如果你使用动画，那么这个流水线就必须要在帧与帧之间的间隙内完成，这个间隙有多长呢，目前大多数设备的屏幕刷新率为 60 次/秒，如果浏览器渲染每一帧动画的速率跟设备屏幕的刷新率保持一致，也就是1 秒/ 60 = 16.66 毫秒，那么我们看到就是比较顺滑的画面，如果超过这个时间就会出现页面掉帧。感兴趣的话可以参考[这里](https://developers.google.com/web/fundamentals/performance/rendering?hl=zh-cn)
 
 ![pagejank1.png](./pagejank1.png)
 <image-description text="渲染没有跟上屏幕的刷新节奏，出现掉帧"/>
 
 
-就算渲染跟上了屏幕的刷新频率，还是有可能会出现掉帧卡顿的情况，因为这些跟js一起都是在主线程上运行的，js的运行完全有可能会阻塞主线程。
+就算渲染跟上了屏幕的刷新频率，还是有可能会出现掉帧卡顿的情况，因为这个过程跟js一起都是在主线程上运行的，js的运行完全有可能会阻塞主线程。
 
 ![pagejank2.png](./pagejank2.png)
 
@@ -124,57 +125,58 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 
 ### 如何将页面画出来？
 
-现在浏览器知道了文档的结构，每一个元素的样式，页面的几何形状还有绘制的顺序，那它怎么v把浏览器画出来呢？将这些信息转换为像素的过程叫做栅格化（rasterizing）。
+现在浏览器知道了文档的结构，每一个元素的样式，页面的几何结构还有绘制的顺序，那它怎么把页面画出来呢？将这些信息转换为像素的过程叫做栅格化（rasterizing）。
 
-Chrome最初处理栅格布化的方式是栅格化视口（viewport）内的部分，当用户滚动页面就移动已经栅格化的部分，然后栅格化进入视口的部分来填充缺失的部分。
+Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分，当用户滚动页面就移动已经栅格化的部分，然后栅格化进入视口的部分来填充页面缺失的部分。
 
 ![naive_rastering.gif](./naive_rastering.gif)
 
 <image-description text="简单的栅格过程"/>
 
+但是现在浏览器运行一个更复杂的过程来提升性能和效率，这个过程叫做合成（compositing）
+
 ### 什么是合成
 
-![composit.gif](./composit.gif)
-<image-description text="合成过程"/>
 
-合成会将页面拆分成不同的层，然后单独的栅格化，最后在一个单独的合成线程（compositor thread）中合成一个完整的页面。如果页面滚动，由于每一层都已经栅格化了，唯一要做的就是合成新的帧展示页面。
 
-我们可以在DevTools中使用[Layers panel](https://blog.logrocket.com/eliminate-content-repaints-with-the-new-layers-panel-in-chrome-e2c306d4d752?gi=cd6271834cea)查看我们的页面是如何分层的。
+合成会将页面拆分成不同的层，然后单独的栅格化，最后在一个单独的合成线程（compositor thread）中合成一个完整的页面。如果页面滚动，由于每一层都已经栅格化了，唯一要做的就是合成新的帧展示页面。动画也可以用相同的方式来实现，通过移动“层”来组合层新的帧。
+
+
+我们可以在开发者工具中使用[Layers panel](https://blog.logrocket.com/eliminate-content-repaints-with-the-new-layers-panel-in-chrome-e2c306d4d752?gi=cd6271834cea)查看我们的页面是如何分层的。
 
 ### 页面分层 
 
-为了找出哪些元素应该在哪些层主线程会遍历布局树来创建图层树(layer tree),这部分在开发者工具的（performance）面板中称为更新图层树（Update Layer Tree ）。如果页面的某些部分本应该放在单独的层中但是却没有的话（比如侧边栏菜单），我们可以通过css```will-chang```属性告诉浏览器对其进行分层。
+为了找出哪些元素应该在哪些层主线程会遍历布局树来创建图层树(layer tree),这部分在开发者工具的performance面板中叫做“Update Layer Tree”。如果页面的某些部分本应该放在单独的层中但是却没有的话（比如侧边栏菜单），我们可以通过css```will-change```属性告诉浏览器对其进行分层。
 
 ![layer.png](./layer.png)
 <image-description text="主线程遍历布局树产生图层树"/>
 
-但是图层也不是想设置多少就设置多少的，当图层太多时页面操作会比在单帧中栅格化页面的一部分还要慢，所以评估页面的渲染性能是必须不可少。想要获取关于这方面的更多信息，可以参考文章[Stick to Compositor-Only Properties and Manage Layer Count。](https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count)
+但是图层也不是想给多少就给多少的，当图层太多时层的合成操作要比在每个帧中光栅化页面的一小部分还要慢，所以评估页面的渲染性能是必须不可少。想要了解更多，可以参考文章[Stick to Compositor-Only Properties and Manage Layer Count。](https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count)
 
 
 ### 在主线程外栅格化并合成
 
-一旦图层树创建完成并且绘制顺序决定了，主线程会将这些信息提交到合成线程中（compositor thread）。 合成线程会对每一层进行栅格化。有些层可能会和整个页面一样大，所以合成线程会将它们拆分成小块，然后把每个小块发送到光栅线程中。光栅线程会对每一个小块进行光栅化并将它们存储到GPU内存中。
+一旦图层树创建完成并且绘制顺序决定了，主线程会将这些信息提交到合成线程中（compositor thread）。 合成线程会对每一层进行栅格化。但是有些层可能会和整个页面一样大，所以合成线程会将它们拆分成小块，然后把每个小块发送到光栅线程中。光栅线程会对每一个小块进行光栅化并将它们存储到GPU内存中。
 
 ![raster.png](./raster.png)
 <image-description text="光栅线程创建每一块的位图并发送到GPU"/>
 
-合成线程可以给不同的光栅线程分配优先级，这样在视口中或者视口附近的页面可以更快的光栅化。为了处理像缩放一类的操作，图层（layer）会为不同的清晰度配备不同的图块。
+合成线程可以给不同的光栅线程分配优先级，这样在视口中或者视口附近的页面可以更快的光栅化。为了处理像缩放一类的操作，同一图层（layer）会为不同的清晰度配备不同的块。
 
 当块都被光栅化以后，合成线程会收集被叫做图画四边形（draw quads）的块信息，然后创建一个合成帧。
 
 
-* 图画四边形: 图画四边形包含块在内存中的位置以及页面合成后图块在页面的位置之类的信息
-* 合成帧: 代表页面的一帧的图画四边形的合集
+* 图画四边形（draw quads）: 图画四边形包含块在内存中的位置以及页面合成后图块在页面的位置之类的信息
+* 合成帧（Compositor frame）: 代表页面的一帧的图画四边形的合集
 
-随后合成帧通过IPC提交给浏览器进程。这时因为浏览器UI的改变可能会有另外的合成帧从UI线程添加进来，或者为了扩展会从他们的渲染进程中添加进来。这些合成帧发送到GPU然后展示在屏幕上。如果有滚动事件，合成线程会另外创建合成帧发送到GPU。
+随后合成帧通过IPC提交给浏览器进程。这时因为浏览器UI的改变可能会有另外的合成帧从UI线程添加进来，或者为了扩展会从其他的渲染进程中添加进来。这些合成帧发送到GPU然后展示在屏幕上。如果有滚动事件，合成线程会另外创建合成新的合成帧发送到GPU。
 
 ![composit.png](./composit.png)
-<image-description text="合成线程创建合成帧。帧被发送到浏览器进程中的GPU"/>
+<image-description text="合成线程创建合成帧。帧被发送到浏览器最后到GPU"/>
 
 合成的好处是这个过程是独立于主线程的，不会阻塞主线程，同理也不会被主线程上的样式计算和js的执行所阻塞。
 
-这就是合成动画([compositing only animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/))被认为拥有平滑性能的原因。如果布局或绘制需要再次计算，那么主线程必须参与。
-
+这就是只用合成来构建动画([compositing only animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/))被认为拥有良好性能的原因。如果布局或绘制需要再次计算，那么主线程必须参与。
 
 ## 参考资料
 [inside-browser-part3](https://developers.google.com/web/updates/2018/09/inside-browser-part3)

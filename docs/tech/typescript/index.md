@@ -1,6 +1,8 @@
-# Typescript 学习笔记
+# Typescript学习笔记
 
-## Typescript 手册
+## 基本类型
+
+
 
 
 ### 类型操作
