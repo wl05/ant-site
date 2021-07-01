@@ -16,9 +16,20 @@ module.exports = {
       { text: "技术", link: "/tech/" },
       { text: "爱好", link: "/hobby/" },
       { text: "生活", link: "/life/" },
+      { text: "读书", link: "/read/" },
     ],
     sidebar: {
       "/tech/": [
+        {
+          title: "CSS",
+          collapsable: false,
+          children: ["css/"],
+        },
+        {
+          title: "Javascript",
+          collapsable: false,
+          children: ["javascript/"],
+        },
         {
           title: "Typescript",
           collapsable: false,
@@ -34,12 +45,27 @@ module.exports = {
           ],
         },
         {
+          title: "前端性能优化",
+          collapsable: false,
+          children: ["performance/"],
+        },
+        {
+          title: "前端框架",
+          collapsable: false,
+          children: ["framework/"],
+        },
+        {
+          title: "设计模式",
+          collapsable: false,
+          children: ["design-patterns/"],
+        },
+        {
           title: "git",
           collapsable: false,
           children: ["git/git-base", "git/git-rebase/"],
         },
         {
-          title: "algorithm",
+          title: "算法",
           collapsable: false,
           children: [
             "algorithm/leetcode.md",
