@@ -1,5 +1,7 @@
 # 浏览器篇（三）- 渲染进程的内部工作过程
 
+<page-tags text="发布于：2021-06-30"></page-tags>
+
 在上一篇中我们遗留了一个问题，渲染进程是如何加载文档的？HTML，CSS，JS是如何被解析的? 本篇我们就来一探究竟。
 
 ## 前言
@@ -14,7 +16,6 @@
 总之一点，渲染进程的核心任务就是将HTML、CSS、JS转换为用户可交互的网页。
 
 ![renderer.png](./renderer.png)
-
 <image-description text="渲染进程里面有一个主线程，多个worker线程，一个合成（Compositor）线程和一个光栅 （raster）线程"/>
 
 
@@ -70,6 +71,7 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 布局过程不是那么简单和容易的。即使是最简单的页面布局，比如从上到下的排列段落，这个过程就必须要考虑到字体的大小以及每一行到哪里换行，因为这些会影响到段落的大小和形状，更进一步会影响到下一个段落的位置。
 
 ![layout.gif](./layout.gif)
+<image-description text="由于换行导致布局改变"/>
 
 我们可以通过CSS干很多事情，比如使元素浮动，隐藏溢出的部分或者改变输入框的输入方向。因此我们d可以想象布局阶段有多么复杂，在Chrome团队中有一个专门的团队来负责布局过程。如果你对他们的工作感兴趣可以看下这个视频[few talks from BlinkOn Conference](https://www.youtube.com/watch?v=Y5Xa4H2wtVA)
 
@@ -81,7 +83,7 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 现在我们已经有了DOM，样式和布局，但是要渲染页面这些还是不够。就跟画画一样，知道了画中元素的大小，形状和位置，你还要考虑从哪个元素开始画起。
 
 
-[drawgame.png](./drawgame.png)
+![drawgame.png](./drawgame.png)
 <image-description text="一个人站在画布面前思考是应该先画圆还是应该画正方形"/>
 
 举个例子，给某些元素设置了不同的z-index属性，在这种情况还按照元素在HTML中的顺序渲染，渲染出来的页面就会有问题。
@@ -141,6 +143,8 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 
 合成会将页面拆分成不同的层，然后单独的栅格化，最后在一个单独的合成线程（compositor thread）中合成一个完整的页面。如果页面滚动，由于每一层都已经栅格化了，唯一要做的就是合成新的帧展示页面。动画也可以用相同的方式来实现，通过移动“层”来组合层新的帧。
 
+![composit.gif](./composit.gif)
+<image-description text="合成过程动画"/>
 
 我们可以在开发者工具中使用[Layers panel](https://blog.logrocket.com/eliminate-content-repaints-with-the-new-layers-panel-in-chrome-e2c306d4d752?gi=cd6271834cea)查看我们的页面是如何分层的。
 

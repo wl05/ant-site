@@ -14,3 +14,6 @@ export default {
    text-decoration:underline
   }
 </style>
+
+
+// <center style="font-size:14px;text-decoration:underline"></center>
