@@ -33,7 +33,10 @@ module.exports = {
         {
           title: "Typescript",
           collapsable: false,
-          children: ["typescript/", "typescript/type-manipulation/generics.md"],
+          children: [
+            "typescript/basic-type/",
+            "typescript/type-manipulation/generics.md",
+          ],
         },
         {
           title: "浏览器",
