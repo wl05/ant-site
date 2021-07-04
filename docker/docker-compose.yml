@@ -1,8 +1,9 @@
 version: "3"
 services:
   web:
+    build: .
     image: node:12-alpine
-    command: sh -c "npm install && sh /script/deploy.sh"
+    command: npm install && sh /script/deploy.sh
     working_dir: /app
     volumes:
       - ../:/app
