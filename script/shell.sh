@@ -1,3 +1,3 @@
 #!/bin/bash
 cd ../docker
-docker-compose up -d --no-cache
+docker-compose up -d --force-recreate

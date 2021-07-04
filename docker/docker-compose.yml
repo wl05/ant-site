@@ -1,14 +1,13 @@
 version: "3"
 services:
-  web:
-    build: .
-    image: node:12-alpine
-    command: sh -c "ls -a && npm install"
-    working_dir: /app
-    volumes:
-      - ../:/app
-      - /app/node_modules/
-
+  # web:
+  #   build: .
+  #   image: node:12-alpine
+  #   command: sh -c "ls -a && npm install"
+  #   working_dir: /app
+  #   volumes:
+  #     - ../:/app
+  #     - /app/node_modules/
   mynginx:
     #使用的镜像
     image: nginx:1.16.1
