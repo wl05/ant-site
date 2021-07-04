@@ -3,20 +3,20 @@ services:
   web:
     build: .
     image: node:12-alpine
-    command: sh -c "npm install && sh /script/deploy.sh"
+    command: sh -c "ls -a && npm install"
     working_dir: /app
     volumes:
       - ../:/app
-  # mynginx:
-  #    #使用的镜像
-  #    image: nginx:1.16.1
-  #    #容器的映射端口
-  #    ports:
-  #      - 80:80
-  #    #定义挂载点         
-  #    volumes:
-  #      - ../docs/.vuepress/dist:/usr/share/nginx/html
-  #      - ./nginx/default.conf /etc/nginx/conf.d/default.conf
-  #      - ./nginx/logs:/var/log/nginx
-  #    #docker 重启后，容器自启动
-  #    restart: always
+  mynginx:
+    #使用的镜像
+    image: nginx:1.16.1
+    #容器的映射端口
+    ports:
+      - 80:80
+    #定义挂载点         
+    volumes:
+      - ../docs/.vuepress/dist:/usr/share/nginx/html
+      - ./nginx/default.conf /etc/nginx/conf.d/default.conf
+      - ./nginx/logs:/var/log/nginx
+    #docker 重启后，容器自启动
+    restart: always
