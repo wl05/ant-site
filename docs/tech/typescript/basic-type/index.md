@@ -300,11 +300,128 @@ function f(x: E) {
 
 在这个例子中，我们首先比较了 x 是否不等于 E.Foo。 如何这个条件成立，判断就结束了。但是如果不成立那x就只能是E.Foo。所以后面再去比较E.bar就没有意义了。
 
-### 运行时的枚举类型
+### 运行时的枚举
+
+在运行时枚举就是真实的对象，例如：
+
+```ts
+enum E {
+  X,
+  Y,
+  Z,
+}
+
+function f(obj: { X: number }) {
+  return obj.X;
+}
+
+// Works, since 'E' has a property named 'X' which is a number.
+f(E);
+```
+
+这里可以直接将枚举当对象使用。
+
+### 编译时的枚举 // TODO:
+
+虽然枚举在运行时是对象，
 
 
+### 反向映射 （Reverse mappings）
+
+数字枚举类型成员会有一个从值到名字的反向映射，在前面也已经提到过。
+
+```ts
+enum Enum {
+  A,
+}
+
+let a = Enum.A;
+let nameOfA = Enum[a]; // "A"
+```
+
+Typescript会将这段代码编译成下面的js：
+
+```js
+"use strict";
+var Enum;
+(function (Enum) {
+    Enum[Enum["A"] = 0] = "A";
+})(Enum || (Enum = {}));
+let a = Enum.A;
+let nameOfA = Enum[a]; // "A"
+```
+
+最后的结果是将枚举编译成为一个对象，这个对象既存储了name->value的映射，又存储了value->name的映射。**对其他枚举成员的引用总是作为属性访问发出，从不内联。** //TODO:
+
+需要特别注意的一点，字符串枚举不具备这种反向映射能力。
 
 
+#### const 枚举 （const enums）
+
+常量枚举使用const修饰符定义，并且只能使用常量枚举表达式。不同于一般的枚举类型，如何不存在反向映射的访问，常量枚举在编译阶段会被完全移除掉，只会在使用枚举成员的地方保留枚举成员的值，正是因为没有计算成员，所以能够在编译阶段做到这一点。看个例子就明白了：
+
+```ts
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+let directions = [
+  Direction.Up,
+  Direction.Down,
+  Direction.Left,
+  Direction.Right,
+];
+```
+这个例子只存在对枚举成员的访问没有反向的访问情况（比如 Direction[0]，这里没有使用常量枚举编译后的js：
+```js
+var Direction;
+(function (Direction) {
+    Direction[Direction["Up"] = 0] = "Up";
+    Direction[Direction["Down"] = 1] = "Down";
+    Direction[Direction["Left"] = 2] = "Left";
+    Direction[Direction["Right"] = 3] = "Right";
+})(Direction || (Direction = {}));
+var directions = [
+    Direction.Up,
+    Direction.Down,
+    Direction.Left,
+    Direction.Right,
+];
+```
+
+使用const 定义常量枚举类型：
+
+```ts
+const enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+...
+```
+编译后的js：
+
+```js
+var directions = [
+    0 /* Up */,
+    1 /* Down */,
+    2 /* Left */,
+    3 /* Right */,
+];
+```
+
+这样的好处是显而易见的，没有了反向映射的额外代码，最终的代码变少了。
+
+
+### 外部枚举 （Ambient enums）
+// TODO: https://stackoverflow.com/questions/28818849/how-do-the-different-enum-variants-work-in-typescript
+
+### Objects vs Enums
+// TODO:
 ## 参考资料
 
 1. [Enums](https://www.typescriptlang.org/docs/handbook/enums.html#numeric-enums)

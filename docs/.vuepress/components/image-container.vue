@@ -1,7 +1,7 @@
 <template>
 <div class="container">
-<div class="img-container" :width="width">
-    <slot></slot>
+  <div class="img-container" :width="width">
+      <slot></slot>
   </div>
 </div>
   
@@ -21,6 +21,5 @@ export default {
   }
   .img-container {
     width: 400px;
-  
   }
 </style>
