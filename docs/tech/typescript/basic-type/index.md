@@ -248,8 +248,7 @@ enum FileAccess {
 }
 ```
 
-### 联合枚举和枚举成员类型 （Union enums and enum member types
-）
+### 联合枚举和枚举成员类型 （Union enums and enum member types）
 
 还有一种特殊的常量枚举成员的子集：字面量枚举成员。字面量枚举成员是值没有初始值的常量枚举成员或者初始值被初始化为:
 
@@ -260,7 +259,7 @@ enum FileAccess {
 当枚举中的所有成员都有字面量枚举值时，就会产生一些特殊的语义。
 
 
-**第一，**就是枚举成员本身也会成为类型。比如我们可以定义对象的某些成员只能具有枚举成员的值。
+**第一,** 就是枚举成员本身也会成为类型。比如我们可以定义对象的某些成员只能具有枚举成员的值。
 
 ```ts
 enum ShapeKind {
@@ -525,17 +524,14 @@ let d = looselyTyped.a.b.c.d;
 ```
 
 虽然使用```any```有这些便利，但是是以牺牲类型安全为代价的，这样就违背了使用```Typescript```的初衷了，总之能避免使用```any```就尽量避免。
-
-
-
 ## Void 
-void类型有点像是any的反面，表示没有任何类型。通常在定义一个没有返回值的函数时使用到：
+```void```类型有点像是```any```的反面，表示没有任何类型。通常在定义一个没有返回值的函数时会使用到：
 ```ts
 function warnUser(): void {
   console.log("This is my warning message");
 }
 ```
-将一个变量声明为void用处不大，因为只能赋值为null（没有指定--strictNullChecks）或者undefined：
+将一个变量声明为```void```用处不大，因为只能赋值为```null```（没有指定```--strictNullChecks```的情况下）或者```undefined```：
 
 ```ts
 let unusable: void = undefined;
@@ -544,7 +540,7 @@ unusable = null;
 ```
 
 ## Null 和 Undefined
-在Typescript中，值null和undefined都有自己的类型，分别为null 和 undefined。当前变量声明为null或者undefined时，也只能分别赋值为null和undefined：
+在```Typescript```中，值```null```和```undefined```都有自己的类型，分别为```null``` 和 ```undefined```。如果当前变量声明为```null```或者```undefined```时，也只能分别赋值为```null```和```undefined```：
 
 ```ts
 // Not much else we can assign to these variables!
@@ -552,16 +548,15 @@ let u: undefined = undefined;
 let n: null = null;
 ```
 
+类型```null```和```undefined```是其他类型的子类型，比如可以将```null``` 或者 ```undefined```赋值给```number```类型的变量。
 
-类型null和undefined可以用作其他类型的子类型，比如可以将null 或者 undefined赋值给number类型的变量。
-
-但是如果使用```--strictNullChecks```，null和undefined就只能赋值给unknown、any 还有他们各自的类型null和undefined的变量（undefined还可以赋值给void类型的变量）。
+但是如果使用```--strictNullChecks```，```null```和```undefined```就只能赋值给```unknown```、```any``` 还有他们各自的类型```null```和```undefined```的变量（```undefined```还可以赋值给```void```类型的变量）。
 
 ## Never
 
-never表示变量值不存在的类型。 比如一个函数永远不会返回或者总是抛出错误那么就可以将这个函数的返回值定义为never类型。当变量被永不为真的类型守卫所约束时也会获得never类型。
+```never```表示永远不会出现的值的类型。 比如一个函数永远不会返回或者总是抛出错误那么就可以将这个函数的返回值类型定义为```never```类型。当变量被永不为真的类型守卫所约束时也会获得```never```类型。
 
-never类型是任何类型的子类型，可以赋值给任何类型。只有never可以赋值给never，any类型也不能赋值给never。
+```never```类型是任何类型的子类型，可以赋值给任何类型。但是只有```never```可以赋值给```never```，```any```类型也不能赋值给```never```。
 
 ```ts
 // Function returning never must not have a reachable end point
@@ -580,7 +575,7 @@ function infiniteLoop(): never {
 }
 ```
 
-never 的使用场景：
+**```never``` 的使用场景：**
 
 ```ts
 interface Foo {
@@ -610,19 +605,19 @@ function handleValue(val: All) {
 }
 ```
 
-如果增加一个新的类型，但是没有在switch中处理：
+如果增加一个新的类型，但是没有在```switch```中处理：
 
 ```ts
 type All = Foo | Bar | Baz
 ```
 
-最终default 里面的val就被收窄为Baz， 因为没有任何类型可以复制给never（除了never自己），导致这里无法通过编译，通过这个办法，可以确保 handleValue 总是穷尽 (exhaust) 了所有 All 的可能类型。
+最终```default``` 里面的```val```就被收窄为```Baz```， 因为没有任何类型可以赋值给```never```（除了```never```自己）导致这里无法通过编译。通过这个办法可以确保 ```handleValue``` 总是穷尽 (```exhaust```) 了所有 ```All``` 的可能类型。
 
 ## Object
 
-object表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。
+```object```表示非原始类型，也就是除```number```，```string```，```boolean```，```symbol```，```null```或```undefined```之外的类型。
 
-使用object类型，就可以更好的表示像Object.create这样的API。例如：
+使用```object```类型就可以更好的表示像```Object.create```这样的```API```。例如：
 
 
 ```ts
@@ -664,12 +659,12 @@ let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
-两种方式是等效的，喜欢那种方式看个人喜好，需要注意的是在JSX中只能使用as语法
+两种方式是等效的，喜欢那种方式看个人喜好，需要注意的是在```JSX```中只能使用```as```语法
 
 
-## 关于 Number,String,Boolean,Symbol, Object
+## 关于 ```Number```,```String```,```Boolean```,```Symbol```, ```Object```
 
-需要区分Number,String,Boolean,Symbol, Object和小写的number,string,boolean,symbol, object，只有小写形式可以作为类型。
+需要区分```Number```,```String```,```Boolean```,```Symbol```, ```Object```和小写的```number```,```string```,```boolean```,```symbol```, ```object```，只有小写形式可以作为类型。
 
 
 
