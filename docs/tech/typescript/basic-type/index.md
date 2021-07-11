@@ -1,5 +1,6 @@
 # Typescript 基础类型
 
+<page-tags text="发布于：2021-07-11"></page-tags>
 ## Boolean
 
 布尔类型声明：
