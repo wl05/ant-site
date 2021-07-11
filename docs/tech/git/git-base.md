@@ -11,9 +11,9 @@ git cherry-pick <feature 分支>
 # cherry-pick 多个commit
 git cherry-pick <HashA> <HashB>
 # cherry-pick 连续的多个commit，这个命令不包含commit A
-git cherry-pick A..B 
+git cherry-pick A...B 
 # cherry-pick 连续的多个commit，这个命令包含commit A
-git cherry-pick A^..B 
+git cherry-pick A^...B 
 ```
 
 * cherry-pick 有冲突解决
