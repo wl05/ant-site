@@ -1,1 +1,0 @@
-1. [when-to-use-never-and-unknown](https://blog.logrocket.com/when-to-use-never-and-unknown-in-typescript-5e4d6c5799ad/)
