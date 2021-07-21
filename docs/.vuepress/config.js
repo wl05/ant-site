@@ -46,6 +46,7 @@ module.exports = {
             "browser/2-what-happens-in-navigation/",
             "browser/3-inner-workings-of-a-renderer-process/",
             "browser/4-input-is-coming-to-the-compositor/",
+            "browser/how-v8-works/",
           ],
         },
         {
