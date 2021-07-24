@@ -1,5 +1,7 @@
 # JS引擎工作原理详解
 
+<page-tags text="发布于：2021-07-24"></page-tags>
+
 作为前端开发了解```javascript```引擎的原理和工作流程是很有必要的。
 
 ## ```Javascript```引擎的工作原理
@@ -20,7 +22,7 @@
 
 在了解V8的具体工作流程之前，我们先来看看各大浏览器的js引擎具体的工作流程是怎样的。
 
-上面也提到，````js```引擎工作的流程大致是一致的：
+上面也提到，```js```引擎工作的流程大致是一致的：
 * 解释器负责快速的生成没有优化过的字节码，
 * 优化编译器负责生成优化过后的机器码但是相对来说花的时间会长一些。
 
@@ -97,7 +99,7 @@ console.log(result);
 
 ![](./pipeline-detail-spidermonkey.svg)
 
-```Baseline code``` 执行一定时间后，```SpiderMonkey```会启动```IonMonkey frontend```接着在另一个线程中启动```IonMonkey optimizer```。这个过程就和```V8```非常相似了，在优化过程中还是执行````Baseline code```，当优化完成后就以最后优化完成的代码接替执行。
+```Baseline code``` 执行一定时间后，```SpiderMonkey```会启动```IonMonkey frontend```接着在另一个线程中启动```IonMonkey optimizer```。这个过程就和```V8```非常相似了，在优化过程中还是执行```Baseline code```，当优化完成后就以最后优化完成的代码接替执行。
 
 #### ```Chakra``` 引擎
 
