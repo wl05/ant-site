@@ -75,6 +75,5 @@ https://github.com/jamiebuilds/the-super-tiny-compiler
 3. [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 4. [AST Explorer](https://astexplorer.net/)
 5. [How to implement a programming language in JavaScript](http://lisperator.net/pltut/)
-6. [JavaScript Engines: An Overview](https://blog.bitsrc.io/javascript-engines-an-overview-2162bffa1187)
-7. [How JavaScript Works: Under the Hood of the V8 Engine](https://www.freecodecamp.org/news/javascript-under-the-hood-v8/)
 8.  [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)
+9.  [AST for JavaScript developers](https://itnext.io/ast-for-javascript-developers-3e79aeb08343)

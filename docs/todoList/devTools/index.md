@@ -26,7 +26,7 @@
 * ```Command+Option+C (Mac)``` 、 ```Control+Shift+C (Windows, Linux, Chrome OS)```，打开```Elements```面板。或者右键选择```Inspect(检查)```
 * ```Command+Option+J (Mac)``` 、 ```Control+Shift+J (Windows, Linux, Chrome OS)```，打开```Console```面板。
 * ```Command+Option+I (Mac)``` 、 ```Control+Shift+I (Windows, Linux, Chrome OS)```，打开最后一次打开过的面板。
-* Mac: ```/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --auto-open-devtools-for-tabs```打开Chrome并且每新开一个tab都是自动打开开发者工具。TODO://
+* Mac: ```/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --auto-open-devtools-for-tabs```打开Chrome并且每新开一个tab都是自动打开开发者工具。TODO: //
 
 ## 调试CSS
 
