@@ -1,16 +1,4 @@
-# Javascript 的解析过程
-
-javascript 从被下载到执行这个过程中发生了什么，本篇我们来一探究竟。
-
-<!-- ![](./popline.jpg) -->
-
-
-js 引擎负责将js代码编译为机器码并最终执行，主流浏览器都实现了自己的js引擎，像Chrome v8、
-Safari JavaScriptCore、Firefox SpiderMonkey。
-
-
-这里以Chrome为例，看看js的整个编译和执行过程。
-
+# 玩转AST
 
 
 ## Parse （解析）
@@ -68,12 +56,13 @@ https://segmentfault.com/a/1190000016231512
 ## AST 的简单实现
 
 https://github.com/jamiebuilds/the-super-tiny-compiler
-## 资料收集
 
+## 参考资料
 
-1. [How JavaScript works: Parsing, Abstract Syntax Trees (ASTs) + 5 tips on how to minimize parse time](https://blog.sessionstack.com/how-javascript-works-parsing-abstract-syntax-trees-asts-5-tips-on-how-to-minimize-parse-time-abfcf7e8a0c8)
-3. [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
-4. [AST Explorer](https://astexplorer.net/)
-5. [How to implement a programming language in JavaScript](http://lisperator.net/pltut/)
-8.  [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)
-9.  [AST for JavaScript developers](https://itnext.io/ast-for-javascript-developers-3e79aeb08343)
+* [How JavaScript works: Parsing, Abstract Syntax Trees (ASTs) + 5 tips on how to minimize parse time](https://blog.sessionstack.com/how-javascript-works-parsing-abstract-syntax-trees-asts-5-tips-on-how-to-minimize-parse-time-abfcf7e8a0c8)
+* [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
+* [AST Explorer](https://astexplorer.net/)
+* [How to implement a programming language in JavaScript](http://lisperator.net/pltut/)
+* [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)
+* [AST for JavaScript developers](https://itnext.io/ast-for-javascript-developers-3e79aeb08343)
+* [AST详解与运用](https://zhuanlan.zhihu.com/p/266697614)

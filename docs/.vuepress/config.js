@@ -47,6 +47,7 @@ module.exports = {
             "browser/3-inner-workings-of-a-renderer-process/",
             "browser/4-input-is-coming-to-the-compositor/",
             "browser/how-v8-works/",
+            "browser/ast/",
           ],
         },
         {
@@ -100,7 +101,7 @@ module.exports = {
             "three-toed-box-turtle/breeding.md",
             "cuora-galbinifrons/cuora-galbinifrons.md",
             "fall-down-and-hurt-oneself/",
-            "how-to-give-medicine-to-turtle/",
+            "dried-shrimp/",
           ],
         },
       ],
