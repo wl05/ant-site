@@ -1,5 +1,7 @@
 # 黄额闭壳龟的挑选与调理
 
+<page-tags text="发布于：2021-06-08"></page-tags>
+
 >（仅限于黑腹亚种）
 
 先附上一只本人正在调理的黄额
@@ -8,6 +10,7 @@
  <img src="./my-turtle.jpeg"/>
 </image-container>
 <image-description text="（购于2021年6月8号）"/> 
+
 
 
 

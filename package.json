@@ -23,5 +23,10 @@
     "@commitlint/config-conventional": "^12.1.4",
     "husky": "^6.0.0",
     "vuepress": "^1.8.1"
+  },
+  "dependencies": {
+    "@vuepress/core": "^1.8.2",
+    "async-validator": "^1.11.5",
+    "element-ui": "^2.15.3"
   }
 }

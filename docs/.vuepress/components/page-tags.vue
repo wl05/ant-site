@@ -1,5 +1,5 @@
 <template>
-  <span class="title">{{text}}</span>
+  <el-tag type="info">{{text}}</el-tag>
 </template>
 <script>
 export default {
@@ -9,8 +9,4 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" scoped>
-  .title {
-    font-size:14px;
-    text-decoration: underline
-  }
 </style>

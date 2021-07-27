@@ -1,6 +1,6 @@
 # 东箱摔伤治疗
 
-发布于：2021-06-23
+<page-tags text="发布于：2021-06-23"></page-tags>
 
 <image-container>
  <img src="./1.jpeg"/>
