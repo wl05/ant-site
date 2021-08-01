@@ -8,6 +8,7 @@ module.exports = {
   markdown: {
     lineNumbers: true, // 代码块显示行号
   },
+
   themeConfig: {
     repo: "wl05/ant-site",
     docsDir: "docs",
@@ -40,7 +41,7 @@ module.exports = {
         },
         {
           title: "浏览器",
-          collapsable: false,
+          collapsable: true,
           children: [
             "browser/1-chrome-browser-architecture/",
             "browser/2-what-happens-in-navigation/",
