@@ -29,7 +29,7 @@ module.exports = {
         {
           title: "Javascript",
           collapsable: false,
-          children: ["javascript/"],
+          children: ["javascript/ast/",],
         },
         {
           title: "Typescript",
@@ -41,14 +41,13 @@ module.exports = {
         },
         {
           title: "浏览器",
-          collapsable: true,
+          collapsable: false,
           children: [
             "browser/1-chrome-browser-architecture/",
             "browser/2-what-happens-in-navigation/",
             "browser/3-inner-workings-of-a-renderer-process/",
             "browser/4-input-is-coming-to-the-compositor/",
             "browser/how-v8-works/",
-            "browser/ast/",
           ],
         },
         {
