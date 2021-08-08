@@ -29,7 +29,7 @@ module.exports = {
         {
           title: "Javascript",
           collapsable: false,
-          children: ["javascript/ast/",],
+          children: ["javascript/ast/","javascript/module/",],
         },
         {
           title: "Typescript",
