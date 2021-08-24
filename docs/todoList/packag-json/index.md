@@ -1,0 +1,1 @@
+https://davidwells.io/blog/advanced-package-json-tips
