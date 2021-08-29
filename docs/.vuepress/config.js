@@ -29,7 +29,7 @@ module.exports = {
         {
           title: 'Javascript',
           collapsable: false,
-          children: ['javascript/ast/', 'javascript/module/']
+          children: ['javascript/ast/']
         },
         {
           title: 'Typescript',
@@ -88,11 +88,13 @@ module.exports = {
           title: '散记',
           collapsable: false,
           children: [
-            'turtle-way/turtle-way.md',
-            'three-toed-box-turtle/breeding.md',
-            'cuora-galbinifrons/cuora-galbinifrons.md',
-            'fall-down-and-hurt-oneself/',
-            'dried-shrimp/'
+            'sidelights/turtle-way/turtle-way.md',
+            'sidelights/three-toed-box-turtle/breeding.md',
+            'sidelights/cuora-galbinifrons/cuora-galbinifrons.md',
+            'sidelights/fall-down-and-hurt-oneself/',
+            'sidelights/dried-shrimp/',
+            'sidelights/website/',
+            'sidelights/drill-pattern-turtle-rot-nail-treatment/'
           ]
         },
         {
