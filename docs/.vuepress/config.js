@@ -1,110 +1,106 @@
 module.exports = {
-  base: "/",
-  title: "wl05 记录",
+  base: '/',
+  title: 'wl05 记录',
   head: [
-    ["link", { rel: "icon", href: "/favicon.ico" }], // 增加一个自定义的 favicon(网页标签的图标)
+    ['link', { rel: 'icon', href: '/favicon.ico' }] // 增加一个自定义的 favicon(网页标签的图标)
   ],
 
   markdown: {
-    lineNumbers: true, // 代码块显示行号
+    lineNumbers: true // 代码块显示行号
   },
 
   themeConfig: {
-    repo: "wl05/ant-site",
-    docsDir: "docs",
-    lastUpdated: "最后更新于",
+    repo: 'wl05/ant-site',
+    docsDir: 'docs',
+    lastUpdated: '最后更新于',
     nav: [
-      { text: "技术", link: "/tech/" },
-      { text: "爱好", link: "/hobby/" },
-      { text: "生活", link: "/life/" },
-      { text: "读书", link: "/read/" },
+      { text: '技术', link: '/tech/' },
+      { text: '爱好', link: '/hobby/' },
+      { text: '生活', link: '/life/' },
+      { text: '读书', link: '/read/' }
     ],
     sidebar: {
-      "/tech/": [
+      '/tech/': [
         {
-          title: "CSS",
+          title: 'CSS',
           collapsable: false,
-          children: ["css/"],
+          children: ['css/']
         },
         {
-          title: "Javascript",
+          title: 'Javascript',
           collapsable: false,
-          children: ["javascript/ast/","javascript/module/",],
+          children: ['javascript/ast/', 'javascript/module/']
         },
         {
-          title: "Typescript",
+          title: 'Typescript',
           collapsable: false,
-          children: [
-            "typescript/basic-type/",
-            "typescript/type-manipulation/generics.md",
-          ],
+          children: ['typescript/basic-type/', 'typescript/type-manipulation/generics.md']
         },
         {
-          title: "浏览器",
+          title: '浏览器',
           collapsable: false,
           children: [
-            "browser/1-chrome-browser-architecture/",
-            "browser/2-what-happens-in-navigation/",
-            "browser/3-inner-workings-of-a-renderer-process/",
-            "browser/4-input-is-coming-to-the-compositor/",
-            "browser/how-v8-works/",
-          ],
+            'browser/1-chrome-browser-architecture/',
+            'browser/2-what-happens-in-navigation/',
+            'browser/3-inner-workings-of-a-renderer-process/',
+            'browser/4-input-is-coming-to-the-compositor/',
+            'browser/how-v8-works/'
+          ]
         },
         {
-          title: "前端性能优化",
+          title: '前端性能优化',
           collapsable: false,
-          children: ["performance/"],
+          children: ['performance/']
         },
         {
-          title: "前端框架",
+          title: '前端框架',
           collapsable: false,
-          children: ["framework/"],
+          children: ['framework/']
         },
         {
-          title: "设计模式",
+          title: '设计模式',
           collapsable: false,
-          children: ["design-patterns/"],
+          children: ['design-patterns/']
         },
         {
-          title: "git",
+          title: 'git',
           collapsable: false,
-          children: ["git/git-base", "git/git-rebase/"],
+          children: ['git/git-base', 'git/git-rebase/']
         },
         {
-          title: "算法",
+          title: '算法',
           collapsable: false,
-          children: [
-            "algorithm/leetcode.md",
-            "algorithm/sort-algorithm/bubble-sort.md",
-          ],
+          children: ['algorithm/leetcode.md', 'algorithm/sort-algorithm/bubble-sort.md']
         },
         {
-          title: "docker",
+          title: 'docker',
           collapsable: false,
-          children: ["docker/docker-introduction/"],
+          children: ['docker/docker-introduction/']
         },
         {
-          title: "其他",
+          title: '其他',
           collapsable: false,
-          children: [
-            "other/abort-request.md",
-            "other/abort-request.md",
-            "other/google-search.md",
-          ],
-        },
+          children: ['other/abort-request.md', 'other/abort-request.md', 'other/google-search.md']
+        }
       ],
-      "/hobby/": [
+      '/hobby/': [
         {
+          title: '散记',
           collapsable: false,
           children: [
-            "turtle-way/turtle-way.md",
-            "three-toed-box-turtle/breeding.md",
-            "cuora-galbinifrons/cuora-galbinifrons.md",
-            "fall-down-and-hurt-oneself/",
-            "dried-shrimp/",
-          ],
+            'turtle-way/turtle-way.md',
+            'three-toed-box-turtle/breeding.md',
+            'cuora-galbinifrons/cuora-galbinifrons.md',
+            'fall-down-and-hurt-oneself/',
+            'dried-shrimp/'
+          ]
         },
-      ],
-    },
-  },
-};
+        {
+          title: '养龟日常',
+          collapsable: false,
+          children: ['daily/2021-08-22/']
+        }
+      ]
+    }
+  }
+}
