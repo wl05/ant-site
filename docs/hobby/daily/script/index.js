@@ -1,9 +1,10 @@
 const path = require('path')
 const fs = require('fs')
-const { formatImage, formatVideo } = require('./utils')
+const { formatImage, formatVideo, formatTitleAndDate } = require('./utils')
 
-const files = fs.readdirSync(path.resolve(__dirname, '../pictures'))
+const files = fs.readdirSync(path.resolve(__dirname, '../../../../turtle-source'))
 
+console.log(files)
 const formatFiles = files => {
   try {
     const data = new Map()
@@ -65,7 +66,7 @@ try {
           pre += formatImage(key, cur)
         }
         return pre
-      }, '')
+      }, formatTitleAndDate(key))
     )
     // }
   }

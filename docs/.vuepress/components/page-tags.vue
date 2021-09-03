@@ -3,8 +3,8 @@
 </template>
 <script>
 export default {
-  name: "page-tags",
-  props:["text"]
+  name: 'page-tags',
+  props: ['text']
 }
 </script>
 
