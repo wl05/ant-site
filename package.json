@@ -28,6 +28,9 @@
     "@vuepress/core": "^1.8.2",
     "async-validator": "^1.11.5",
     "element-ui": "^2.15.3",
+    "imagemin": "^7.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "vue-photo-preview": "^1.1.3"
   }
 }
