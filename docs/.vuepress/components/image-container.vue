@@ -20,5 +20,6 @@ export default {
 }
 .img-container {
   width: 100%;
+  cursor: zoom-in;
 }
 </style>
