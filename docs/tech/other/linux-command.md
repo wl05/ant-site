@@ -20,4 +20,4 @@ $ mv source_directory(目录) dest_directory(目录)
 
 ## 参考资料
 
-# [Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
+* [Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
