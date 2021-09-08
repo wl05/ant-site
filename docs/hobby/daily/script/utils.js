@@ -1,8 +1,5 @@
 const domain = 'http://wangleant.com/turtle-source/'
 const formatTitleAndDate = date => `# ${date}
-
-<page-tags text="发布于：${date}"></page-tags>
-
 `
 
 const formatImage = (date, pathStr) => `
