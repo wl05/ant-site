@@ -1,4 +1,4 @@
-# 浏览器篇（三）- 渲染进程的内部工作过程
+# 3、渲染进程工作过程
 
 <page-tags text="发布于：2021-06-30"></page-tags>
 
@@ -12,12 +12,10 @@
 
 在前面的篇章中我们也提到过，tab里面的所有内容都是由渲染进程来控制的。在渲染进程中主线程会处理你的大部分代码。如果你使用```web worker``` 或者```service worker```，wokrder线程会处理你的部分代码。合成（Compositor）和光栅 （raster）线程也在渲染器进程内运行，以高效流畅地渲染页面。
 
-
 总之一点，渲染进程的核心任务就是将HTML、CSS、JS转换为用户可交互的网页。
 
 ![renderer.png](./renderer.png)
 <image-description text="渲染进程里面有一个主线程，多个worker线程，一个合成（Compositor）线程和一个光栅 （raster）线程"/>
-
 
 ## 网页解析过程
 
@@ -41,20 +39,18 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 
 如果在解析HTML的过程中遇到```<script>```标签，HTML的解析会被阻塞，然后加载、解析并执行js代码。为什么？ 因为js的执行可能会改变文档的结构(HTML的解析模型[overview of the parsing model](https://html.spec.whatwg.org/multipage/parsing.html#overview-of-the-parsing-model))。这就是为什么HTML解析器必须要等到js执行完了才能重新开始解析文档。如果你对js的执行过程感兴趣可以参考[JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics)
 
-
 ### 告诉浏览器你想如何加载资源
 
-有很多方法可以告诉浏览器如何加载资源。比如你可以通过给```<script>```标签加上```async```或者```defer```属性，这样浏览器会异步的加载js代码，不会阻塞HTML的解析。如果合适你也可以使用[JavaScript module](https://developers.google.com/web/fundamentals/primers/modules)。另外通过```<link rel="preload">``` 标签可以告诉浏览器当前资源是必须的并且希望尽快下载。想了解更多可以参考[ Resource Prioritization – Getting the Browser to Help You.](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
-
+有很多方法可以告诉浏览器如何加载资源。比如你可以通过给```<script>```标签加上```async```或者```defer```属性，这样浏览器会异步的加载js代码，不会阻塞HTML的解析。如果合适你也可以使用[JavaScript module](https://developers.google.com/web/fundamentals/primers/modules)。另外通过```<link rel="preload">``` 标签可以告诉浏览器当前资源是必须的并且希望尽快下载。想了解更多可以参考[Resource Prioritization – Getting the Browser to Help You.](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
 
 ### 样式计算
+
 光有DOM还不够，我们还需要样式才能更好的展示我们的页面。主线程会解析CSS并且决定每个DOM节点的计算样式（computed style）。计算样式是基于CSS选择器的信息，这个信息表示每个元素应用什么样式。在开发者工具的```computed```部分可以看到这些信息。
 
 ![computedstyle.png](./computedstyle.png)
 <image-description text="主线程解析Css，并给Dom节点加上计算样式"/>
 
 就算我们不写任何CSS代码，每个DOM节点也都会有一个计算样式。比如```<h1>```标签比```h2```标签大、给每个元素定义margin。这是因为浏览器有一个默认的样式表。Chrome的默认样式表可以参考[you can see the source code here](https://cs.chromium.org/chromium/src/third_party/blink/renderer/core/html/resources/html.css)
-
 
 ### 布局 (Layout)
 
@@ -75,13 +71,9 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 
 我们可以通过CSS干很多事情，比如使元素浮动，隐藏溢出的部分或者改变输入框的输入方向。因此我们d可以想象布局阶段有多么复杂，在Chrome团队中有一个专门的团队来负责布局过程。如果你对他们的工作感兴趣可以看下这个视频[few talks from BlinkOn Conference](https://www.youtube.com/watch?v=Y5Xa4H2wtVA)
 
-
 ### 绘制过程（Paint）
 
-
-
 现在我们已经有了DOM，样式和布局，但是要渲染页面这些还是不够。就跟画画一样，知道了画中元素的大小，形状和位置，你还要考虑从哪个元素开始画起。
-
 
 ![drawgame.png](./drawgame.png)
 <image-description text="一个人站在画布面前思考是应该先画圆还是应该画正方形"/>
@@ -91,7 +83,6 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 ![zindex.png](./zindex.png)
 
 <image-description text="页面元素按HTML中的顺序出现，因为没有把z-index考虑进去导致渲染出来的页面不正确"/>
-
 
 在绘制这一步，主线程遍历布局树来创建绘制记录。绘制记录是绘制过程的笔记，就像“应该先画背景再画文字再画长方形”。如果你使用过canvas，那么你对这个过程应该不会感到陌生。
 
@@ -110,7 +101,6 @@ DOM是网页在浏览器中的内部表示，同时也是我们通过js与网页
 
 ![pagejank1.png](./pagejank1.png)
 <image-description text="渲染没有跟上屏幕的刷新节奏，出现掉帧"/>
-
 
 就算渲染跟上了屏幕的刷新频率，还是有可能会出现掉帧卡顿的情况，因为这个过程跟js一起都是在主线程上运行的，js的运行完全有可能会阻塞主线程。
 
@@ -139,8 +129,6 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 
 ### 什么是合成
 
-
-
 合成会将页面拆分成不同的层，然后单独的栅格化，最后在一个单独的合成线程（compositor thread）中合成一个完整的页面。如果页面滚动，由于每一层都已经栅格化了，唯一要做的就是合成新的帧展示页面。动画也可以用相同的方式来实现，通过移动“层”来组合层新的帧。
 
 ![composit.gif](./composit.gif)
@@ -148,7 +136,7 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 
 我们可以在开发者工具中使用[Layers panel](https://blog.logrocket.com/eliminate-content-repaints-with-the-new-layers-panel-in-chrome-e2c306d4d752?gi=cd6271834cea)查看我们的页面是如何分层的。
 
-### 页面分层 
+### 页面分层
 
 为了找出哪些元素应该在哪些层主线程会遍历布局树来创建图层树(layer tree),这部分在开发者工具的performance面板中叫做“Update Layer Tree”。如果页面的某些部分本应该放在单独的层中但是却没有的话（比如侧边栏菜单），我们可以通过css```will-change```属性告诉浏览器对其进行分层。
 
@@ -156,7 +144,6 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 <image-description text="主线程遍历布局树产生图层树"/>
 
 但是图层也不是想给多少就给多少的，当图层太多时层的合成操作要比在每个帧中光栅化页面的一小部分还要慢，所以评估页面的渲染性能是必须不可少。想要了解更多，可以参考文章[Stick to Compositor-Only Properties and Manage Layer Count。](https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count)
-
 
 ### 在主线程外栅格化并合成
 
@@ -168,7 +155,6 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 合成线程可以给不同的光栅线程分配优先级，这样在视口中或者视口附近的页面可以更快的光栅化。为了处理像缩放一类的操作，同一图层（layer）会为不同的清晰度配备不同的块。
 
 当块都被光栅化以后，合成线程会收集被叫做图画四边形（draw quads）的块信息，然后创建一个合成帧。
-
 
 * 图画四边形（draw quads）: 图画四边形包含块在内存中的位置以及页面合成后图块在页面的位置之类的信息
 * 合成帧（Compositor frame）: 代表页面的一帧的图画四边形的合集
@@ -183,4 +169,5 @@ Chrome最初处理栅格化的方式是栅格化视口（viewport）内的部分
 这就是只用合成来构建动画([compositing only animations](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/))被认为拥有良好性能的原因。如果布局或绘制需要再次计算，那么主线程必须参与。
 
 ## 参考资料
+
 [inside-browser-part3](https://developers.google.com/web/updates/2018/09/inside-browser-part3)

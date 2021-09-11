@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="img-container" :width="width">
+    <div ref="imgContainer" class="img-container" :width="width">
       <slot></slot>
     </div>
   </div>
@@ -8,7 +8,11 @@
 <script>
 export default {
   name: 'image-container',
-  props: ['width']
+  props: ['width'],
+  mounted: function () {
+    this.$refs.imgContainer.children[0].setAttribute('preview', '1')
+    this.$refs.imgContainer.children[0].setAttribute('width', '100%')
+  }
 }
 </script>
 
@@ -16,7 +20,7 @@ export default {
 .container {
   display: flex;
   justify-content: center;
-  width: 100%;
+  max-width: 660px;
 }
 .img-container {
   width: 100%;
