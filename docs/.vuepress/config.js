@@ -1,7 +1,7 @@
 const path = require('path')
 module.exports = {
   base: '/',
-  title: 'wl05 记录',
+  title: 'ANT 记录',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }] // 增加一个自定义的 favicon(网页标签的图标)
   ],
@@ -96,6 +96,7 @@ module.exports = {
           collapsable: false,
           children: [
             'sidelights/turtle-way/turtle-way.md',
+            'sidelights/box-turtle-baby-feed/',
             'sidelights/three-toed-box-turtle/breeding.md',
             'sidelights/cuora-galbinifrons/cuora-galbinifrons.md',
             'sidelights/fall-down-and-hurt-oneself/',
