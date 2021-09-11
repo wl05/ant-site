@@ -17,7 +17,6 @@ module.exports = {
     nav: [
       { text: '技术', link: '/tech/' },
       { text: '爱好', link: '/hobby/' },
-      { text: '生活', link: '/life/' },
       { text: '读书', link: '/read/' }
     ],
     sidebar: {
@@ -101,14 +100,19 @@ module.exports = {
             'sidelights/cuora-galbinifrons/cuora-galbinifrons.md',
             'sidelights/fall-down-and-hurt-oneself/',
             'sidelights/dried-shrimp/',
-            'sidelights/website/',
-            'sidelights/drill-pattern-turtle-rot-nail-treatment/'
+            'sidelights/drill-pattern-turtle-rot-nail-treatment/',
+            'sidelights/website/'
           ]
         },
         {
           title: '养龟日常',
           collapsable: false,
           children: [
+            'daily/2021-09-11.md',
+            'daily/2021-09-08.md',
+            'daily/2021-09-04.md',
+            'daily/2021-09-02.md',
+            'daily/2021-09-01.md',
             'daily/2021-08-29.md',
             'daily/2021-08-28.md',
             'daily/2021-08-27.md',

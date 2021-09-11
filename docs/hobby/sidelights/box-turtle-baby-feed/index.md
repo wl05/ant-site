@@ -36,6 +36,11 @@
 </image-container>
 <image-description text="2015年的老图，已经糊得看不清楚了，😂"/>
 
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856691631370538_.pic_hd.jpg"/>
+</image-container>
+<image-description text="最近布置的养苗环境"/>
+
 这里不得不提一下加温环境的布置。苗子第一年，很多玩家都会选择给龟苗加温过冬以提高存活率。但是这个过程如果把稳不当很容易造成龟苗品相受损甚至夭折。
 
 第一、是加温箱的选择，加温箱一定要选择高度在40厘米以上的，这样加温灯才不至于离龟太近，不容易造成烤龟的惨剧。还有一定要选择一个质量好的温控，切记！
@@ -79,4 +84,67 @@
 
 当然也有龟友会说我就是想让龟早点开食，多吃点长重些好冬眠，那么上面提到方式都可以挨个试一遍。
 
-最后，说了这么多，把这些年的一些饲养经验总结了一下，希望可以帮助到新手玩家，希望我们在饲养的过程中多观察，多总结，龟活得好我们的乐趣也就会越多。
+<video-container>
+  <source src="http://wangleant.com/turtle-source/VID_20210911_074017.mp4"/>
+</video-container>
+<image-description text="这两个苗子从出壳到开食差不多也有两个月的时间"/>
+
+说了这么多，把这些年的一些饲养经验总结了一下，希望可以帮助到新手玩家，希望我们在饲养的过程中多观察，多总结，龟活得好我们的乐趣也就会越多。
+
+最后附上平时的饲养过程：
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856541631370520_.pic_hd.jpg"/>
+</image-container>
+<image-description text="这个环境还是能给他们相当的安全感看得出他们很喜欢的"/>
+
+日常散步：
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856511631370515_.pic_hd.jpg"/>
+</image-container>
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856861631370566_.pic_hd.jpg"/>
+</image-container>
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856941631370575_.pic_hd.jpg"/>
+</image-container>
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_857071631370955_.pic_hd.jpg"/>
+</image-container>
+
+日常泡水：
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856671631370536_.pic_hd.jpg"/>
+</image-container>
+
+第一次拍写真
+
+龟1:
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856751631370547_.pic_hd.jpg"/>
+</image-container>
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856771631370549_.pic_hd.jpg"/>
+</image-container>
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856801631370552_.pic_hd.jpg"/>
+</image-container>
+
+龟2:
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856811631370553_.pic_hd.jpg"/>
+</image-container>
+
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856831631370563_.pic_hd.jpg"/>
+</image-container>
+<image-container>
+  <img preview="0" src="http://wangleant.com/turtle-source/IMG_20210911_856841631370564_.pic_hd.jpg"/>
+</image-container>
+
+希望各位龟友的龟都能茁壮成长🎉！

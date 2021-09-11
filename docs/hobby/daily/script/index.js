@@ -4,7 +4,6 @@ const { formatImage, formatVideo, formatTitleAndDate } = require('./utils')
 
 const files = fs.readdirSync(path.resolve(__dirname, '../../../../turtle-source'))
 
-console.log(files)
 const formatFiles = files => {
   try {
     const data = new Map()
@@ -49,12 +48,15 @@ try {
   })
 
   console.log(
-    keys.map(key => {
-      return `daily/${key}.md`
-    })
+    keys
+      .map(key => {
+        return `daily/${key}.md`
+      })
+      .reverse()
   )
   for (let [key, value] of data.entries()) {
     // if (!fs.existsSync(path.resolve(__dirname, `../${key}.md`))) {
+    console.log(path.resolve(__dirname, `../${key}.md`))
     fs.writeFileSync(
       path.resolve(__dirname, `../${key}.md`),
       value.reduce((pre, cur) => {
