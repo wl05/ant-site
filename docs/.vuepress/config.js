@@ -10,6 +10,11 @@ module.exports = {
     lineNumbers: true // 代码块显示行号
   },
   palette: path.resolve(__dirname, './styles/palette.styl'),
+  markdown: {
+    toc: {
+      includeLevel: [1, 2, 3, 4]
+    }
+  },
   themeConfig: {
     repo: 'wl05/ant-site',
     docsDir: 'docs',
@@ -87,6 +92,11 @@ module.exports = {
             'other/linux-command.md',
             'other/flow-chart.md'
           ]
+        },
+        {
+          title: '面试',
+          collapsable: false,
+          children: ['interview/handwritten-topic.md']
         }
       ],
       '/hobby/': [
