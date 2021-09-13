@@ -173,6 +173,53 @@ res.sayHello()
 
 ## 实现一个call
 
+实现 call 之前，还是先来看看 call 方法能做什么，首先要明确 call 是 Function.prototype 里面的方法，也就是说每个函数或者方法中都可以调用 call  方法，根据 MDN 中对 [call] (<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call#using_call_to_invoke_an_anonymous_function>)的介绍可以总结出以下几个要点：
+
+1. call 方法的第一个参数用作调用 call 的函数中的this，后续传入的参数作为调用函数的参数。
+2. 执行函数，函数的执行是在第一步的this和传参下进行。
+3. 非严格模式下，如果 call 的第一个参数为 undefined、null 或者不传参数，this 指向全局对象；如果传入的是原始类型的值，this 是将原始类型转换为对象后的值。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>call</title>
+  </head>
+  <body>
+    <script>
+      const context = {
+        nickName: 'Tome'
+      }
+      function say(word) {
+        console.log(this)
+        console.log(`${this.nickName} say ${word}`)
+      }
+      console.log('// 1: this 就是 context 对象 ')
+      say.call(context, 'hello')
+      console.log('// 2: call 第一个参数是 undefined, 非严格模式下 this 是全局对象 window；严格模式下为 undefined')
+      say.call(undefined, 'hello')
+      console.log('// 3: call 第一个参数是 null，非严格模式下 this 是全局对象 window；严格模式下为 null')
+      say.call(null, 'hello')
+      console.log('// 4: call 不传参数，非严格模式下 this 为全局对象， 严格模式下为 undefined')
+      say.call()
+      console.log('// 5: call 第一个参数为原始类型的值，非严格模式下会将原始类型的值转换成对象，this 就是这个对象')
+      say.call(1, 'hello')
+    </script>
+  </body>
+</html>
+```
+
+打印结果如下：
+
+<image-container>
+  <img src="./WeChatea70fa9b3810cac00ffd7fe3b494c56e.png"/>
+</image-container>
+
+根据这些要点可以模拟实现call方法：
+
 ## 实现一个apply
 
 ## 实现bind
