@@ -136,6 +136,41 @@
 
 ## 模拟new
 
+要模拟实现new关键字，首先我们要知道new关键字做了哪些事情。
+
+new关键字后面跟的是构造函数或者class。参考 MDN 中对[new](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new)关键字的介绍，可以总结几个关键点：
+
+1. 创建一个空对象；
+2. 给空对象添加__proto__属性，指向构造函数的prototype（原型）对象；
+3. 将新创建的对象作为 this 上下文；
+4. 如果构造函数返回一个对象，这个对象就是new操作的结果；如果构造函数返回的是原始类型或者不返回值则new操作的结果就是上面创建的对象。
+
+根据上面的要点可以实现如下：
+
+```js
+function ObjFactory() {
+  const obj = new Object() // 1. 创建一个空对象；
+  const args = arguments
+  const Constructor = Array.prototype.shift.call(args) // ObjFactory的第一个参数是构造函数，这里shift会改变args，剩下的都是传给构造函数的参数
+  obj.__proto__ = Constructor.prototype // 2. 给空对象添加__proto__属性，指向构造函数的prototype（原型）对象；
+  const res = Constructor.apply(obj, args) // 3. 将新创建的对象作为 this 上下文；
+  return Object.prototype.toString.call(res) === '[object Array]' ||
+    Object.prototype.toString.call(res) === '[object Object]' ||
+    Object.prototype.toString.call(res) === '[object Function]'
+    ? res
+    : obj // 4. 如果构造函数返回一个对象，这个对象就是new操作的结果；如果构造函数返回的是原始类型或者不返回值则new操作的结果就是上面创建的对象。
+}
+const Person = function (name) {
+  this.name = name
+}
+
+Person.prototype.sayHello = function () {
+  console.log(`${this.name} say hello`)
+}
+const res = ObjFactory(Person, 'Tom')
+res.sayHello()
+```
+
 ## 实现一个call
 
 ## 实现一个apply
