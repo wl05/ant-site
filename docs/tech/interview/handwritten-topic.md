@@ -173,7 +173,7 @@ res.sayHello()
 
 ## 实现一个call
 
-实现 call 之前，还是先来看看 call 方法能做什么，首先要明确 call 是 Function.prototype 里面的方法，也就是说每个函数或者方法中都可以调用 call  方法，根据 MDN 中对 [call] (<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call#using_call_to_invoke_an_anonymous_function>)的介绍可以总结出以下几个要点：
+实现 call 之前，还是先来看看 call 方法能做什么，首先要明确 call 是 Function.prototype 里面的方法，也就是说每个函数或者方法中都可以调用 call  方法，根据 MDN 中对 [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 的介绍可以总结出以下几个要点：
 
 1. call 方法的第一个参数用作调用 call 的函数中的this，后续传入的参数作为调用函数的参数。
 2. 执行函数，函数的执行是在第一步的this和传参下进行。
@@ -219,6 +219,41 @@ res.sayHello()
 </image-container>
 
 根据这些要点可以模拟实现call方法：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myCall</title>
+  </head>
+  <body>
+    <script>
+      // 这里不传入 context 或者传入的是 null 或者 undefined，将 context 指向 window
+      // 这里没有考虑传入基本类型的情况。
+      Function.prototype.myCall = function (context, ...args) {
+        context = context || window
+        context.fn = this // this 指向调用函数，因为 js 里面函数的构造函数都是 Function，所以函数是Function构造函数的实例，所以this拿到的就是函数。
+        const result = context.fn(...args) // 调用方法，这样 fn 里面的 this 就是 context；将myCall接收到的参数args传入到fn里面。
+        delete context.fn // context上是没有fn的，fn只是临时使用一下，调用完后需要将其删除
+        return result // 将执行结果返回
+      }
+
+      var nickName = 'Tony'
+      const context = {
+        nickName: 'Tome'
+      }
+
+      function say(word) {
+        console.log(`${this.nickName} say ${word}`)
+      }
+      say.myCall(null, 'hello')
+    </script>
+  </body>
+</html>
+```
 
 ## 实现一个apply
 
