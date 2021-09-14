@@ -257,6 +257,54 @@ res.sayHello()
 
 ## 实现一个apply
 
+趁热打铁，实现了call方法，那apply的实现就再简单不过了。
+
+call和apply的作用都是一样的，第一个参数都是this值，不同的是call后面的参数是一个一个传入的，apply则是接收的一个[类数组对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections#working_with_array-like_objects)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myApply</title>
+  </head>
+  <body>
+    <script>
+      // 这里不传入 context 或者传入的是 null 或者 undefined，将 context 指向 window
+      Function.prototype.myApply = function (context, args) {
+        context = context || window
+        context.fn = this // this 指向调用函数，因为 js 里面函数的构造函数都是 Function
+        let result
+        // 如果args为undefined或者null说明不需要传参数
+        if (args === undefined || args === null) {
+          result = context.fn()
+        } else {
+          // 注意：这里为了演示只是简单地判断了args是否为数组，实际call函数是可以接收类数组参数的。
+          if (!(args instanceof Array)) {
+            throw TypeError('不接收非数组参数')
+          }
+          result = context.fn(...args)
+        }
+        delete context.fn
+        return result
+      }
+
+      var nickName = 'Tony'
+      const context = {
+        nickName: 'Tome'
+      }
+      function say(word) {
+        console.log(this)
+        console.log(`${this.nickName} say ${word}`)
+      }
+      say.myApply(null, undefined)
+    </script>
+  </body>
+</html>
+```
+
 ## 实现bind
 
 ## 函数柯里化
