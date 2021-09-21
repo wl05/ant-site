@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const { formatImage, formatVideo, formatTitleAndDate } = require('./utils')
 
-const files = fs.readdirSync(path.resolve(__dirname, '../../../../turtle-source'))
+const files = fs.readdirSync(path.resolve(__dirname, '../../../../turtle-source-images-thumbnail'))
 
 const formatFiles = files => {
   try {

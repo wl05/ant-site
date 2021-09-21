@@ -214,9 +214,7 @@ res.sayHello()
 
 打印结果如下：
 
-<image-container>
-  <img src="./WeChatea70fa9b3810cac00ffd7fe3b494c56e.png"/>
-</image-container>
+<img src="./WeChatea70fa9b3810cac00ffd7fe3b494c56e.png"/>
 
 根据这些要点可以模拟实现call方法：
 
