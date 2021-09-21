@@ -116,7 +116,7 @@ module.exports = {
         },
         {
           title: '养龟日常',
-          collapsable: false,
+          collapsable: true,
           children: [
             'daily/2021-09-11.md',
             'daily/2021-09-08.md',
