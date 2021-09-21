@@ -1,4 +1,4 @@
-const domain = 'http://wangleant.com/turtle-images-thumbnail/'
+const domain = 'http://www.wangleant.com/turtle-images-thumbnail/'
 const formatTitleAndDate = date => `# ${date}
 `
 
