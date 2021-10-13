@@ -1,5 +1,7 @@
 # 数据监控小白入门 （Prometheus）
 
+## 概念介绍
+
 初次接触到数据监控，遇到了一些陌生的概念，
 
 * 什么是Prometheus？
@@ -26,9 +28,6 @@ $ docker run -p 9090:9090 -v /Users/lewang/Desktop/prometheus.yml:/etc/prometheu
 // TODO: exporter 实例
 
 ### PromQL查询监控数据
-
-
-
 ### 监控数据可视化（grafana）
 
 一键安装：
@@ -36,6 +35,15 @@ $ docker run -p 9090:9090 -v /Users/lewang/Desktop/prometheus.yml:/etc/prometheu
 ```bash
 docker run -d -p 3000:3000 grafana/grafana
 ```
+
+
+## PromQL 详解
+
+### 理解时间序列
+
+### Metrics类型
+
+### 初识PromQL
 
 
 
