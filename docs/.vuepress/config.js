@@ -72,7 +72,7 @@ module.exports = {
         {
           title: "git",
           collapsable: false,
-          children: ["git/git-base", "git/git-rebase/"],
+          children: ["git/git-base.md", "git/git-rebase/", "git/git-config.md"],
         },
         {
           title: "算法",
