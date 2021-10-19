@@ -56,3 +56,4 @@ docker run -d -p 3000:3000 grafana/grafana
 4. [prometheus的summary和histogram指标的简单理解](https://blog.csdn.net/wtan825/article/details/94616813)
 5. [](https://blog.csdn.net/ZhanBiaoChina/article/details/109012566)
 6. [](https://www.jianshu.com/p/ccffd6b9e3d1)
+7. [](https://segmentfault.com/a/1190000019987152)

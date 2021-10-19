@@ -88,6 +88,11 @@ module.exports = {
           children: ["docker/docker-introduction/"],
         },
         {
+          title: "数据可视化",
+          collapsable: false,
+          children: ["data-visualization/histogram/"],
+        },
+        {
           title: "其他",
           collapsable: false,
           children: [
