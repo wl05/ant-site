@@ -1,6 +1,10 @@
+---
+title: 1. Promethus 介绍
+---
+
 # Promethus
 
-## 背景简介
+## 简介
 
 ## Promethus 架构
 
@@ -28,4 +32,18 @@ Exporter将监控数据采集的端点通过HTTP服务的形式暴露给Promethe
 
 ### PushGateway
 
-由于Prometheus数据采集基于Pull模型进行设计，因此在网络环境的配置上必须要让Prometheus Server能够直接与Exporter进行通信。 当这种网络需求无法直接满足时，就可以利用PushGateway来进行中转。可以通过PushGateway将内部网络的监控数据主动Push到Gateway当中。而Prometheus Server则可以采用同样Pull的方式从PushGateway中获取到监控数据。
+由于Prometheus数据采集基于Pull模型进行设计，因此在网络环境的配置上必须要让Prometheus Server能够直接与Exporter进行通信。 当这种网络需求无法直接满足时，就可以利用PushGateway来进行中转。可以通过PushGateway将内部网络的监控数据主动Push到Gateway当中。而Prometheus Server则可以采用同样Pull的方式从PushGateway中获取到监控数据
+
+## 安装
+
+Prometheus是一个开放性的监控解决方案，用户可以非常方便的安装和使用Prometheus并且能够非常方便的对其进行扩展。为了能够更加直观的了解Prometheus Server，接下来我们将在本地部署并运行一个Prometheus Server实例，通过Node Exporter采集当前主机的系统资源使用情况。 并通过Grafana创建一个简单的可视化仪表盘。
+
+Prometheus基于Golang编写，编译后的软件包，不依赖于任何的第三方依赖。用户只需要下载对应平台的二进制包，解压并且添加基本的配置即可正常启动Prometheus Server。可以从<https://prometheus.io/download/找到最新版本的Prometheus> Sevrer软件包。这里为了推荐使用docker进行安装，方便快捷。
+
+对于Docker用户，直接使用Prometheus的镜像即可启动Prometheus Server：
+
+```
+docker run -p 9090:9090 -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+```
+
+启动完成后，可以通过<http://localhost:9090/访问Prometheus的UI>界面。
