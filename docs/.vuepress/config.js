@@ -90,7 +90,11 @@ module.exports = {
         {
           title: "数据可视化",
           collapsable: false,
-          children: ["data-visualization/histogram/"],
+          children: [
+            "data-visualization/histogram/",
+            "data-visualization/1/",
+            "data-visualization/2/",
+          ],
         },
         {
           title: "其他",
