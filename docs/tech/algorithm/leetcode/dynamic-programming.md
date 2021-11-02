@@ -109,12 +109,55 @@ var minPathSum = function(grid) {
 <!-- |  76  | 困难 | [最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/) |        ❎     | -->
 <!-- |  91  | 中等 | [解码方法](https://leetcode-cn.com/problems/decode-ways)     |       ❎     | -->
 <!-- | 120  | 中等 | [三角形最小路径和](https://leetcode-cn.com/problems/triangle/description/) |       ❎     | -->
-<!-- | 121  | 简单 | [买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/#/description) |     ❎     | -->
-<!-- | 122  | 简单 | [买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) |        ❎     | -->
+## 121、[买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/#/description) （*简单*）
+
+解法一：
+
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    // 1. 确定dp数组中元素的含义：因为要求的是最大利润，如果i天的价格时prices数组，很明显dp元素的含义就是这i天中卖出该股票所获得的最大利润
+    // 2. 确定数组中元素的关系表达式： 假设前 i-1 天中的最低价格是min, 则 dp[i] = Math.max(dp[i-1],prices[i] - min)
+    // 3. 确定初始值： dp[0] = 0
+    
+    var dp = [0]
+    var min = prices[0]
+    var len = prices.length
+    for(var i = 1;i<len;i++){
+        dp[i] = Math.max(dp[i-1],prices[i] - min)
+        if( prices[i] < min) {
+            min = prices[i]
+        }
+    }
+    return dp[len-1]
+};
+```
+
+解法二：空间优化
+
+```js
+var maxProfit = function(prices) {
+    var cur = [0]
+    var min = prices[0]
+    var len = prices.length
+    for(var i = 1;i<len;i++){
+        cur = Math.max(cur,prices[i] - min)
+        if( prices[i] < min) {
+            min = prices[i]
+        }
+    }
+    return cur
+};
+```
+
+<!-- | 122  | 简单 | [买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) 
 <!-- | 123  | 困难 | [买卖股票的最佳时机 III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)        |    ❎     | -->
 <!-- | 152  | 中等 | [乘积最大子序列](https://leetcode-cn.com/problems/maximum-product-subarray/description/)    |    ❎     | -->
 <!-- | 188  | 困难 | [买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)          |    ❎     | -->
-## 198、 [打家劫舍](https://leetcode-cn.com/problems/house-robber/)  （*中等*）
+## 198、 [打家劫舍](https://leetcode-cn.com/problems/house-robber/)（*中等*）
 
 解法一：
 
