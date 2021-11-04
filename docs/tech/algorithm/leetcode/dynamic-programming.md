@@ -13,7 +13,47 @@
 
 * **第三步骤：找出初始值**。学过数学归纳法的都知道，虽然我们知道了数组元素之间的关系式，例如 dp[n] = dp[n-1] + dp[n-2]，我们可以通过 dp[n-1] 和 dp[n-2] 来计算 dp[n]，但是，我们得知道初始值啊，例如一直推下去的话，会由 dp[3] = dp[2] + dp[1]。而 dp[2] 和 dp[1] 是不能再分解的了，所以我们必须要能够直接获得 dp[2] 和 dp[1] 的值，而这，就是所谓的初始值。有了初始值，并且有了数组元素之间的关系式，那么我们就可以得到 dp[n] 的值了，而 dp[n] 的含义是由你来定义的，你想求什么，就定义它是什么，这样，这道题也就解出来了。
 
-<!-- |  32  | 中等 | [最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/) |     ❎     | -->
+## 32、[最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/) （困难）
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestValidParentheses = function(s) {
+    // 一、确定dp数组的含义: dp[i] 代表以 s[i] 结尾的最长有效长度，这里需要注意 s[i] 一定是等于 ')' 的，如果 s[i] === '(' 则将 dp[i] 记录为 dp[i] = 0，切记这一点，最后就是求出 dp 数组中的最大值。
+    // 二、确定dp数组元素之间的关系，这里需要分情况讨论：
+    //      1. s[i] === '(' 显然没办法和前面的子串组成有效子串，此时 dp[i] = 0
+    //      2. s[i] === ')' 这就比较好玩了，这里又要分情况讨论了
+    //          2.1 如果 dp[i-1] === 0： 
+    //.                 2.1.1 s[i-1] === '(' 则此时刚好和 s[i] 凑成 '()'，所以 dp[i] = (dp[i-2] || 0) + 2；需要注意 dp[i-2] 可能不存在
+    //                  2.1.2 s[i-1] === ')' 则 dp[i] = 0
+    //          2.2 如果 dp[i-1] !== 0 说明 s[i-1] 一定是 ')'，此时我们需要去找出 dp[i-1] 长度之前的那个符号能否和 s[i] 配对：
+    //                  2.2.1 如果 s[i-dp[i-1]-1] === '(' 则 dp[i] = dp[i-1] + 2 + (dp[i-dp[i-1]-2] || 0)； 需要注意 dp[i-dp[i-1]-2] 可能不存在
+    //                  2.2.2 如果 s[i-dp[i-1]-1] === ')' 则 dp[i] = 0
+    // 三、确定初始值：dp[0] = 0
+
+    var len = s.length
+    if(len===0) {
+        return 0
+    }
+    var dp = [0]
+    var max = 0
+    for(var i=1;i<len;i++){
+       if(s[i] === '(') {
+           dp[i] = 0
+       } else{
+           if(dp[i-1] === 0) {
+                dp[i] = s[i-1] === '(' ?  (dp[i-2] || 0) + 2 : 0
+           }else{
+               dp[i] = s[i-dp[i-1]-1] === '(' ? dp[i-1] + 2 + (dp[i-dp[i-1]-2] || 0) : 0
+           }
+           max = dp[i] > max ? dp[i] : max
+       }
+    }
+   return max
+};
+```
 <!-- |  45  | 困难 | [跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/) |          ❎     | -->
 <!-- |  55  | 困难 | [跳跃游戏](https://leetcode-cn.com/problems/jump-game/)     |            ❎     | -->
 ## 62、  [不同路径](https://leetcode-cn.com/problems/unique-paths/) (*中等*)
