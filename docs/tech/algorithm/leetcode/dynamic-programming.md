@@ -26,7 +26,7 @@ var longestValidParentheses = function(s) {
     //      1. s[i] === '(' 显然没办法和前面的子串组成有效子串，此时 dp[i] = 0
     //      2. s[i] === ')' 这就比较好玩了，这里又要分情况讨论了
     //          2.1 如果 dp[i-1] === 0： 
-    //.                 2.1.1 s[i-1] === '(' 则此时刚好和 s[i] 凑成 '()'，所以 dp[i] = (dp[i-2] || 0) + 2；需要注意 dp[i-2] 可能不存在
+    //                  2.1.1 s[i-1] === '(' 则此时刚好和 s[i] 凑成 '()'，所以 dp[i] = (dp[i-2] || 0) + 2；需要注意 dp[i-2] 可能不存在
     //                  2.1.2 s[i-1] === ')' 则 dp[i] = 0
     //          2.2 如果 dp[i-1] !== 0 说明 s[i-1] 一定是 ')'，此时我们需要去找出 dp[i-1] 长度之前的那个符号能否和 s[i] 配对：
     //                  2.2.1 如果 s[i-dp[i-1]-1] === '(' 则 dp[i] = dp[i-1] + 2 + (dp[i-dp[i-1]-2] || 0)； 需要注意 dp[i-dp[i-1]-2] 可能不存在
@@ -54,8 +54,57 @@ var longestValidParentheses = function(s) {
    return max
 };
 ```
-<!-- |  45  | 困难 | [跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/) |          ❎     | -->
-<!-- |  55  | 困难 | [跳跃游戏](https://leetcode-cn.com/problems/jump-game/)     |            ❎     | -->
+<!-- |  45  | 中等 | [跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/) |          ❎     | -->
+
+## 55、[跳跃游戏](https://leetcode-cn.com/problems/jump-game/) (*中等*)
+
+解法一：
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+    // 1. 确定dp数组元素的含义：
+    // dp[i] 代表该位置能往后跳跃的最大长度，例如: nums=[10,8], dp[0] = 10,dp[1] = 9；
+    // 因为从位置 0 到位置 1 需要跳跃一步，到达位置 1 后还可以往后跳跃 9 步，
+    // 同时因为位置 1 本身能跳跃的步数是8，小于9 ，所以将位置 1 能跳跃的步数记为 dp[1] = 9；后续同理。
+    // 2. 确定 dp 数组元素之间的关系： 
+    //      2.1 正常情况：dp[i] = Math.max(dp[i-1]-1,nums[i]); dp[i-1]-1 时因为到达 dp[i] 需要减1
+    //      2.2 nums = [0] 的情况已经在最后位置，返回true，但是如 nums = [0,1], 这种情况需要返回 false： if(nums[0] === 0 && nums.length > 1) return false
+    //      2.3 如果 dp[i] = 0 时还没有到达最后一个位置应该返回 return false： if(dp[i] === 0 && i  !== nums.length-1) {return false}
+    // 3. 确定初始值： dp[0] = num[0]
+    var len = nums.length
+    if(nums[0] === 0 && len > 1) return false
+    var dp = [nums[0]]
+    for(var i = 1; i<len; i++){
+        dp[i] = Math.max(dp[i-1]-1,nums[i]);
+        if(dp[i] === 0 && i  < len-1) {
+            return false
+        }
+    }
+    return true
+};
+```
+
+解法二：空间优化
+
+```js
+// 本题中可以直接利用nums作为 dp 数组，节省空间
+var canJump = function(nums) {
+    var len = nums.length
+    if(nums[0] === 0 && len > 1) return false
+    for(var i = 1; i<len; i++){
+        nums[i] = Math.max(nums[i-1]-1,nums[i]);
+        if(nums[i] === 0 && i  < len-1) {
+            return false
+        }
+    }
+    return true
+};
+```
+
 ## 62、  [不同路径](https://leetcode-cn.com/problems/unique-paths/) (*中等*)
 
 ```js
