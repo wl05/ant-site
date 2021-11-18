@@ -45,12 +45,10 @@ var lemonadeChange = function(bills) {
     var map = {
         '5' : 1,
         '10': 0,
-        '20':0
     } // 利用对象存储对应面值金额的数量。
     for(var i =1;i<bills.length;i++){
         var cur = bills[i]
         if( cur === 20) {
-            map['20'] += 1 // 收入一张20元
             if(map['10'] > 0 && map['5'] > 0) { // 优先找出10 + 5元
                 map['10'] -= 1
                 map['5'] -= 1
