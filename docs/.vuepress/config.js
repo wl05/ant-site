@@ -74,7 +74,12 @@ module.exports = {
         {
           title: '算法',
           collapsable: false,
-          children: ['algorithm/leetcode/', 'algorithm/leetcode/dynamic-programming.md', 'algorithm/sort-algorithm/bubble-sort.md']
+          children: [
+            'algorithm/leetcode/',
+            'algorithm/leetcode/dynamic-programming.md',
+            'algorithm/leetcode/greedy-algorithm.md',
+            'algorithm/sort-algorithm/bubble-sort.md'
+          ]
         },
         {
           title: 'docker',
