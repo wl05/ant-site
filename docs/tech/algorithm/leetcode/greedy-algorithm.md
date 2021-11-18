@@ -2,7 +2,11 @@
 
 [[toc]]
 
-贪心解题思路：
+贪心解题思路：局部最优达到全局最优。
+
+举一个不恰当的例子：你的面前有一堆面额不等的钱，你每次只能拿一张，一共可以拿五次，求如何拿到最多的钱。
+
+只要不傻每个人都知道每次都拿最大面额的钱最后就能拿到最多的钱。这里“每次拿最大面额的钱”就是局部最优，“最后拿到最多的钱”这就是全局最优。
 
 ## 455、[分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/) （简单）
 
@@ -31,7 +35,7 @@ var findContentChildren = function(g, s) {
 };
 ```
 
-## 860  [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/) （简单）
+## 860、[柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/) （简单）
 
 ```js
 /**
@@ -73,4 +77,79 @@ var lemonadeChange = function(bills) {
 };
 ```
 
-| 874  | 简单 | [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) |          |    ❎     |
+874、 [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) （中等）
+
+```js
+/**
+ * @param {number[]} commands
+ * @param {number[][]} obstacles
+ * @return {number}
+ */
+var robotSim = function(commands, obstacles) {
+    var direction = "+Y" // 取值 "+Y" , "-Y", "+X", "-X"
+    var currentPositionX = 0
+    var currentPositionY = 0
+    var maxEuclideanDistance = 0
+    
+    var changeDirection = function(command,curDirection){
+        var newDirection = ''
+        if(curDirection === '+Y') {
+            newDirection = command === -1 ? "+X" : "-X"
+        }else if (curDirection === '-Y') {
+            newDirection = command === -2 ? "+X" : "-X"
+        }else if(curDirection === '+X') {
+            newDirection = command === -1 ? "-Y" : "+Y"
+        } else if(curDirection === '-X') {
+           newDirection = command === -2 ? "-Y" : "+Y"
+        }
+        return newDirection
+    }
+    for(var i = 0;i<commands.length;i++){
+        var command = commands[i]
+        if(command >= 1) {
+            var tempPositionX = currentPositionX
+            var tempPositionY = currentPositionY
+            for(j=0;j<command;j++) {
+                if(direction === '+Y') {
+                    tempPositionY += 1
+                }else if (direction === '-Y') {
+                    tempPositionY -= 1
+                }else if(direction === '+X') {
+                    tempPositionX += 1
+                }else if(direction === '-X') {
+                    tempPositionX -= 1
+                }
+                var isThereObstacle = false
+                // 判断是否遇到障碍物
+                for(var b=0;b<obstacles.length;b++){
+                    if(obstacles[b][0] === tempPositionX && obstacles[b][1] === tempPositionY) {
+                        isThereObstacle = true
+                        break
+                    }
+                }
+                if(isThereObstacle) {
+                     if(direction === '+Y') {
+                        tempPositionY -= 1
+                    }else if (direction === '-Y') {
+                        tempPositionY += 1
+                    }else if(direction === '+X') {
+                        tempPositionX -= 1
+                    }else if(direction === '-X') {
+                        tempPositionX += 1
+                    }
+                    break
+                }
+            }
+            currentPositionX = tempPositionX
+            currentPositionY = tempPositionY
+            // 存下当前的最大距离
+            var tempMaxEuclideanDistance = Math.pow(currentPositionX,2) + Math.pow(currentPositionY,2)
+            maxEuclideanDistance = maxEuclideanDistance <  tempMaxEuclideanDistance  ? tempMaxEuclideanDistance : maxEuclideanDistance
+        }else{
+            direction = changeDirection(command,direction)
+        }
+        
+    }
+    return maxEuclideanDistance
+};
+```
