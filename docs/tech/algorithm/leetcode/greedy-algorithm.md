@@ -4,7 +4,7 @@
 
 贪心解题思路：
 
-## 455、[分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/) (简单)
+## 455、[分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/) （简单）
 
 ```js
 /**
@@ -31,5 +31,48 @@ var findContentChildren = function(g, s) {
 };
 ```
 
-| 860  | 简单 | [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/) |          |    ❎     |
+## 860  [柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/description/) （简单）
+
+```js
+/**
+ * @param {number[]} bills
+ * @return {boolean}
+ */
+var lemonadeChange = function(bills) {
+    // 思路： 如果收到的是5元不用找；如果收到的是10元找5元；如果收到的是20元，优先找出10 + 5元，如果没有10元则找出 5 + 5 +5 元
+    // 这里需要记录手上一共有几张 5元，几张10元，几张20元。
+    if(bills[0] !== 5) return false // 如果首次收到的不是5元，没法找出，直接返回false。
+    var map = {
+        '5' : 1,
+        '10': 0,
+        '20':0
+    } // 利用对象存储对应面值金额的数量。
+    for(var i =1;i<bills.length;i++){
+        var cur = bills[i]
+        if( cur === 20) {
+            map['20'] += 1 // 收入一张20元
+            if(map['10'] > 0 && map['5'] > 0) { // 优先找出10 + 5元
+                map['10'] -= 1
+                map['5'] -= 1
+            }else if(map['5'] >= 3) { // 如果没有10元则找出 5 + 5 +5 元
+                map['5'] -= 3
+            }else {
+                return false // 否则直接返回false，没法找零
+            }
+            
+        } else if(cur === 10) {
+            map['10'] += 1 // 收入一张10元
+            if(map['5'] > 0) { // 收到10元找5元
+                map['5'] -= 1
+            }else{
+                return false // 否则直接返回false，没法找零
+            }
+        } else {
+             map['5'] += 1 // 收入一张5元
+        }
+    }
+    return true
+};
+```
+
 | 874  | 简单 | [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) |          |    ❎     |
