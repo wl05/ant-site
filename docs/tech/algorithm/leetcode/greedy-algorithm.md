@@ -77,7 +77,7 @@ var lemonadeChange = function(bills) {
 };
 ```
 
-874、 [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) （中等）
+## 874、[模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) （中等）
 
 解法一：
 
