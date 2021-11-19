@@ -155,6 +155,12 @@ git stash clear
 
 ```
 
+## git log
+
+```bash
+# 查看某一个文件的提交记录
+git log --pretty=oneline 文件名
+```
 
 
 ## 参考
