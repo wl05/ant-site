@@ -79,6 +79,8 @@ var lemonadeChange = function(bills) {
 
 874、 [模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/) （中等）
 
+解法一：
+
 ```js
 /**
  * @param {number[]} commands
@@ -87,10 +89,11 @@ var lemonadeChange = function(bills) {
  */
 var robotSim = function(commands, obstacles) {
     var direction = "+Y" // 取值 "+Y" , "-Y", "+X", "-X"
-    var currentPositionX = 0
-    var currentPositionY = 0
-    var maxEuclideanDistance = 0
+    var currentPositionX = 0 // 记录当前到达的x横坐标
+    var currentPositionY = 0 // 记录当前到达的y纵坐标
+    var maxEuclideanDistance = 0 // 记录走过的最大距离
     
+    // 计算转向后的方向
     var changeDirection = function(command,curDirection){
         var newDirection = ''
         if(curDirection === '+Y') {
@@ -106,20 +109,20 @@ var robotSim = function(commands, obstacles) {
     }
     for(var i = 0;i<commands.length;i++){
         var command = commands[i]
-        if(command >= 1) {
-            var tempPositionX = currentPositionX
-            var tempPositionY = currentPositionY
+        if(command >= 1) { // 如果 command 大于1，则表示需要移动
+            var tempPositionX = currentPositionX // 暂存当前x横坐标位置
+            var tempPositionY = currentPositionY // 暂存当前y纵坐标位置
             for(j=0;j<command;j++) {
-                if(direction === '+Y') {
+                if(direction === '+Y') { // 如果当前方向是 "+Y"，则y纵坐标加1
                     tempPositionY += 1
-                }else if (direction === '-Y') {
+                }else if (direction === '-Y') { // 如果当前方向是 "-Y"，则y纵坐标减1
                     tempPositionY -= 1
-                }else if(direction === '+X') {
+                }else if(direction === '+X') { // 如果当前方向是 "+X"，则x横坐标加1
                     tempPositionX += 1
-                }else if(direction === '-X') {
+                }else if(direction === '-X') { // 如果当前方向是 "-X"，则x横坐标减1
                     tempPositionX -= 1
                 }
-                var isThereObstacle = false
+                var isThereObstacle = false // 标记是否遇到障碍物
                 // 判断是否遇到障碍物
                 for(var b=0;b<obstacles.length;b++){
                     if(obstacles[b][0] === tempPositionX && obstacles[b][1] === tempPositionY) {
@@ -127,6 +130,7 @@ var robotSim = function(commands, obstacles) {
                         break
                     }
                 }
+                // 如果遇到障碍物需要将之前加的操作减回来
                 if(isThereObstacle) {
                      if(direction === '+Y') {
                         tempPositionY -= 1
@@ -140,16 +144,92 @@ var robotSim = function(commands, obstacles) {
                     break
                 }
             }
-            currentPositionX = tempPositionX
+            currentPositionX = tempPositionX 
             currentPositionY = tempPositionY
             // 存下当前的最大距离
             var tempMaxEuclideanDistance = Math.pow(currentPositionX,2) + Math.pow(currentPositionY,2)
             maxEuclideanDistance = maxEuclideanDistance <  tempMaxEuclideanDistance  ? tempMaxEuclideanDistance : maxEuclideanDistance
-        }else{
+        }else{ // 否则是做改变方向的动作
             direction = changeDirection(command,direction)
         }
         
     }
-    return maxEuclideanDistance
+    return maxEuclideanDistance // 最后返回最大距离
+};
+```
+
+解法二：
+
+```js
+/**
+ * @param {number[]} commands
+ * @param {number[][]} obstacles
+ * @return {number}
+ */
+var robotSim = function(commands, obstacles) {
+    var direction = "+Y" // 取值 "+Y" , "-Y", "+X", "-X"
+    var currentPositionX = 0 // 记录当前到达的x横坐标
+    var currentPositionY = 0 // 记录当前到达的y纵坐标
+    var maxEuclideanDistance = 0 // 记录走过的最大距离
+    
+    // 计算转向后的方向
+    var changeDirection = function(command,curDirection){
+        switch(curDirection) {
+            case "+Y":
+                return command === -1 ? "+X" : "-X"
+            case "-Y":
+                return command === -2 ? "+X" : "-X"
+            case "+X":
+                return command === -1 ? "-Y" : "+Y"
+            case "-X":
+                return command === -2 ? "-Y" : "+Y"
+        }
+    }
+
+    // 这里使用一个对象来存储字符串化的障碍物坐标，方便后续判断障碍物的时候使用，可以降低复杂度，以空间换时间
+    var obstaclesMap = {}
+    for(var val of obstacles) {
+        obstaclesMap[`${val[0]}-${val[1]}`] =  `${val[0]}-${val[1]}`
+    }
+    for(var i = 0;i<commands.length;i++){
+        var command = commands[i]
+        if(command >= 1) { // 如果 command 大于1，则表示需要移动
+            var tempPositionX = currentPositionX // 暂存当前x横坐标位置
+            var tempPositionY = currentPositionY // 暂存当前y纵坐标位置
+            for(j=0;j<command;j++) {
+                var isObstacle = false
+                switch(direction) {
+                    case "+Y": // 如果当前方向是 "+Y"，则y纵坐标加1
+                        isObstacle = obstaclesMap[`${tempPositionX}-${tempPositionY+1}`]
+                        tempPositionY = isObstacle ? tempPositionY : tempPositionY + 1
+                        break
+                    case "-Y": // 如果当前方向是 "-Y"，则y纵坐标减1
+                        isObstacle =  obstaclesMap[`${tempPositionX}-${tempPositionY-1}`]
+                        tempPositionY = isObstacle ? tempPositionY : tempPositionY - 1
+                        break
+                    case "+X": // 如果当前方向是 "+X"，则x横坐标加
+                        isObstacle = obstaclesMap[`${tempPositionX+1}-${tempPositionY}`]
+                        tempPositionX = isObstacle ? tempPositionX : tempPositionX + 1
+                        break
+                    case "-X": // 如果当前方向是 "-X"，则x横坐标减1
+                        isObstacle = obstaclesMap[`${tempPositionX-1}-${tempPositionY}`]
+                        tempPositionX = isObstacle ? tempPositionX : tempPositionX - 1
+                        break
+                }
+                if(isObstacle) {
+                    break
+                }
+            }
+            currentPositionX = tempPositionX 
+            currentPositionY = tempPositionY
+            // 存下当前的最大距离
+            var tempMaxEuclideanDistance = Math.pow(currentPositionX,2) + Math.pow(currentPositionY,2)
+            maxEuclideanDistance = maxEuclideanDistance <  tempMaxEuclideanDistance  ? tempMaxEuclideanDistance : maxEuclideanDistance
+        }else{ // 否则是做改变方向的动作
+            direction = changeDirection(command,direction)
+        }
+        
+    }
+    return maxEuclideanDistance // 最后返回最大距离
 };
 ```
