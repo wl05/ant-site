@@ -2,11 +2,76 @@
 
 [[toc]]
 
+求解最优化问题的算法通常需要经过一系列的步骤，在每个步骤都面临多种选择。对于许
+多最优化问题，使用动态规划算法来求最优解有些杀鸡用牛刀了，可以使用更简单、更高效的算
+法。贪心算法(greedy algorithm)就是这样的算法，它在每一步都做出当时看起来最佳的选择。也
+就是说，它总是做出局部最优的选择，寄希望这样的选择能导致全局最优解。本章介绍一些贪心
+算法能找到最优解的最优化问题。在学习本章之前，你应该学习第15章动态规划，特别是应认
+真学习15.3节。 ---- 摘自《算法导论（第三版）》第 16 章的叙述
+
 贪心解题思路：局部最优达到全局最优。
 
 举一个不恰当的例子：你的面前有一堆面额不等的钱，你每次只能拿一张，一共可以拿五次，求如何拿到最多的钱。
 
 只要不傻每个人都知道每次都拿最大面额的钱最后就能拿到最多的钱。这里“每次拿最大面额的钱”就是局部最优，“最后拿到最多的钱”这就是全局最优。
+
+## 122、 [买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) （中等）（需复习）
+
+解法一：
+
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    // 思路： 
+    // 1. 比较 prices[i] 和 prices[i-1]，如果 prices[i] <  prices[i-1] 说明不应该在 i-1天的时候买入。重新尝试从第i天买入
+    // 2. 如果 prices[i] >= prices[i-1] 说明在i-1天买入有利可图，我们为了卖出更好的价钱还需要比较第i天和i+1天的价格，
+    //    如果prices[i+1] >= prices[i]，则继续往后比较，否则就应该在第i天的时候卖出获取最大利润。后续以此类推。
+    var len = prices.length
+    if(len === 1) {
+        return 0
+    } 
+    var profit = 0 // 记录获取的最大利润
+    var currentPrice = prices[0] // 记录当前买入价格
+    for(var i = 1;i<len;i++){
+        if(prices[i] <  prices[i-1]) {
+           currentPrice = prices[i] 
+        }else{
+            while(i + 1 < len  && prices[i + 1] >= prices[i]) {
+                i++                
+            }
+            profit += prices[i] - currentPrice // 计算利润
+
+            // 判断 i 是否是最后一个元素，不是的话需要继续进行交易
+            if(i + 1 < len) {
+                currentPrice = prices[i+1]
+                i++
+            }
+        }
+    }
+    return profit
+};
+```
+
+解法二： 贪心
+
+```js
+var maxProfit = function(prices){
+    var len = prices.length
+    var profit = 0
+    if(len === 1){
+        return profit
+    }
+    for(var i = 1;i<len;i++){
+        if(prices[i]-prices[i-1] >= 0) {
+            profit += prices[i]-prices[i-1]
+        }
+    }
+    return profit
+}
+```
 
 ## 134、[加油站](https://leetcode-cn.com/problems/gas-station/) (中等)
 
@@ -66,6 +131,68 @@ var canCompleteCircuit = function(gas, cost) {
 };
 ```
 
+## 435、[无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/) （中等）
+
+方法一：
+
+```js
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var eraseOverlapIntervals = function(intervals) {
+    // 思路：
+    // 1、根据题目描述如果区间不相互重叠，那区间之间一定是存在顺序关系的，这里就以升序的方式来看，
+    //    假设有 A B C D 区间满足不相互重叠的条件且满足 A[1] <= B[0]，B[1] <= C[0]，C[1] <= D[0]，此时ABCD是按生序排列的互不重叠的区间，因此也应该满足 A[0] < B[0] < C[0] < D[0] 或者。A[1] < B[1] < C[1] < D[1]。
+    //    所以首先想到的就是对区间进行排序，这里我们根据终点的大小进行升序排序，根据起点排序也是同样的道理。
+    // 2、排序完成后遍历 intervals 比较相邻两个区间是否有交集，如果有交集我们就去掉后面这个区间，为什么？因为后面这个区间和剩余区间存在交集的可能性更大（想想为什么要进行排序）
+
+    if(intervals.length === 1) {
+        return 0
+    }
+    // 首先进行排序
+    intervals = intervals.sort(function(pre,cur){
+        return pre[1] - cur[1]
+    })
+    var count = 0 // 记录去掉的区间数量
+    for(var i=1;i<intervals.length;i++){
+        if(intervals[i][0] < intervals[i-1][1]) { // 判断是否存在交集，如果当前区间的起点比前一个区间的终点小则认为两个区间相交
+            count ++ // 计数加1
+            var temp = intervals[i] // 这里我们没有真正的删除这个区间，因为直接删除会到改变数组的长度。我们将两个区间的位置进行交换来间接的实现“删除”的目的，方便后面继续进行比较
+            intervals[i] = intervals[i-1]
+            intervals[i-1] = temp
+        }
+    }
+    return count // 返回最终结果
+};
+```
+
+方法二：
+
+```js
+var eraseOverlapIntervals = function(intervals) {
+    if(intervals.length === 1) {
+        return 0
+    }
+    // 根据起点大小进行升序排序
+    intervals = intervals.sort(function(pre,cur){
+        return pre[0] - cur[0]
+    })
+    var count = 0 // 记录去掉的区间数量
+    for(var i=1;i<intervals.length;i++){
+        if(intervals[i][0] < intervals[i-1][1] ) { 
+            count ++ // 计数加1
+            if(intervals[i-1][1] < intervals[i][1]) { // 这里需要注意一下，如果当前区间的终点大于前一个区间的终点，去掉的是当前这个区间，需要进行位置交换达到“删除”的目的；否则“删除”的应该是前一个区间就不用进行交换了。
+                var temp = intervals[i] 
+                intervals[i] = intervals[i-1]
+                intervals[i-1] = temp
+            }
+        }
+    }
+    return count
+};
+```
+
 ## 455、[分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/) （简单）
 
 ```js
@@ -122,6 +249,33 @@ var canCompleteCircuit = function(gas, cost) {
         }
     }
     return start
+}
+```
+
+## 605、[种花问题](https://leetcode-cn.com/problems/can-place-flowers/submissions/) (简单)
+
+```js
+/**
+ * @param {number[]} flowerbed
+ * @param {number} n
+ * @return {boolean}
+ */
+var canPlaceFlowers = function(flowerbed, n) {
+    // 思路：
+    // 能种花的条件：[...0,0,0...]至少三个连续的0才能在中间种一朵。只要达到这个条件就种一朵 （据说这就是贪心的思想？）
+    // 边界怎么办？像[0,0,1], [1,0,0]也是可以在边界处种一朵的，很好办将越界的地方都当成0，0[0,0,1], [1,0,0]0。这样方便我们从逻辑上理解。
+    var len = flowerbed.length
+    for(var i=0;i<len;i++){
+        // i-1 === -1 和 i+1===len 都当作0来看待，保证我们逻辑的完整性
+       if((i-1 === -1 || flowerbed[i-1] === 0) && flowerbed[i] === 0 && (flowerbed[i+1] === 0 || i+1===len)) {
+            n--
+            i++ // 这里 i++ 是为了跳过后一个，因为已经在当前位置种了一朵了，后一个位置必不能种
+        }
+        if(n <= 0){ 
+            return true
+        }
+    }
+    return false
 }
 ```
 
