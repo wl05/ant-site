@@ -1,11 +1,12 @@
+# SketchUp 基础入门
 ## 快捷键
 
-选择：Space
-环绕观察：o 或者 control + command
-推拉：p
-矩形：r
-平移：h
-分段：option
+* 选择：Space
+* 环绕观察：o 或者 control + command
+* 推拉：p
+* 矩形：r
+* 平移：h
+
 
 ## 参考资料
 
