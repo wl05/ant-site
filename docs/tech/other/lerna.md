@@ -241,14 +241,13 @@ lerna version 1.0.1 # 直接指定特定的版本
 lerna version patch # 使用语义关键字
 lerna version       # 通过交互式命令选择
 
-执行 lerna version 
-When run, this command does the following:
+lerna version 在背后为我们做了这些事：
 
-Identifies packages that have been updated since the previous tagged release.
-Prompts for a new version.
-Modifies package metadata to reflect new release, running appropriate lifecycle scripts in root and per-package.
-Commits those changes and tags the commit.
-Pushes to the git remote.
+1. Identifies packages that have been updated since the previous tagged release. 
+2. Prompts for a new version.
+3. Modifies package metadata to reflect new release, running appropriate lifecycle scripts in root and per-package.
+4. Commits those changes and tags the commit. 对发布打tag
+5. Pushes to the git remote. 
 ```
 
 先commit本地的改动，然后执行：
