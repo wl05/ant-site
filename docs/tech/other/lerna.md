@@ -236,21 +236,20 @@ lerna success found 3 packages ready to publish
 
 用法：
 
+```bash
+$ lerna version 1.0.1 # 直接指定特定的版本
+$ lerna version patch # 使用语义关键字
+$ lerna version       # 通过交互式命令选择
 ```
-lerna version 1.0.1 # 直接指定特定的版本
-lerna version patch # 使用语义关键字
-lerna version       # 通过交互式命令选择
-
 lerna version 在背后为我们做了这些事：
 
-1. Identifies packages that have been updated since the previous tagged release. 
-2. Prompts for a new version.
-3. Modifies package metadata to reflect new release, running appropriate lifecycle scripts in root and per-package.
-4. Commits those changes and tags the commit. 对发布打tag
-5. Pushes to the git remote. 
-```
+1. 识别出自上次发布以后更新过的包
+2. 提示选择新版本
+3. 修改包的元数据来反映新发版（修改包的版本号），在根目录和每个包里面运行生命周期脚本
+4. 对提交打tag
+5. 推送到远程代码仓库
 
-先commit本地的改动，然后执行：
+先commit本地的改动，然后执行lerna version，默认情况下lerna version会将本地的commit和tag推送到远程仓库，这里只是本地演示可以通过指定 --no-push 参数来禁止推送。
 
 ```bash
 $ lerna version --no-push
@@ -267,33 +266,51 @@ lerna info Looking for changed packages since animal@1.0.1
   Premajor (2.0.0-alpha.0) 
   Custom Prerelease 
   Custom Version 
+...
 ```
 
 #### [lerna publish](https://github.com/lerna/lerna/tree/main/commands/publish#readme)
 
 作用： 发布本地包
 
-为了真实的模拟发包过程这里我们使用Verdaccio搭建一个本地 npm 仓库
+用法：
+
+```
+lerna publish              # publish packages that have changed since the last release
+lerna publish from-git     # explicitly publish packages tagged in the current commit
+lerna publish from-package # explicitly publish packages where the latest version is not present in the registry
+```
+
+When run, this command does one of the following things:
+
+* lerna publish
+发布自上次发布过后更新过的包 （背后会执行lerna version）
+
+* lerna publish from-git
+发布当前通过lerna version 打好tag的包
+
+* lerna publish from-package
+
+只发布远程 npm 仓库中没有的版本，适用于 lerna publish 没有全部发布成功的场景。
+
+
+
+为了真实地模拟发包过程这里我们使用[Verdaccio](https://verdaccio.org/)搭建一个本地 npm 仓库
 
 ```bash
+# 全局安装
 $ npm install -g verdaccio
 $ verdaccio
 ```
 访问 http://localhost:4873/ 可以看到启动界面。
 
 
-将每个package里面package.json 重的 publishConfig.registry 改为 "http://localhost:4873/"
+* 将每个 package 里面 package.json 中的 publishConfig.registry 改为 "http://localhost:4873/"
 
-或者在项目的根目录创建.npmrc 文件，将 npm 仓库地址改写为本地仓库地址：
-
-```
-registry="http://localhost:4873/"
-```
-
-注意将每个package里面package.json 中的publishConfig字段去掉
+* 或者在项目的根目录创建.npmrc 文件，将 npm 仓库地址改写为本地仓库地址： `registry="http://localhost:4873/"`，注意将每个 package package.json 中的 publishConfig 字段去掉
 
 
-commit提交本地的修改，然后执行：
+准备就绪后commit提交本地的修改，然后执行：
 
 ```bash
 $ lerna publish --no-push             
@@ -312,7 +329,8 @@ Successfully published:
  - cat@1.0.1
  - dog@1.0.1
 lerna success published 3 packages
-```
+``
+
 
 命令行中会让我们进行版本的选择和确认，确认完毕后就会将我们的包发布到npm仓库中。
 
