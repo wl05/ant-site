@@ -18,7 +18,7 @@ Lerna干的事情就是使用git和npm来优化多包库管理工作流程。
 
 ## 如何使用Lerna
 
-###  Lerna管理项目的模式
+### Lerna管理项目的模式
 
 Lerna 有两种管理项目的模式：
 
@@ -29,6 +29,7 @@ Lerna 有两种管理项目的模式：
 ```bash
 lerna init --independent
 ```
+
 这种模式下，可以单独的为每个包指定版本号。
 
  learn为我们提供了以下命令：
@@ -91,6 +92,7 @@ lerna.json 各个字段的含义：
   "packages": ["packages/*"]
 }
 ```
+
 * version: 当前项目的版本，如果是independent模式的话这里是 "independent" 字符串
 * npmClient: 默认是 npm，可以使用yarn
 * command.publish.ignoreChanges: 指定哪些文件的更新不需要发布，例如修改README。
@@ -108,9 +110,9 @@ lerna.json 各个字段的含义：
 作用：通过 lerna create 创建一个新的包，当然你也可以手动创建
 
 ```bash
-$ lerna create animal
-$ lerna create cat 
-$ lerna create dog
+lerna create animal
+lerna create cat 
+lerna create dog
 ```
 
 这里我们创建了animal cat dog 三个包项目结构如下:
@@ -171,8 +173,8 @@ lerna add babel-core
 # 添加的 animal 作为dog、cat 的依赖
 $ lerna add animal 
 ```
-查看dog或者cat的dependencies会看到加入的依赖animal。
 
+查看dog或者cat的dependencies会看到加入的依赖animal。
 
 #### [lerna list](https://github.com/lerna/lerna/tree/main/commands/list#readme)
 
@@ -276,11 +278,11 @@ lerna info Looking for changed packages since animal@1.0.1
 为了真实的模拟发包过程这里我们使用Verdaccio搭建一个本地 npm 仓库
 
 ```bash
-$ npm install -g verdaccio
-$ verdaccio
+npm install -g verdaccio
+verdaccio
 ```
-访问 http://localhost:4873/ 可以看到启动界面。
 
+访问 <http://localhost:4873/> 可以看到启动界面。
 
 将每个package里面package.json 重的 publishConfig.registry 改为 "http://localhost:4873/"
 
@@ -291,7 +293,6 @@ registry="http://localhost:4873/"
 ```
 
 注意将每个package里面package.json 中的publishConfig字段去掉
-
 
 commit提交本地的修改，然后执行：
 
@@ -316,8 +317,7 @@ lerna success published 3 packages
 
 命令行中会让我们进行版本的选择和确认，确认完毕后就会将我们的包发布到npm仓库中。
 
-刷新 http://localhost:4873/ 就可以看到我们刚刚发布的包了。
-
+刷新 <http://localhost:4873/> 就可以看到我们刚刚发布的包了。
 
 ## 参考资料
 
