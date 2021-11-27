@@ -1,6 +1,6 @@
-![](./79596653-38f81200-80e1-11ea-98cd-1c6a3bb5de51.png)
-
 # lerna 简单入门
+
+![](./79596653-38f81200-80e1-11ea-98cd-1c6a3bb5de51.png)
 
 本篇将围绕**为什么要使用 lerna**以及**如何使用 lerna** 两个方面来认识 lerna。
 
@@ -20,7 +20,7 @@ Lerna干的事情就是使用 git 和 npm 来优化多包库的管理工作流�
 
 ## 如何使用 Lerna
 
-###  Lerna 管理项目的模式
+### Lerna 管理项目的模式
 
 Lerna 有两种管理项目的模式：
 
@@ -31,6 +31,7 @@ Lerna 有两种管理项目的模式：
 ```bash
 lerna init --independent
 ```
+
 这种模式下，可以单独的为每个包指定版本号。
 
  learn为我们提供了以下命令：
@@ -50,7 +51,6 @@ lerna init --independent
 * lerna link
 * lerna create
 * lerna info
-
 
 下面通过具体的demo来使用一下这些命令。
   
@@ -92,6 +92,7 @@ lerna.json 各个字段的含义：
   "packages": ["packages/*"]
 }
 ```
+
 * version: 当前项目的版本，如果是independent模式的话这里是 "independent" 字符串
 * npmClient: 默认是 npm，可以使用yarn
 * command.publish.ignoreChanges: 指定哪些文件的更新不需要发布，例如修改 README。
@@ -109,9 +110,9 @@ lerna.json 各个字段的含义：
 作用：通过 lerna create 创建一个新的包，当然你也可以手动创建
 
 ```bash
-$ lerna create animal
-$ lerna create cat 
-$ lerna create dog
+lerna create animal
+lerna create cat 
+lerna create dog
 ```
 
 这里我们创建了animal cat dog 三个包项目结构如下:
@@ -172,8 +173,8 @@ $ lerna add babel-core
 # 添加的 animal 作为 dog、cat 的依赖
 $ lerna add animal 
 ```
-查看 dog 或者 cat 的 dependencies 会看到加入的依赖 animal。
 
+查看 dog 或者 cat 的 dependencies 会看到加入的依赖 animal。
 
 ### [lerna version](https://github.com/lerna/lerna/tree/main/commands/version#readme)
 
@@ -182,10 +183,11 @@ $ lerna add animal
 用法：
 
 ```bash
-$ lerna version 1.0.1 # 直接指定特定的版本
-$ lerna version patch # 使用语义关键字
-$ lerna version       # 通过交互式命令选择
+lerna version 1.0.1 # 直接指定特定的版本
+lerna version patch # 使用语义关键字
+lerna version       # 通过交互式命令选择
 ```
+
 lerna version 在背后为我们做了这些事：
 
 1. 识别出自上次发布以后更新过的包；
@@ -229,8 +231,6 @@ $ lerna publish from-git
 $ lerna publish from-package
 ```
 
-
-
 为了真实地模拟发包过程这里我们使用 [Verdaccio](https://verdaccio.org/) 搭建一个本地 npm 仓库
 
 ```bash
@@ -238,13 +238,12 @@ $ lerna publish from-package
 $ npm install -g verdaccio
 $ verdaccio
 ```
-访问 `http://localhost:4873/` 可以看到启动界面。
 
+访问 `http://localhost:4873/` 可以看到启动界面。
 
 * 将每个包 package.json 中的 publishConfig.registry 改为 `http://localhost:4873/`
 
 * 或者在项目的根目录创建 .npmrc 文件，将 npm 仓库地址改写为本地仓库地址： `registry="http://localhost:4873/"`，注意将每个包 package.json 中的 publishConfig 字段去掉
-
 
 在 dog.js 中添加一行 `console.log("bark")`,准备就绪后 commit 提交本地的修改，然后执行：
 
@@ -269,7 +268,6 @@ lerna info Looking for changed packages since cat@1.0.3
 命令行中会让我们进行版本的选择和确认，确认完毕后就会将我们的包发布到 npm 仓库中。
 
 刷新 `http://localhost:4873/` 就可以看到我们刚刚发布的包了。
-
 
 ### [lerna list](https://github.com/lerna/lerna/tree/main/commands/list#readme)
 
@@ -345,7 +343,8 @@ lerna info clean packages/dog/node_modules
 ? Proceed? Yes
 ...
 ```
-### [lerna bootstrap](https://github.com/lerna/lerna/tree/main/commands/bootstrap#readme) 
+
+### [lerna bootstrap](https://github.com/lerna/lerna/tree/main/commands/bootstrap#readme)
 
 作用：建立相互依赖的包之间的软连接并安装其他的依赖
 
@@ -354,8 +353,7 @@ lerna info clean packages/dog/node_modules
 * 安装所有包的外部依赖
 * 建立存在依赖关系的包之间的依赖
 * 在 bootstrapped 的包中执行 npm run prepublish （没有指定 --ignore-prepublish 的情况下）
-* 在 bootstrapped 的包中执行npm run prepare 
-
+* 在 bootstrapped 的包中执行npm run prepare
 
 ```bash
 $ lerna bootstrap
@@ -380,7 +378,6 @@ $ lerna diff
 $ lerna diff package-name
 ```
 
-
 ### [lerna exec](https://github.com/lerna/lerna/tree/main/commands/exec#readme)
 
 作用：使用 lerna exec 可以在所有的包目录下执行任意的命令。
@@ -388,18 +385,18 @@ $ lerna diff package-name
 用法：
 
 ```bash
-$ lerna exec -- <command> [..args] # runs the command in all packages
-$ lerna exec -- rm -rf ./node_modules # 删除所有包下面的 node_modules
+lerna exec -- <command> [..args] # runs the command in all packages
+lerna exec -- rm -rf ./node_modules # 删除所有包下面的 node_modules
 ```
 
 ### [lerna run](https://github.com/lerna/lerna/tree/main/commands/run#readme)
 
 作用：使用 lerna run 可以在所有的包目录下执行对应的脚本。
 
-用法： 
+用法：
 
 ```bash
-$ lerna run test # 执行所有包的 test 命令
+lerna run test # 执行所有包的 test 命令
 ```
 
 ### [lerna import](https://github.com/lerna/lerna/tree/main/commands/import#readme)
@@ -409,7 +406,7 @@ $ lerna run test # 执行所有包的 test 命令
 用法：
 
 ```bash
-$ lerna import <path-to-external-repository>
+lerna import <path-to-external-repository>
 ```
 
 ### [lerna link](https://github.com/lerna/lerna/tree/main/commands/link#readme)
@@ -419,9 +416,8 @@ $ lerna import <path-to-external-repository>
 用法：
 
 ```bash
-$ lerna link
+lerna link
 ```
-
 
 ## 总结
 
