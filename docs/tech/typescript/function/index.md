@@ -66,7 +66,17 @@ const num = getElementByIndex([1, 2, 3, 4], 1);
 const str = getElementByIndex(["a", "b", "c", "d"], 1);
 ```
 
-## 
+这里不用明确的指定具体的类型，typescript 会自动的帮我们推断出来。
+
+再举个例子：
+
+```ts
+
+```
+
+## 范型约束
+
+
 
 
 
