@@ -179,3 +179,7 @@
 🎒[01背包问题](https://github.com/gaoshengnan/LeetCode/blob/master/src/main/java/theoreticalBasis/%E8%83%8C%E5%8C%85/backpack.md)
 
 当被问到背包的时候，你第一个想到的是什么？点击查看回溯 + 动态规划两种方式解决背包问题
+
+## 参考资料
+
+1. [Leetcode面试高频题分类刷题总结](https://zhuanlan.zhihu.com/p/349940945)
