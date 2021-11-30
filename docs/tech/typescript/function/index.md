@@ -116,14 +116,11 @@ const d1 = makeDate(12345678);
 const d2 = makeDate(5, 5, 5);
 const d3 = makeDate(1, 3); // 这里 ts 报错： "No overload expects 2 arguments, but overloads do exist that expect either 1 or 3 arguments.ts(2575)"
 ```
-
-d3 报错的原因是没有重载生命deasdasdsadass是接收两个参数的。这里声明的 makeDate 只能接收一个参数或者两个参数。
-
 前两个是函数的重载声明，最后一个是函数的实现声明。
 
 实现声明必须要保证对重载声明的兼容性，兼容性体现在实现函数的入参和返回参数类型必须兼容所有的重载声明。
 
-
+d3 报错的原因是没有重载声明是接收两个参数的。这里声明的 makeDate 只能接收一个参数或者两个参数。
 
 
 
