@@ -129,6 +129,64 @@ var zigzagLevelOrder = function(root) {
 };
 ```
 
+## 133. [克隆图](https://leetcode-cn.com/problems/clone-graph/)（中等）
+
+```js
+/**
+ * // Definition for a Node.
+ * function Node(val, neighbors) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.neighbors = neighbors === undefined ? [] : neighbors;
+ * };
+ */
+
+/**
+ * @param {Node} node
+ * @return {Node}
+ */
+
+// dfs
+var cloneGraph = function (node) {
+  if (node == null) return null
+  var map = {}
+  var dfs = function (node) {
+    if (map[node.val]) return map[node.val]
+    var newNode = new Node(node.val)
+    map[node.val] = newNode
+    newNode.neighbors = node.neighbors.map(function (node) {
+      return dfs(node)
+    })
+    return newNode
+  }
+  return dfs(node)
+}
+
+// bfs
+var cloneGraph = function (node) {
+    if (node == null) return null
+    var bfs = function (node) {
+        var map = {}
+        var queue = [node]
+        var root = null
+        while(queue.length) {
+            var  tempNode = queue.shift()
+            var  currentNode = map[tempNode.val] || new Node(tempNode.val)
+            if(!root) root = currentNode
+            map[tempNode.val] = currentNode
+            for(var n of tempNode.neighbors) {
+                if(!map[n.val]) {
+                    queue.push(n)
+                    map[n.val] = new Node(n.val)
+                }
+                currentNode.neighbors.push(map[n.val])
+            }
+        }   
+        return root
+    }
+  return bfs(node)
+}
+```
+
 ## 200. [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/) （中等） (需复习)
 
 解法一： 深度优先遍历 （DFS）
