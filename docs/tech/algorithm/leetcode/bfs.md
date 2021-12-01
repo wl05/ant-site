@@ -129,6 +129,86 @@ var zigzagLevelOrder = function(root) {
 };
 ```
 
+## 130. [被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/) （中等）
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+
+// 思路：
+// 1. 寻找边界边界上的 O ，然后寻找所有和它相邻的所有 O 设置为 Y，这样处理以后剩下的 O 就是被 X 包围的 O 了
+// 2. 再次遍历，将剩余的 O 替换为 X，将所有 Y 替换回 O。
+
+// DFS
+var solve = function(board) {
+    var iLen = board.length
+    var jLen = board[0].length
+    var dfs = function(i,j){
+        if(i < 0 || j< 0 || i>=iLen || j>=jLen || board[i][j] !== 'O') {
+            return 
+        }
+        board[i][j] = 'Y'
+        dfs(i-1,j)
+        dfs(i+1,j)
+        dfs(i,j-1)
+        dfs(i,j+1) 
+    }
+    for(var i=0;i<iLen;i++){
+        for(var j=0;j<jLen;j++){
+            if(board[i][j] === 'O' && (i === 0 || j === 0 || i === iLen - 1 || j === jLen - 1) ) {
+                dfs(i,j)
+            }
+        }
+    }
+    for(var i=0;i<iLen;i++){
+        for(var j=0;j<jLen;j++){
+            if(board[i][j] === "Y") {
+                board[i][j] = "O"    
+            }else{
+                board[i][j] = "X"
+            }
+        }
+    }
+};
+
+// BFS
+var solve = function(board){
+    var iLen = board.length
+    var jLen = board[0].length
+    var bfs = function(indexI,indexJ){
+        var queue = [[indexI,indexJ]]
+        while(queue.length) {
+            var [i,j] = queue.shift()
+            if(!(i < 0 || j< 0 || i>=iLen || j>=jLen || board[i][j] !== 'O')) {
+                board[i][j] = "Y"
+                queue.push([i,j-1]) 
+                queue.push([i,j+1])
+                queue.push([i-1,j])
+                queue.push([i+1,j])
+            }
+        }
+    }
+    for(var i=0;i<iLen;i++){
+        for(var j=0;j<jLen;j++){
+            if(board[i][j] === 'O' && (i === 0 || j === 0 || i === iLen - 1 || j === jLen - 1) ) {
+                bfs(i,j)
+            }
+        }
+    }
+    for(var i=0;i<iLen;i++){
+        for(var j=0;j<jLen;j++){
+            if(board[i][j] === "Y") {
+                board[i][j] = "O"    
+            }else{
+                board[i][j] = "X"
+            }
+        }
+    }
+}
+```
+
 ## 133. [克隆图](https://leetcode-cn.com/problems/clone-graph/)（中等）
 
 ```js
