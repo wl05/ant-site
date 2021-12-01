@@ -15,7 +15,7 @@ function printToConsole(s: string) {
 greeter(printToConsole);
 ```
 
-这里使用 `(a: string) => void` 声明函数 `fn` 的类型，`=>` 之前的部分表示的是函数接受的参数类型，之后标识的是函数的返回值。
+这里使用 `(a: string) => void` 声明函数 `fn` 的类型，`=>` 之前的部分表示的是函数接受的参数类型，之后表示的是函数的返回值。
 
 
 ## 声明函数的其他属性
@@ -116,11 +116,42 @@ const d1 = makeDate(12345678);
 const d2 = makeDate(5, 5, 5);
 const d3 = makeDate(1, 3); // 这里 ts 报错： "No overload expects 2 arguments, but overloads do exist that expect either 1 or 3 arguments.ts(2575)"
 ```
-前两个是函数的重载声明，最后一个是函数的实现声明。
+需要特别注意：*前两个是函数的重载声明，最后一个是函数的实现声明。*
 
 实现声明必须要保证对重载声明的兼容性，兼容性体现在实现函数的入参和返回参数类型必须兼容所有的重载声明。
 
 d3 报错的原因是没有重载声明是接收两个参数的。这里声明的 makeDate 只能接收一个参数或者两个参数。
+
+
+## 什么情况下返回值类型是 never ?
+
+以下三种情况下函数的返回值是 never :
+
+1. 抛出错误的函数
+
+```ts
+function fail(msg: string): never {
+  throw new Error(msg);
+}
+```
+
+2. 终止执行的函数
+3. 当 TypeScript 确定联合类型中没有的类型时 never 也会出现。
+
+
+```ts
+function fn(x: string | number) {
+  if (typeof x === "string") {
+    // do something
+  } else if (typeof x === "number") {
+    // do something else
+  } else {
+    x; // has type 'never'!
+  }
+}
+```
+
+
 
 
 
