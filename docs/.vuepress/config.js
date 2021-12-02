@@ -88,12 +88,13 @@ module.exports = {
           ],
         },
         {
-          title: "数据可视化",
+          title: "前端监控",
           collapsable: false,
           children: [
-            "data-visualization/histogram/",
-            "data-visualization/1/",
-            "data-visualization/2/",
+            "monitor/monitor/",
+            "monitor/data-visualization/histogram/",
+            "monitor/data-visualization/1/",
+            "monitor/data-visualization/2/",
           ],
         },
         {
@@ -109,6 +110,7 @@ module.exports = {
             "other/sketchup.md",
             "other/docker/docker-introduction/",
             "other/lerna/",
+            "other/npm/",
           ],
         },
         {

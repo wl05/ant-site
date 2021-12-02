@@ -152,9 +152,6 @@ function fn(x: string | number) {
 ```
 
 
-
-
-
 ## 参考
 
 * [More on  Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)
