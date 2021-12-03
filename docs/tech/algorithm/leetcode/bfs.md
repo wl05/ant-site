@@ -129,6 +129,47 @@ var zigzagLevelOrder = function(root) {
 };
 ```
 
+## 111. [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) （简单）
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+    // 思路：
+    // 因为是找出最小深度，所以只需要找到带叶子结点最近的一层
+    // 遍历的时候一层一层的找，确定一层中没有叶子节点再继续往下寻找
+    var bfs=function(){
+        if(!root) return 0
+        var queue = [root]
+        var count = 1    
+        while(queue.length) {
+            var queueLen = queue.length // 这里表示的是一层里面的节点个数
+            while(queueLen>0) { 
+                var cur = queue.shift()
+                if(!cur.left && !cur.right) {
+                    return count
+                }
+                if(cur.left) queue.push(cur.left)
+                if(cur.right) queue.push(cur.right)
+                queueLen--
+            }
+            count ++ // 找完一层没有找到叶子节点再继续往下寻找
+        }
+    }
+    return bfs()
+};
+```
+
 ## 130. [被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/) （中等）
 
 ```js
@@ -353,3 +394,6 @@ var numIslands = function(grid) {
 
 * [Leetcode面试高频题分类刷题总结](https://zhuanlan.zhihu.com/p/349940945)
 * [BFS 的使用场景总结：层序遍历、最短路径问题](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/)
+* [A Beginners guid to BFS and DFS](https://leetcode.com/discuss/study-guide/1072548/A-Beginners-guid-to-BFS-and-DFS)
+* [BFS 题例](https://leetcode.com/list/57ksoa4v/)
+* [DFS 题例](https://leetcode.com/list/57ksrrzj/)
