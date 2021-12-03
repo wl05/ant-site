@@ -32,8 +32,7 @@ $ npm install npm@latest -g
 
 ```bash
 # 创建 package 目录
-$ mkdir package-demo
-$ cd package-demo
+$ mkdir package-demo && cd $_
 # 执行 npm init 进行初始化，会询问一些字段的填写
 $ npm init
 ```

@@ -1,6 +1,6 @@
 {
   "name": "package-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HELLO WORLD",
   "main": "index.js",
   "scripts": {
