@@ -110,3 +110,7 @@ HELLO WORLD
 ```bash
 $ npm run publish
 ```
+
+# 参考资料
+
+* [npm 官网](https://docs.npmjs.com/)
