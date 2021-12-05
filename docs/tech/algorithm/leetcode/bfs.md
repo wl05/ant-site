@@ -170,6 +170,46 @@ var minDepth = function(root) {
 };
 ```
 
+## 116、[填充每个节点的下一个右侧节点指针](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/)（中等）
+
+```js
+/**
+ * // Definition for a Node.
+ * function Node(val, left, right, next) {
+ *    this.val = val === undefined ? null : val;
+ *    this.left = left === undefined ? null : left;
+ *    this.right = right === undefined ? null : right;
+ *    this.next = next === undefined ? null : next;
+ * };
+ */
+
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+var connect = function(root) {
+    // 思路：
+    // 使用 dfs 进行层序遍历，一层一层遍历
+    // 关键点在于需要知道每层的最后一个节点，最后一个节点的next是指向null的，所以需要知道当前节点在哪一层
+    if(!root) return root
+    var dfs = function(){
+        var queue = [root]    
+        while(queue.length) { 
+            var count = queue.length // 这里记录的count就是每层节点的个数
+            while(count>0) { // 处理完每层节点再处理下一层
+                var curNode = queue.shift() 
+                count--
+                if(count > 0) curNode.next = queue[0] // 如果没有到当前层的最后一个节点则将当前节点的next指向它的下一个节点
+                curNode.left && queue.push(curNode.left)
+                curNode.right && queue.push(curNode.right)
+            }
+        }
+    }
+    dfs()
+    return root
+};
+```
+
 ## 130. [被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/) （中等）
 
 ```js
@@ -306,6 +346,40 @@ var cloneGraph = function (node) {
     }
   return bfs(node)
 }
+```
+
+## 199. [199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/) （中等）
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var rightSideView = function(root) {
+    var res = []
+    if(!root) return res
+    var queue = [root]
+    
+    while(queue.length) {
+        var count = queue.length
+        while(count) {
+            var curNode = queue.shift()
+            count === 1 && res.push(curNode.val)
+            curNode.left && queue.push(curNode.left)
+            curNode.right && queue.push(curNode.right)
+            count--
+        }
+    }
+    return res
+};
 ```
 
 ## 200. [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/) （中等） (需复习)
