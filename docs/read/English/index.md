@@ -3,32 +3,32 @@
 ## 音标学习
 
 单元音
-KK DJ IPA 单字
-[i] [iː] [iː] seat
-[ɪ] [ɪ] [ɪ] sit
-[e] [eɪ] [eɪ] pain
-[ɛ] [e] [e] head
-[æ] [æ] [æ] fat
-[ɑ] [ɑː] [ɑ] hot
-[o] [əʊ] [əʊ] nose
-[ɔ] [ɔː] [ɔː] four
-[ɔ] [ɔ] [ɒ] dog
-[u] [uː] [uː] too
-[ᴜ] [ʊ] [ʊ] put
-[ʌ] [ʌ] [ʌ] sun
-[ə] [ə] [ə] again
-[ɪr] [ɪə] [ɪə] rear
-[ɚ] [ə] [ə˞] brother
-[ɝ] [ɜ] [ɜ˞] bird
+KK 单字
+[i]  seat
+[ɪ]  sit
+[e]  pain
+[ɛ] head
+[æ]  fat
+[ɑ] hot
+[o]  nose
+[ɔ] four
+[ɔ] dog
+[u]  too
+[ᴜ]  put
+[ʌ]  sun
+[ə]  again
+[ɪr] rear
+[ɚ] brother
+[ɝ] bird
 
 双元音
-KK DJ IPA 单字
-[aɪ] [aɪ] [aɪ] pie
-[aᴜ] [aʊ] [aʊ] house
-[ɔɪ] [ɔɪ] [ɔɪ] coin
+KK 单字
+[aɪ]  pie
+[aᴜ]  house
+[ɔɪ]  coin
 
 清辅音
-KK DJ IPA 单字
+KK 单字
 [p] [p] [p] pet
 [t] [t] [t] ten
 [k] [k] [k] key
