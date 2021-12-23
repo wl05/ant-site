@@ -119,6 +119,18 @@ module.exports = {
           children: ["interview/handwritten-topic.md"],
         },
       ],
+      "/read/": [
+        {
+          title: "英语",
+          collapsable: false,
+          children: ["english/"],
+        },
+        {
+          title: "逻辑思考",
+          collapsable: false,
+          children: ["logical-thinking/"],
+        },
+      ],
     },
   },
 };
