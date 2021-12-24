@@ -63,7 +63,7 @@ module.exports = {
         {
           title: "前端框架",
           collapsable: false,
-          children: ["framework/"],
+          children: ["framework/react/create-your-own-react/"],
         },
         {
           title: "设计模式",
