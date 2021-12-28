@@ -1,9 +1,4 @@
-/**
- * Function 组件有两处不同的地方
- * 1. the fiber from a function component doesn’t have a DOM node
- * 2. and the children come from running the function instead of getting them directly from the props
- */
- function createElement(type, props, ...children) {
+function createElement(type, props, ...children) {
   return {
     type,
     props: {
@@ -87,32 +82,30 @@ function commitWork(fiber) {
   if (!fiber) {
     return;
   }
-  
-  let domParentFiber = fiber.parent
+  let domParentFiber = fiber.parent;
   while (!domParentFiber.dom) {
-    domParentFiber = domParentFiber.parent
+    domParentFiber = domParentFiber.parent;
   }
-  const domParent = domParentFiber.dom
+  const domParent = domParentFiber.dom;
+
   if (fiber.effectTag === "PLACEMENT" && fiber.dom != null) {
     domParent.appendChild(fiber.dom);
   } else if (fiber.effectTag === "UPDATE" && fiber.dom != null) {
     updateDom(fiber.dom, fiber.alternate.props, fiber.props);
   } else if (fiber.effectTag === "DELETION") {
-    commitDeletion(fiber, domParent)
+    commitDeletion(fiber, domParent);
   }
-
   commitWork(fiber.child);
   commitWork(fiber.sibling);
 }
 
 function commitDeletion(fiber, domParent) {
   if (fiber.dom) {
-    domParent.removeChild(fiber.dom)
+    domParent.removeChild(fiber.dom);
   } else {
-    commitDeletion(fiber.child, domParent)
+    commitDeletion(fiber.child, domParent);
   }
 }
-​
 
 function render(element, container) {
   wipRoot = {
@@ -148,12 +141,11 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
-  const isFunctionComponent =
-    fiber.type instanceof Function
+  const isFunctionComponent = fiber.type instanceof Function;
   if (isFunctionComponent) {
-    updateFunctionComponent(fiber)
+    updateFunctionComponent(fiber);
   } else {
-    updateHostComponent(fiber)
+    updateHostComponent(fiber);
   }
   if (fiber.child) {
     return fiber.child;
@@ -167,25 +159,17 @@ function performUnitOfWork(fiber) {
   }
 }
 
-
-​/**
-​ * 如果是 Function 组件调用function获得children
-​ */
 function updateFunctionComponent(fiber) {
-  const children = [fiber.type(fiber.props)]
-  reconcileChildren(fiber, children)
+  const children = [fiber.type(fiber.props)];
+  reconcileChildren(fiber, children);
 }
-​/**
-​ * 如果不是function组件则按之前的逻辑处理
-​ */
+
 function updateHostComponent(fiber) {
   if (!fiber.dom) {
-    fiber.dom = createDom(fiber)
+    fiber.dom = createDom(fiber);
   }
-  reconcileChildren(fiber, fiber.props.children)
+  reconcileChildren(fiber, fiber.props.children);
 }
-​
-
 
 function reconcileChildren(wipFiber, elements) {
   let index = 0;
@@ -244,7 +228,23 @@ const Didact = {
 
 /** @jsx Didact.createElement */
 function App(props) {
-  return <h1>Hi {props.name}</h1>;
+  return (
+    <div>
+      <h1>Hi {props.name}</h1>
+      <Container />
+    </div>
+  );
+}
+function Child() {
+  return <h3>Child hello world</h3>;
+}
+function Container() {
+  return (
+    <div>
+      <span>Container hello world</span>
+      <Child />
+    </div>
+  );
 }
 const element = <App name="foo" />;
 const container = document.getElementById("root");

@@ -4,8 +4,18 @@
 
 [[toc]]
 
-本文是对 [build your own react](https://pomb.us/build-your-own-react/) 的学习总结，跟随原文作者的思路，
-把每一步的代码整理出来，然后结合自己的理解添加一些理解说明文字。跟随作者的思路一步一步实现一个简版的 react。
+
+本文是对 [build your own react](https://pomb.us/build-your-own-react/) 的学习注解。
+
+相信也有很多同学拜读过这篇文章，虽然只有短短的几百行代码，还是需要花些精力去理清其中的逻辑关系。
+
+读完整篇文章可以对 react 基本原理有一个整体上的认识和宏观上的把握，对于进一步学习react 源码非常有帮助。
+
+本篇跟随原文作者的思路，把每一步的代码整理出来，然后结合自己的理解添加一些理解说明文字。
+
+让我们跟随作者一步一步实现一个简版的 react。
+
+
 ## Step 0
 
 ```js
@@ -1002,4 +1012,6 @@ Didact.render(element, container);
 ```
 ## Step VIII: Hooks
 
+```js
 
+```
