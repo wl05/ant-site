@@ -760,6 +760,7 @@ rerender("World");
 
 ```js
 /**
+ * 一：
  * Function 组件有两处不同的地方
  * 1. the fiber from a function component doesn’t have a DOM node
  * 2. and the children come from running the function instead of getting them directly from the props
@@ -849,11 +850,17 @@ function commitWork(fiber) {
     return;
   }
   
+  /**
+   * 四：
+   * 这里需要单独处理没有 dom 属性的 fiber
+   * 需要不断地往上寻找直到找到一个 Dom 节点
+   */
   let domParentFiber = fiber.parent
   while (!domParentFiber.dom) {
     domParentFiber = domParentFiber.parent
   }
   const domParent = domParentFiber.dom
+
   if (fiber.effectTag === "PLACEMENT" && fiber.dom != null) {
     domParent.appendChild(fiber.dom);
   } else if (fiber.effectTag === "UPDATE" && fiber.dom != null) {
@@ -861,7 +868,6 @@ function commitWork(fiber) {
   } else if (fiber.effectTag === "DELETION") {
     commitDeletion(fiber, domParent)
   }
-
   commitWork(fiber.child);
   commitWork(fiber.sibling);
 }
@@ -873,7 +879,6 @@ function commitDeletion(fiber, domParent) {
     commitDeletion(fiber.child, domParent)
   }
 }
-​
 
 function render(element, container) {
   wipRoot = {
@@ -911,10 +916,14 @@ requestIdleCallback(workLoop);
 function performUnitOfWork(fiber) {
   const isFunctionComponent =
     fiber.type instanceof Function
+  /**
+   * 三：所以在处理 fiber 的时候需要判断 fiber 的类型，如果是函数类型则需要单独处理
+   */
   if (isFunctionComponent) {
     updateFunctionComponent(fiber)
   } else {
     updateHostComponent(fiber)
+  }
   if (fiber.child) {
     return fiber.child;
   }
@@ -927,12 +936,14 @@ function performUnitOfWork(fiber) {
   }
 }
 
-
 ​/**
 ​ * 如果是 Function 组件调用function获得children
 ​ */
 function updateFunctionComponent(fiber) {
-  const children = [fiber.type(fiber.props)]
+  // 这里 fiber.type 是定义的函数组件函数，接收 props 返回 element 结构 
+  // 又因为 type 是 Function 所以这里没法直接创建 dom
+  // 所以在最后的 commit 阶段需要单独处理这样的 fiber
+  const children = [fiber.type(fiber.props)] 
   reconcileChildren(fiber, children)
 }
 ​/**
@@ -944,8 +955,6 @@ function updateHostComponent(fiber) {
   }
   reconcileChildren(fiber, fiber.props.children)
 }
-​
-
 
 function reconcileChildren(wipFiber, elements) {
   let index = 0;
@@ -1004,11 +1013,32 @@ const Didact = {
 
 /** @jsx Didact.createElement */
 function App(props) {
-  return <h1>Hi {props.name}</h1>;
+  return (
+    <div>
+      <h1>Hi {props.name}</h1>
+      <Container />
+    </div>
+  );
+}
+function Child() {
+  return <h3>Child hello world</h3>;
+}
+function Container() {
+  return (
+    <div>
+      <span>Container hello world</span>
+      <Child />
+    </div>
+  );
 }
 const element = <App name="foo" />;
+/**
+ * 二：
+ * 这里 APP 是函数组件
+ * 最后返回的 element 的格式为 {type: f App(){},props: object}
+ */
 const container = document.getElementById("root");
-Didact.render(element, container);
+Didact.render(element, container)
 ```
 ## Step VIII: Hooks
 

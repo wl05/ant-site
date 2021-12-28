@@ -71,6 +71,11 @@ module.exports = {
           children: ["design-patterns/"],
         },
         {
+          title: "web 安全",
+          collapsable: false,
+          children: ["web-security/xss/"],
+        },
+        {
           title: "git",
           collapsable: false,
           children: ["git/git-base.md", "git/git-rebase/", "git/git-config.md"],
