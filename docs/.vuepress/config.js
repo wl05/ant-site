@@ -116,6 +116,7 @@ module.exports = {
             "other/docker/docker-introduction/",
             "other/lerna/",
             "other/npm/",
+            "other/svg/",
           ],
         },
         {
