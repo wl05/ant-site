@@ -1,4 +1,6 @@
+# svg 不完全入门
 
+[[toc]]
 ## 什么是svg
 
 ## svg 的优势有哪些
@@ -222,12 +224,12 @@ path 的 d 属性提供了以下命令:
 <html>
 <body>
 
-<svg height="400" width="400" style="background-color: red">
+<svg height="310" width="110" style="background-color: red">
   <!-- 使用绝对路径 -->
   <path d="M10 10 H100 V100 H10 L10 10" />
-  <- 使用 Z 命令闭合 ->
+   <!-- 或者使用 Z 命令闭合 -->
   <path d="M10 110 H100 V200 H10 Z" fill="orange"/>
-  <- 或者 ->
+  <!-- 或者使用相对定位进行绘制 -->
   <path d="m10 210 h90 v90 h-90 z" fill="green"/>
   Sorry, your browser does not support inline SVG.
 </svg>
@@ -236,7 +238,7 @@ path 的 d 属性提供了以下命令:
 </html>
 ```
 
-<svg height="400" width="400" style="background-color: red">
+<svg height="310" width="110" style="background-color: red">
   <path d="M10 10 H100 V100 H10 L10 10" />
   <- 或者 ->
   <path d="M10 110 H100 V200 H10 Z" fill="orange"/>
@@ -245,7 +247,245 @@ path 的 d 属性提供了以下命令:
   Sorry, your browser does not support inline SVG.
 </svg>
 
+#### 曲线命令
+
+贝塞尔曲线的类型有很多，但是在path元素里，只存在两种贝塞尔曲线：三次贝塞尔曲线C，和二次贝塞尔曲线Q。
+
+命令有：C S Q T A
+
+1. 三次贝塞尔曲线C （命令 C、S）
+
+三次贝塞尔曲线需要定义一个点和两个控制点，所以用C命令创建三次贝塞尔曲线，需要设置三组坐标参数：
+
+```
+C x1 y1, x2 y2, x y (or c dx1 dy1, dx2 dy2, dx dy)
+```
+这里的最后一个坐标(x,y)表示的是曲线的终点，
+
+另外两个坐标是控制点，(x1,y1)是起点的控制点，(x2,y2)是终点的控制点。
+
+控制点描述的是曲线起始点的斜率，曲线上各个点的斜率，是从起点斜率到终点斜率的渐变过程。
+
+
+结合例子来理解:
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+<svg width="190px" height="160px" style="background-color: green">
+
+  <path d="M10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/>
+  <path d="M70 10 C 70 20, 120 20, 120 10" stroke="black" fill="transparent"/>
+  <path d="M130 10 C 120 20, 180 20, 170 10" stroke="black" fill="transparent"/>
+  <path d="M10 60 C 20 80, 40 80, 50 60" stroke="black" fill="transparent"/>
+  <path d="M70 60 C 70 80, 110 80, 110 60" stroke="black" fill="transparent"/>
+  <path d="M130 60 C 120 80, 180 80, 170 60" stroke="black" fill="transparent"/>
+  <path d="M10 110 C 20 140, 40 140, 50 110" stroke="black" fill="transparent"/>
+  <path d="M70 110 C 70 140, 110 140, 110 110" stroke="black" fill="transparent"/>
+  <path d="M130 110 C 120 140, 180 140, 170 110" stroke="black" fill="transparent"/>
+	Sorry, your browser does not support inline SVG.
+</svg>
+
+</body>
+</html>
+
+```
+
+<svg width="190px" height="160px" style="background-color: green">
+
+  <path d="M10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/>
+  <path d="M70 10 C 70 20, 120 20, 120 10" stroke="black" fill="transparent"/>
+  <path d="M130 10 C 120 20, 180 20, 170 10" stroke="black" fill="transparent"/>
+  <path d="M10 60 C 20 80, 40 80, 50 60" stroke="black" fill="transparent"/>
+  <path d="M70 60 C 70 80, 110 80, 110 60" stroke="black" fill="transparent"/>
+  <path d="M130 60 C 120 80, 180 80, 170 60" stroke="black" fill="transparent"/>
+  <path d="M10 110 C 20 140, 40 140, 50 110" stroke="black" fill="transparent"/>
+  <path d="M70 110 C 70 140, 110 140, 110 110" stroke="black" fill="transparent"/>
+  <path d="M130 110 C 120 140, 180 140, 170 110" stroke="black" fill="transparent"/>
+	Sorry, your browser does not support inline SVG.
+</svg>
+
+上例的曲线从左往右看，控制点在水平方向上逐渐分开，例子中的曲线从上往下看，控制点和曲线坐标之间离得越来越远。这里要注意观察，曲线沿着起点到第一控制点的方向伸出，逐渐弯曲，然后沿着第二控制点到终点的方向结束。
+
+
+这里还可以实现将多个贝塞尔曲线连接起来创建一条长的平滑曲线，通常情况下，两条曲线的交接点某一侧的控制点是它另一侧的控制点的对称（以保持斜率不变）。这样，你可以使用一个简写的贝塞尔曲线命令S:
+
+```
+S x2 y2, x y (or s dx2 dy2, dx dy)
+```
+需要注意的是如果S命令跟在一个C或S命令后面，则它的第一个控制点会被假设成前一个命令曲线的第二个控制点的中心对称点。如果S命令单独使用，前面没有C或S命令，那当前点将作为第一个控制点。
+
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg width="400px" height="400px" style="background-color: green">
+  <path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80 S 300 300, 400 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+</body>
+</html>
+```
+
+<svg width="450px" height="200px" style="background-color: green">
+  <path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80 S 300 300, 400 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+2. 二次贝塞尔曲线Q (命令 Q、T)
+
+与三次贝塞尔曲线不同的是它只需要一个控制点，用来确定起点和终点的曲线斜率，因此它需要两组参数，控制点和终点坐标，使用起来相对简单许多。语法如下：
+
+```
+Q x1 y1, x y (or q dx1 dy1, dx dy)
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+<svg width="190px" height="160px" style="background-color: green">
+  <path d="M10 80 Q 95 10 180 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+</body>
+</html>
+```
+<svg width="190px" height="160px" style="background-color: green">
+  <path d="M10 80 Q 95 10 180 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+跟三次贝塞尔曲线一样，二次贝塞尔曲线有一个简化的 T 命令，可以通过更简短的参数，延长二次贝塞尔曲线。
+
+```
+ T x y (or t dx dy)
+```
+
+T 命令只定义终点。T命令前面必须是一个Q命令，或者是另一个T命令。如果T单独使用，那么控制点就会被认为和终点是同一个点，所以画出来的将是一条直线。
+
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+<svg width="190px" height="160px" style="background-color: green">
+  <path d="M10 80 Q 52.5 10, 95 80 T 180 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+</body>
+</html>
+```
+
+<svg width="190px" height="160px" style="background-color: green">
+  <path d="M10 80 Q 52.5 10, 95 80 T 180 80" stroke="black" fill="transparent"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+3. 弧形 // TODO:
+
+弧形可以看作是圆形或者椭圆形的一部分。创建命令如下：
+
+```
+ A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+ a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy
+```
+
+### 文本 （Text）
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg height="160" width="200" style="background-color: green">
+  <text x="10" y="20" style="fill:red;">Several lines:
+    <tspan x="10" y="45">First line.</tspan>
+    <a xlink:href="https://www.w3schools.com/graphics/" target="_blank">
+    	<tspan x="10" y="70">Second line.</tspan>
+  	</a>
+    
+  </text>
+  <text x="40" y="100" fill="red" transform="rotate(30 20,40)">I love SVG</text>
+    Sorry, your browser does not support inline SVG.
+</svg>
+
+</body>
+</html>
+
+```
+
+
+<svg height="160" width="200" style="background-color: green">
+  <text x="10" y="20" style="fill:red;">Several lines:
+    <tspan x="10" y="45">First line.</tspan>
+    <a xlink:href="https://www.w3schools.com/graphics/" target="_blank">
+    	<tspan x="10" y="70">Second line.</tspan>
+  	</a>
+    
+  </text>
+  <text x="40" y="100" fill="red" transform="rotate(30 20,40)">I love SVG</text>
+    Sorry, your browser does not support inline SVG.
+</svg>
+
+解释：
+
+* 文字使用 `<text>` 标签
+* 使用 transform 属性可以旋转文字
+* `<text>` 标签中可以嵌套 `<tspan>` 子标签，每一个`<tspan>`可以拥有独立的样式和位置
+* 可以使用 `<a>` 标签包含链接。
+
+
+### Stroke 属性
+
+stroke属性包含下列属性：
+
+* stroke： 绘制对象的线条的颜色
+* stroke-width： 定义了描边的宽度
+* stroke-linecap： 它控制边框终点的形状
+  * butt用直边结束线段，它是常规做法，线段边界90度垂直于描边的方向、贯穿它的终点。
+  * square的效果差不多，但是会稍微超出实际路径的范围，超出的大小由stroke-width控制。
+  * round表示边框的终点是圆角，圆角的半径也是由stroke-width控制的。
+* stroke-dasharray: 定义虚线描边
+
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg height="200" width="300" style="background-color: green">
+  <g fill="none" stroke="black">
+    <path stroke="red" d="M5 20 l215 0" />
+	<path stroke-width="6" d="M5 40 l215 0" />
+	<path stroke-width="6" stroke-linecap="butt" d="M5 60 l215 0" />
+    <path stroke-width="6" stroke-linecap="round" d="M5 80 l215 0" />
+    <path stroke-width="6" stroke-linecap="square" d="M5 100 l215 0" />
+    <path stroke-width="6" stroke-dasharray="20,10,5,5,5,10" d="M5 120 l215 0" />
+    </g>
+  Sorry, your browser does not support inline SVG.
+</svg>
+ 
+</body>
+</html>
+```
+
+<svg height="200" width="300" style="background-color: green">
+  <g fill="none" stroke="black">
+    <path stroke="red" d="M5 20 l215 0" />
+	<path stroke-width="6" d="M5 40 l215 0" />
+	<path stroke-width="6" stroke-linecap="butt" d="M5 60 l215 0" />
+    <path stroke-width="6" stroke-linecap="round" d="M5 80 l215 0" />
+    <path stroke-width="6" stroke-linecap="square" d="M5 100 l215 0" />
+    <path stroke-width="6" stroke-dasharray="20,10,5,5,5,10" d="M5 120 l215 0" />
+    </g>
+  Sorry, your browser does not support inline SVG.
+</svg>
 
 ## 资料收集
 * [svg 教程](https://www.w3schools.com/graphics/svg_intro.asp)
-* [svg path](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
+* [svg 教程](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial)
