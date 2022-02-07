@@ -28,7 +28,7 @@ module.exports = {
         {
           title: "CSS",
           collapsable: false,
-          children: ["css/"],
+          children: ["css/css-box-model/"],
         },
         {
           title: "Javascript",
@@ -58,7 +58,7 @@ module.exports = {
         {
           title: "前端性能优化",
           collapsable: false,
-          children: ["performance/"],
+          children: [],
         },
         {
           title: "前端框架",
