@@ -27,12 +27,17 @@ module.exports = {
         {
           title: "CSS",
           collapsable: false,
-          children: ["css/css-box-model/", "css/css-bfc/"],
+          children: ["css/", "css/css-box-model/", "css/css-bfc/"],
         },
         {
           title: "Javascript",
           collapsable: false,
-          children: ["javascript/ast/"],
+          children: [
+            "javascript/js-data-type/",
+            "javascript/js-type-judge/",
+            "javascript/ast/",
+            "javascript/event-loop/",
+          ],
         },
         {
           title: "Typescript",
