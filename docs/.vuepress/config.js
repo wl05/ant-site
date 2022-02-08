@@ -27,7 +27,7 @@ module.exports = {
         {
           title: "CSS",
           collapsable: false,
-          children: ["css/css-box-model/"],
+          children: ["css/css-box-model/", "css/css-bfc/"],
         },
         {
           title: "Javascript",
@@ -128,7 +128,7 @@ module.exports = {
         {
           title: "英语",
           collapsable: false,
-          children: ["English/"],
+          children: ["english/", "english/learn-source/"],
         },
         {
           title: "逻辑思考",
