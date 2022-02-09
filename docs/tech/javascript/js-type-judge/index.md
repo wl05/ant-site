@@ -1,11 +1,13 @@
 # Javascript 类型判断
 
 [[toc]]
+
 ## typeof
 
 说到类型判断首先想到的是 typeof
 
 typeof 是一个操作符，语法：
+
 ```js
 typeof operand
 // 等价于
@@ -26,7 +28,6 @@ typeof 能够检测的类型如下：
 | Function  | "function" |
 | 其他任意对象  | "object" |
 
-
 对于typeof操作符，有以下几点需要注意:
 
 1. ```typeof null === 'object';```
@@ -42,7 +43,6 @@ typeof 能够检测的类型如下：
 ```js
 typeof function() {} === 'function';
 ```
-
 
 虽说 typeof 能够判断出一些类型，但是遇到对象的时候并不能区分出对象具体类型的是什么，比如：
 
@@ -115,6 +115,7 @@ console.log(a instanceof C) // true
 C.prototype = {}
 console.log(a instanceof C) // false
 ```
+
 2. instanceof 和多全局对象(例如：多个 frame 或多个 window 之间的交互)
 
 不同的全局环境拥有不同的全局对象，从而拥有不同的内置类型构造函数，例如：
@@ -151,7 +152,6 @@ console.log(demo.constructor === Object) // true
 
  `Object.prototype.toString` 方法返回的字符串格式为`[object Type]`，其中的Type就是对象的类型。注意这里说的是 Object.prototype.toString，我们知道所有的对象都会继承Object的原型，按道理来说都会有 Object.prototype.toString方法，但是由于有些对象覆写了 toString 方法，例如 Number.prototype.toString，所以为了保证调用的是 Object.prototype.toString 需要使用 call 或者 apply。[参考](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#using_tostring_to_detect_object_class)
 
-
 ```js
 const toString = Object.prototype.toString;
 
@@ -181,7 +181,7 @@ function type(obj){
 
 **注意点：**
 
-这种方法也并不是万能的，如果对象定义了 [Symbol.toStringTag ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) 属性，返回的类型是 Symbol.toStringTag 的属性值。
+这种方法也并不是万能的，如果对象定义了 [Symbol.toStringTag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag) 属性，返回的类型是 Symbol.toStringTag 的属性值。
 
 ```js
 const myDate = new Date();
@@ -191,9 +191,8 @@ myDate[Symbol.toStringTag] = 'myDate';
 Object.prototype.toString.call(myDate);     // [object myDate]
 ```
 
-
-
 ## 参考资料
+
 * [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
 * [instanceof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof)
 * [Object.prototype.toString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#using_tostring_to_detect_object_class)
