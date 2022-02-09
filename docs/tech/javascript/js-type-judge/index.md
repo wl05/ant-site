@@ -195,6 +195,8 @@ Object.prototype.toString.call(myDate);     // [object myDate]
 
 ## 参考资料
 * [typeof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
+* [instanceof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof)
+* [Object.prototype.toString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#using_tostring_to_detect_object_class)
 * [JavaScript专题之类型判断(上)](https://github.com/mqyqingfeng/Blog/issues/28)
 * [JavaScript专题之类型判断(下)](https://github.com/mqyqingfeng/Blog/issues/30)
 * [判断JS数据类型的四种方法](https://www.cnblogs.com/onepixel/p/5126046.html)
