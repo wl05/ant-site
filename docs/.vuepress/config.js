@@ -19,7 +19,7 @@ module.exports = {
     docsDir: "docs",
     lastUpdated: "更新于",
     nav: [
-      { text: "技术", link: "/tech/" },
+      { text: "技术", link: "/tech/css/css-box-model/" },
       { text: "读书", link: "/read/" },
     ],
     sidebar: {
@@ -27,7 +27,7 @@ module.exports = {
         {
           title: "CSS",
           collapsable: false,
-          children: ["css/", "css/css-box-model/", "css/css-bfc/"],
+          children: ["css/css-box-model/", "css/css-bfc/"],
         },
         {
           title: "Javascript",
@@ -35,6 +35,8 @@ module.exports = {
           children: [
             "javascript/js-data-type/",
             "javascript/js-type-judge/",
+            "javascript/js-type-convert/",
+            "javascript/js-this/",
             "javascript/ast/",
             "javascript/event-loop/",
           ],

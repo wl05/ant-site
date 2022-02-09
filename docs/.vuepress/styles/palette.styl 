@@ -12,7 +12,6 @@ $badgeErrorColor = #DA5961
 $navbarHeight = 3.6rem
 $sidebarWidth = 20rem
 $contentWidth = 740px
-$homePageWidth = 960px
 
 // 响应式变化点
 $MQNarrow = 959px
