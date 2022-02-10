@@ -1,4 +1,4 @@
-# This 理解
+# Javascript this 理解
 
 在 javascript 中this的指向一向都让人晦涩难懂，很多时候是反直觉的，怎么一会儿指向这儿一会儿指向那儿？
 
