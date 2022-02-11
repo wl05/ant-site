@@ -83,7 +83,6 @@ say.call(Tom) // I am Tome  and I am  18 years old
 say.call(Tony) // I am Tony  and I am  20 years old
 ```
 
-
 ## 箭头函数
 
 箭头函数的出现让this的指向更加明确，也更加符合人的直觉。
@@ -117,8 +116,8 @@ var person = {
 }
 person.say()
 ```
-此时箭头函数外层的this在浏览器非严格模式下是指向window的。
 
+此时箭头函数外层的this在浏览器非严格模式下是指向window的。
 
 ## 总结
 

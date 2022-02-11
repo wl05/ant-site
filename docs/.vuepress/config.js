@@ -38,6 +38,7 @@ module.exports = {
             "javascript/js-type-judge/",
             "javascript/js-type-convert/",
             "javascript/js-this/",
+            "javascript/js-closure/",
             "javascript/ast/",
             "javascript/event-loop/",
           ],
