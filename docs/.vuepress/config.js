@@ -116,6 +116,11 @@ module.exports = {
           children: ["react-native/webview/"],
         },
         {
+          title: "思考",
+          collapsable: false,
+          children: ["think/2021-06-20.md", "think/2022-02-14.md"],
+        },
+        {
           title: "其他",
           collapsable: false,
           children: [
