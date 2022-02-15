@@ -1,5 +1,6 @@
 // 使用异步函数也是可以的
 import PageTags from "./components/page-tags.vue";
+import Home from "./components/home.vue";
 import ImageDescription from "./components/image-description.vue";
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -14,5 +15,6 @@ export default ({
   // ...做一些其他的应用级别的优化
   Vue.use(Element);
   Vue.use(PageTags);
+  Vue.use(Home);
   Vue.use(ImageDescription);
 };
