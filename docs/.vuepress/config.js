@@ -37,6 +37,7 @@ module.exports = {
             "javascript/js-data-type/",
             "javascript/js-type-judge/",
             "javascript/js-type-convert/",
+            "javascript/js-scope/",
             "javascript/js-this/",
             "javascript/js-closure/",
             "javascript/ast/",
