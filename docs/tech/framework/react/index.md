@@ -5,3 +5,4 @@
 * [build your own react](https://pomb.us/build-your-own-react/)
 * [深入理解React底层实现原理](https://zhuanlan.zhihu.com/p/101507773)
 * [React 技术揭秘](https://react.iamkasong.com/#%E5%AF%BC%E5%AD%A6%E8%A7%86%E9%A2%91)
+* [图解React](https://7kms.github.io/react-illustration-series/main/macro-structure/)
