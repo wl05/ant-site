@@ -6,6 +6,9 @@
 
 # javascript
 
+## this
+[this 的指向问题](./javascript/this.md)
+
 ## event loop
 
 * [loupe](http://latentflip.com/loupe/?code=Y29uc29sZS5sb2coMCk7CgpzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHsKICAgIG5ldyBQcm9taXNlKGZ1bmN0aW9uKHJlc29sdmUscmVqZWN0KXsKICAgIGNvbnNvbGUubG9nKDIpCiAgICByZXNvbHZlKDMpCn0pLnRoZW4oZnVuY3Rpb24odmFsKXsKICAgIGNvbnNvbGUubG9nKHZhbCk7Cn0pCgp9KTsKCm5ldyBQcm9taXNlKGZ1bmN0aW9uKHJlc29sdmUscmVqZWN0KXsKICAgIGNvbnNvbGUubG9nKDIpCiAgICByZXNvbHZlKDMpCn0pLnRoZW4oZnVuY3Rpb24odmFsKXsKICAgIGNvbnNvbGUubG9nKHZhbCk7Cn0pCgpjb25zb2xlLmxvZyg0KTsK!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
@@ -52,3 +55,8 @@
 * [useMemo、useCallback、useContext 你真的玩明白了吗](https://juejin.cn/post/7146107198215553055/)
 
 # 设计模式
+
+1. [JavaScript 设计模式核⼼原理与应⽤实践](https://juejin.cn/book/6844733790204461070/section/6844733790246404109)
+
+# 前端手写题实现
+1. [前端手写题](./handwritten-topic.md)
