@@ -304,12 +304,39 @@ call和apply的作用都是一样的，第一个参数都是this值，不同的�
 ```
 
 ## 实现bind
+实现bind的步骤，我们可以分解成为三部分：
 
+* 修改this指向
+* 动态传递参数
+* 兼容new关键字
+
+```js
+Function.prototype.myBind = function (context) {
+    // 判断调用对象是否为函数
+    if (typeof this !== "function") {
+        throw new Error("Error");
+    }
+
+    // 获取参数
+    const args = [...arguments].slice(1),
+          fn = this;
+
+    return function Fn() {
+
+        // 根据调用方式，传入不同绑定值
+        return fn.apply(this instanceof Fn ? new fn(...arguments) : context, args.concat(...arguments)); 
+    }
+}
+```
+
+[call && apply && bind的区别以及简单实现一个bind](https://juejin.cn/post/7141740026341261325)
 ## 函数柯里化
 
 ## Promise
 
 ## 模板引擎实现
+
+## 迭代器的实现
 
 ## 参考资料
 

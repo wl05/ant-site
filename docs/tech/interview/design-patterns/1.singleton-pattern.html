@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="UTF-8">	
+	</head>
+	<style>
+		.model-container{
+			width: 100px;
+			height: 100px;
+			position: fixed;
+			transform: translate(-50%,-50%);
+			top: 50%;
+			left: 50%;
+			z-index: 999;
+			background-color: red;
+		}
+	</style>
+	<body>
+			<button id="open">打开</button>
+			<button id="close">关闭</button>
+	<script>
+		var createModal = (function (){
+			var instance
+			return function(){
+				if(instance) return instance
+				var model = document.createElement("div")
+				console.log("==model===",model)
+				model.className = "model-container"
+				model.style.display = "none"
+				document.body.appendChild(model)
+				return instance = model
+			}
+		})()
+
+		document.getElementById("open").addEventListener("click",function(){
+			var model = new createModal()
+			model.style.display = "block"
+		})
+
+		document.getElementById("close").addEventListener("click",function(){
+			var model = new createModal()
+			model.style.display = "none"
+		})
+		</script>
+	</body>
+</html>
