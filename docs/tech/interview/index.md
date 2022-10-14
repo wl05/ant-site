@@ -60,3 +60,16 @@
 
 # 前端手写题实现
 1. [前端手写题](./handwritten-topic.md)
+2. [awesome-coding-js](https://github.com/ConardLi/awesome-coding-js)
+
+
+# http
+* [关于HTTP协议，一篇就够了](https://www.cnblogs.com/ranyonsue/p/5984001.html)
+* 《图解 HTTP》
+# 网络安全
+
+# 数据结构与算法
+
+* [学习 JavaScript 数据结构与算法](https://github.com/PacktPublishing/Learning-JavaScript-Data-Structures-and-Algorithms-Third-Edition)
+
+# 浏览器原理
