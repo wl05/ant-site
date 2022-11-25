@@ -19,6 +19,8 @@
 
 # 浏览器
 
+* [inside brower](https://developer.chrome.com/blog/inside-browser-part1/)
+
 ## 垃圾回收
 
 * [common-memory-leaks](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
@@ -66,10 +68,21 @@
 # http
 * [关于HTTP协议，一篇就够了](https://www.cnblogs.com/ranyonsue/p/5984001.html)
 * 《图解 HTTP》
+* 《网络是怎么连接的》
 # 网络安全
+
+* <<图解 HTTP>>
+* [web安全（xss/csrf）简单攻击原理和防御方案（实战篇）](https://juejin.cn/post/6953059119561441287#comment)
+* [浅谈XSS攻击的那些事（附常用绕过姿势）](https://zhuanlan.zhihu.com/p/26177815)
 
 # 数据结构与算法
 
 * [学习 JavaScript 数据结构与算法](https://github.com/PacktPublishing/Learning-JavaScript-Data-Structures-and-Algorithms-Third-Edition)
 
 # 浏览器原理
+1. [How WEb Browsers Work](https://dev.to/arikaturika/how-web-browsers-work-part-1-with-illustrations-1nid)
+
+
+# 框架
+## React
+
