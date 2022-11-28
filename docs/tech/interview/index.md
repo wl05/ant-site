@@ -14,7 +14,10 @@
 * [loupe](http://latentflip.com/loupe/?code=Y29uc29sZS5sb2coMCk7CgpzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHsKICAgIG5ldyBQcm9taXNlKGZ1bmN0aW9uKHJlc29sdmUscmVqZWN0KXsKICAgIGNvbnNvbGUubG9nKDIpCiAgICByZXNvbHZlKDMpCn0pLnRoZW4oZnVuY3Rpb24odmFsKXsKICAgIGNvbnNvbGUubG9nKHZhbCk7Cn0pCgp9KTsKCm5ldyBQcm9taXNlKGZ1bmN0aW9uKHJlc29sdmUscmVqZWN0KXsKICAgIGNvbnNvbGUubG9nKDIpCiAgICByZXNvbHZlKDMpCn0pLnRoZW4oZnVuY3Rpb24odmFsKXsKICAgIGNvbnNvbGUubG9nKHZhbCk7Cn0pCgpjb25zb2xlLmxvZyg0KTsK!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
 * [How JavaScript works: an overview of the engine, the runtime, and the call stack](https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf)
 * [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+* [从event loop规范探究javaScript异步及浏览器更新渲染时机 ](https://github.com/aooy/blog/issues/5)
 
+## requestAnimationFrame
+* [requestAnimationFrame 使用](https://juejin.cn/post/7115572998249119775)
 
 
 # 浏览器
@@ -80,7 +83,8 @@
 * [学习 JavaScript 数据结构与算法](https://github.com/PacktPublishing/Learning-JavaScript-Data-Structures-and-Algorithms-Third-Edition)
 
 # 浏览器原理
-1. [How WEb Browsers Work](https://dev.to/arikaturika/how-web-browsers-work-part-1-with-illustrations-1nid)
+
+[浏览器原理](../browser/1-chrome-browser-architecture/index.md)
 
 
 # 框架
